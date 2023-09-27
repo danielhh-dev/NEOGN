@@ -1,21 +1,16 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { switchSelector } from "../redux/slices/appBarSlice";
-import { useDispatch } from "react-redux";
 
 const AuxBar = ({ theme }) => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const selected = (select) => {
-    dispatch(switchSelector(select));
-  };
+
   
     return (  
       <div className={`font-general-sans w-full h-[80px] justify-around items-center inline-flex ${theme === "dark" ? 'dark:bg-neutral-950 border-t border-white border-opacity-20' : 'bg-white border-t border-black border-opacity-20'}`}>
       <div className="w-full h-[80px] border-t border-black border-opacity-20 justify-around items-center inline-flex">
-          <Link to={currentPath === "/" ? "/" : "/"} onClick={() => selected('/')}>
+          <Link to={currentPath === "/" ? "/" : "/"}>
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="Home line"
@@ -33,11 +28,11 @@ const AuxBar = ({ theme }) => {
             <div
               className={` text-xs font-medium ${
                 theme === "dark" && currentPath === "/"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-300"
                   : theme !== "dark" && currentPath === "/"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : "text-gray-500"
               }`}
             >
@@ -45,7 +40,7 @@ const AuxBar = ({ theme }) => {
             </div>
           </div>
         </Link>
-        <Link to="/Cart" onClick={() => selected("Cart")}>
+        <Link to="/Cart">
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="MyCart"
@@ -63,11 +58,11 @@ const AuxBar = ({ theme }) => {
             <div
               className={`text-xs font-medium ${
                 theme === "dark" && currentPath === "/Cart"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Cart"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : "text-gray-500"
               }`}
             >
@@ -75,7 +70,7 @@ const AuxBar = ({ theme }) => {
             </div>
           </div>
         </Link>
-        <Link to="/Search" onClick={() => selected("Search")}>
+        <Link to="/Search">
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="Search"
@@ -93,11 +88,11 @@ const AuxBar = ({ theme }) => {
             <div
               className={`text-xs font-medium ${
                 theme === "dark" && currentPath === "/Search"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Search"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : "text-gray-500"
               }`}
             >
@@ -105,7 +100,7 @@ const AuxBar = ({ theme }) => {
             </div>
           </div>
         </Link>
-        <Link to="/Wishlist" onClick={() => selected("Wishlist")}>
+        <Link to="/Wishlist">
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="Saved"
@@ -123,11 +118,11 @@ const AuxBar = ({ theme }) => {
             <div
               className={`text-xs font-medium ${
                 theme === "dark" && currentPath === "/Wishlist"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Wishlist"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : "text-gray-500"
               }`}
             >
@@ -136,7 +131,7 @@ const AuxBar = ({ theme }) => {
           </div>
         </Link>
        
-        <Link to="/Account" onClick={() => selected("Account")}>
+        <Link to="/Account">
           <div className="flex-col justify-start items-center inline-flex">
             <img
               src={
@@ -154,11 +149,11 @@ const AuxBar = ({ theme }) => {
             <div
               className={`text-xs font-medium ${
                 theme === "dark" && currentPath === "/Account"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Account"
-                  ? "text-red-500 font-semibold"
+                  ? "text-red-500"
                   : "text-gray-500"
               }`}
             >
