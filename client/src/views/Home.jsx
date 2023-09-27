@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../redux/userSlice";
-import { setProducts, loadProducts } from "../redux/productsSlice";
+import { setProducts,fetchProducts} from "../redux/productsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,13 +15,13 @@ const Home = () => {
 
     if (status === "idle") {
       // Solo cargamos productos si el estado está en "idle"
-      dispatch(loadProducts());
+      dispatch(fetchProducts());
     }
   }, [dispatch, status]);
 
   return (
     <div >
-        <h1>Home</h1>
+      <h1>Home</h1>
       <p>Welcome, {user.name}</p>
       <p>Email: {user.email}</p>
 
