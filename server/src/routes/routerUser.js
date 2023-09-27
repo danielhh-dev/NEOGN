@@ -1,8 +1,8 @@
 const { Router } = require("express");
 
-const getUsers = require();
-const getUserById = require();
-const deleteUser = require();
+const getUsers = require("../controllers/User/getUsers");
+const getUserById = require("../controllers/User/getUserById");
+const deleteUser = require("../controllers/User/deleteUser");
 
 const router = Router();
 
