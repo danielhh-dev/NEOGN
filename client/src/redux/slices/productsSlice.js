@@ -1,6 +1,6 @@
 // src/redux/productsSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import productsData from "../fakeProducts.json"; 
+import productsData from "../../fakeProducts.json";
 
 const initialState = {
   products: [],
@@ -25,8 +25,6 @@ export const productsSlice = createSlice({
 });
 
 export const { setProducts, setLoading, setError } = productsSlice.actions;
-
-
 
 // Exporta una función asincrónica para cargar los productos desde el archivo JSON
 //mas adelante tenemos que cambiar esto por el endpoint del back
