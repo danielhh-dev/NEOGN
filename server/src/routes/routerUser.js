@@ -3,6 +3,7 @@ const { Router } = require("express");
 const getUsers = require("../controllers/User/getUsers");
 const getUserById = require("../controllers/User/getUserById");
 const deleteUser = require("../controllers/User/deleteUser");
+const signUp = require("../controllers/User/signUp");
 
 const router = Router();
 
@@ -46,6 +47,22 @@ router.delete("/delete/:id", async (req, res) => {
 
     res.status(400).json({ error: error.message });
   }
+});
+
+//POST
+router.post("/signup", async (req, res) => {
+  try {
+    const { name, username, email, password, photo } = req.body;
+    console.log(req.body);
+
+    const newUser = await signUp({ name, username, email, password, photo })
+
+    return res.status(200).json(newUser);
+  } catch (error) {
+    console.log(error.message);
+
+    res.status(400).send(error.message)
+  };
 });
 
 module.exports = router;
