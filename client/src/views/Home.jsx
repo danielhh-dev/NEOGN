@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts, fetchProducts } from "../redux/slices/productsSlice";
 
+
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -19,6 +20,7 @@ const Home = () => {
 
   return (
     <div>
+      
       <h1>Home</h1>
       <p>Welcome, {user.name}</p>
       <p>Email: {user.email}</p>
