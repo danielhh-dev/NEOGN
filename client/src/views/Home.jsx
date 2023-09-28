@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../redux/userSlice";
 import { setProducts,fetchProducts} from "../redux/productsSlice";
+import SearchBar from "../components/SearchBar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,9 @@ const Home = () => {
   }, [dispatch, status]);
 
   return (
-    <div >
-      <h1>Home</h1>
+    <div className="flex flex-col items-center justify-center min-hscreen">
+      <SearchBar/>
+      <h1  className="texte-3x1 font-semibold my-4 justify-center">Home</h1>
       <p>Welcome, {user.name}</p>
       <p>Email: {user.email}</p>
 

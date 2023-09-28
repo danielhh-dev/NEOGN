@@ -4,6 +4,7 @@ import productsData from "../fakeProducts.json";
 
 const initialState = {
   products: [],
+  searchTerm: '',
   status: "idle",
 };
 
@@ -21,11 +22,29 @@ export const productsSlice = createSlice({
     setError: (state) => {
       state.status = "failed";
     },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
   },
 });
+export const { setProducts, setLoading, setError, setSearchTerm } = productsSlice.actions;
 
-export const { setProducts, setLoading, setError } = productsSlice.actions;
 
+// funcion para buscar los productos 
+export const buscarProductos =(productos, busqueda)=>{
+  return productos.filter((producto) =>
+  producto.name.toLowerCase().includes(busqueda.toLowerCase())
+
+  );
+};
+export const selectSearchTerm = (state) => state.products.searchTerm;
+
+export const selectFilteredProducts = (state) => {
+  const searchTerm = selectSearchTerm(state);
+  return state.products.products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}
 
 
 // Exporta una función asincrónica para cargar los productos desde el archivo JSON
