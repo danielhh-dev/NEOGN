@@ -6,7 +6,7 @@ const routerOrders = require("./routerOrder");
 const router = Router();
 
 router.use("/products", routerProduct);
-router.use("/user", routerUser);
-router.use("/order", routerOrders);
+router.use("/users", routerUser);
+router.use("/orders", routerOrders);
 
 module.exports = router;
