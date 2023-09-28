@@ -4,6 +4,7 @@ const getUsers = require("../controllers/User/getUsers");
 const getUserById = require("../controllers/User/getUserById");
 const deleteUser = require("../controllers/User/deleteUser");
 const signUp = require("../controllers/User/signUp");
+const login = require("../controllers/User/login");
 
 const router = Router();
 
@@ -64,5 +65,19 @@ router.post("/signup", async (req, res) => {
     res.status(400).send(error.message)
   };
 });
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    await login(email, password);
+
+    return res.status(200).json({ access: true });
+  } catch (error) {
+    console.log(error.message);
+
+    res.status(400).send(error.message);
+  };
+})
 
 module.exports = router;
