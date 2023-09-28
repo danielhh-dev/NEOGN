@@ -10,9 +10,25 @@ const verifyToken = (req, res, next) => {
     });
   };
 
-  const decoded = jwt.verify(token, process.env.AUTH_SECRET);
-  req.userId = decoded.id;
-  next();
+  try {
+    const decoded = jwt.verify(token, process.env.AUTH_SECRET);
+
+    req.userId = decoded.id;
+    
+    next();
+  } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+      return res.status(400).json({
+        auth: false,
+        message: "Token expired",
+      });
+    } else {
+      return res.status(400).json({
+        auth: false,
+        message: "Internal server error",
+      });
+    }
+  }
 };
 
 module.exports = verifyToken;

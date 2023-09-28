@@ -19,7 +19,7 @@ const login = async (email, password) => {
   } catch (error) {
     console.log(error);
     
-    throw new Error("Login failed: ", error.message);
+    throw new Error("Login failed: " + error);
   };
 };
 
