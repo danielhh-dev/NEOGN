@@ -1,12 +1,9 @@
-import {configureStore} from "@reduxjs/toolkit"
-import userReducer from "./userSlice"
-import productsReducer from "./productsSlice"
-import paginationReducer from "./productsSlice"
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./reducers";
 
-export const store = configureStore({
-    reducer:{
-        user: userReducer,
-        products: productsReducer,
-        pagination: paginationReducer,
-    }
-})
+const store = configureStore({
+  reducer: rootReducer,
+});
+
+
+export { store };
