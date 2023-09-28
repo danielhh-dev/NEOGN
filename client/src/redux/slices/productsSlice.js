@@ -1,6 +1,6 @@
 // src/redux/productsSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import productsData from "../fakeProducts.json"; 
+import productsData from "../../fakeProducts.json";
 
 const initialState = {
   products: [],
