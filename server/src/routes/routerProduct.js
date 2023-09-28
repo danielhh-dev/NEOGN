@@ -1,7 +1,25 @@
 const { Router } = require("express");
 const router = Router();
+const {createProduct,calculateAverageRating} = require('../controllers/Products/createProduct')
+const {getProducts} = require ('../controllers/Products/getProducts')
+router.post("/create", async(req, res) => {
+  try{
+    const data = req.body;
+    console.log("DATa", data)
+    const newProduct =await createProduct(data);
+    
+    const averageRating = calculateAverageRating(newProduct.rating);
+    newProduct.averageRating = parseFloat(averageRating.toFixed(2));
+    
+    res.status(200).json(newProduct);
 
-router.get("/", (req, res) => {
+}catch(err){
+    console.log("error crate",err.message)
+
+}
+});
+
+router.get("/",async (req, res) => {
   const products = [
     {
       id: 1,
@@ -673,4 +691,10 @@ router.get("/", (req, res) => {
     },
   ];
   res.json(products);
+  
+
+
 });
+
+
+module.exports = router;
