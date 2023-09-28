@@ -5,6 +5,8 @@ import productsData from "../fakeProducts.json";
 const initialState = {
   products: [],
   status: "idle",
+  currentPage: 1,
+  itemsPerPage: 10,
 };
 
 export const productsSlice = createSlice({
@@ -34,11 +36,21 @@ export const fetchProducts = () => async (dispatch) => {
   try {
     dispatch(setLoading()); // Indicamos que la carga está en progreso
 
+    const response = await new Promise((resolve) => {
+      setTimeout(() =>{
+        resolve(productsData);
+      }, 1000);
+    })
+
     // En lugar de cargar productos ficticios, ahora cargamos los datos del archivo JSON
     dispatch(setProducts(productsData)); // Cargamos los productos desde el archivo JSON en el estado
   } catch (error) {
     dispatch(setError()); // Indicamos que ha ocurrido un error
   }
 };
+
+
+
+
 
 export default productsSlice.reducer;
