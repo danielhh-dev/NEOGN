@@ -1,9 +1,7 @@
-import React from 'react'
 
-
-const Pagination = ({allProducts, currentPage, productsPerge, handlePagination}) => {
-  const startIndex =(currentPage - 1) * productsPerge;
-  const endIndex = startIndex + productsPerge;
+const Pagination = ({allProducts, currentPage, productsPerPage, handlePagination}) => {
+  const startIndex =(currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
   const displayedProducts = allProducts ? allProducts.slice(startIndex, endIndex) : [];
 
   return (
@@ -43,4 +41,4 @@ const Pagination = ({allProducts, currentPage, productsPerge, handlePagination})
 );
 };
 
-export default Pagination
+export default Pagination;
