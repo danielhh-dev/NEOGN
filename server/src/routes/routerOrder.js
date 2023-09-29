@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const getOrder = require("../controllers/Orders/getOrder");
+const getOrder = require("../controllers/Orders/getOrders");
 
 const router = Router();
 
