@@ -18,4 +18,4 @@ const handlersCreateProducts = async (req, res)=>{
 };
 
 
-module.exports = handlersCreateProducts;
+module.exports = {handlersCreateProducts};
