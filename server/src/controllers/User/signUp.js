@@ -28,7 +28,7 @@ const signUp = async ({name, username, email, password, photo}) => {
   } catch (error) {
     console.log(error);
     
-    throw new Error("Error creating user: ", error);
+    throw new Error("Error creating user: " + error);
   };
 };
 

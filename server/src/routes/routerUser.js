@@ -1,10 +1,16 @@
 const { Router } = require("express");
 
+// Controladores
 const getUsers = require("../controllers/User/getUsers");
 const getUserById = require("../controllers/User/getUserById");
 const deleteUser = require("../controllers/User/deleteUser");
 const signUp = require("../controllers/User/signUp");
 const login = require("../controllers/User/login");
+
+// Middlewares
+const verifyToken = require("../middlewares/verifyToken");
+const refreshToken = require("../middlewares/refreshToken");
+const signTokens = require("../middlewares/signTokens");
 
 const router = Router();
 
@@ -70,14 +76,34 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    await login(email, password);
+    const user = await login(email, password);
 
-    return res.status(200).json({ access: true });
+    const { accessToken, refreshToken } = signTokens(user.id);
+
+    return res.status(200).json({ access: true, accessToken, refreshToken });
   } catch (error) {
     console.log(error.message);
 
     res.status(400).send(error.message);
   };
-})
+});
+
+// Refresh token
+router.post("/refresh", refreshToken, (req, res) => {
+  try {
+    const newAccessToken = req.locals.newAccessToken;
+    const newRefreshToken = req.locals.newRefreshToken;
+    
+    if (!newAccessToken || !newRefreshToken) {
+      throw new Error("Unable to renew access tokens.");
+    }
+
+    res.status(200).json({ auth: true, accessToken: newAccessToken, refreshToken: newRefreshToken });
+  } catch (error) {
+    console.log(error.message);
+    
+    res.status(400).json({ auth: false, message: error.message });
+  };
+});
 
 module.exports = router;
