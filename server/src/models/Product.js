@@ -16,14 +16,14 @@ module.exports= (sequelize)=>{
         },        
         category:{
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
         image:{
             type:DataTypes.STRING,
         },
         price:{
             type:DataTypes.FLOAT,
-            allowNull: true,
+            allowNull: false,
         },
         stock:{
             type: DataTypes.INTEGER,
@@ -31,7 +31,7 @@ module.exports= (sequelize)=>{
         },
         SKU:{
             type: DataTypes.STRING,
-            // allowNull:false,
+            allowNull:false,
         },
         discount:{
             type:DataTypes.FLOAT,

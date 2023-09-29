@@ -1,9 +1,8 @@
 
-const {createProduct,calculateAverageRating} = require('../Products/createProduct')
+const {createProduct} = require('../Products/createProduct');
+const {calculateAverageRating} = require ('../auxfunction/calculateAverageRating')
 
-
-const handlersCreateProducts = async (req, res)=>{
-    
+const handlersCreateProducts = async (req, res)=>{    
     try{
         const data = req.body;
         const newProduct =await createProduct(data);
@@ -14,12 +13,9 @@ const handlersCreateProducts = async (req, res)=>{
         res.status(200).json(newProduct);
 
     }catch(err){
-        console.log("error crate", err.message)
-
-
-
+        console.log("error create", err.message);
     }
-}
+};
 
 
 module.exports = handlersCreateProducts;

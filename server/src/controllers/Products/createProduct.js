@@ -1,11 +1,6 @@
 const db = require('../../database/db')
 
-const calculateAverageRating = (ratingArray)=> {
-  console.log('RATINGARRAY',ratingArray);
-  const validRatings = ratingArray.filter(rating => typeof rating === 'number' && !isNaN(rating));
-  const totalRating = validRatings.reduce((sum, rating) => sum + rating, 0);
-  return validRatings.length > 0 ? totalRating / validRatings.length : 0;
-}
+
 
 const generateSKU = () => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -20,7 +15,7 @@ const generateSKU = () => {
 
   
 const createProduct = async (data) => {
-  console.log("DATAAA", data)
+  
     const product = {
         ...data,
         id :data.SKU ? data.SKU : generateSKU(),
@@ -42,9 +37,9 @@ const createProduct = async (data) => {
       isAvailable,
       
     });
-    console.log('np', newProduct)
+    
     return newProduct;
 };
 
 
-module.exports = {createProduct,calculateAverageRating};
+module.exports = {createProduct};
