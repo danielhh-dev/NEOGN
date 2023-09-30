@@ -1,4 +1,4 @@
-const db = require("../../database/db");
+const db = require("../../db");
 
 const getUsers = async () => {
   try {
@@ -7,9 +7,9 @@ const getUsers = async () => {
     return users;
   } catch (error) {
     console.log(error);
-    
+
     throw new Error("There was an error:" + error);
-  };
+  }
 };
 
 module.exports = getUsers;

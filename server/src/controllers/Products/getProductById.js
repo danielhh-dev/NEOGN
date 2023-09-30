@@ -6,4 +6,4 @@ const getProductById = async (id) => {
   return product;
 };
 
-module.exports = { getProductById };
+module.exports = getProductById;

@@ -1,4 +1,4 @@
-const db = require("../../database/db");
+const db = require("../../db");
 
 const deleteUser = async (id) => {
   try {
@@ -17,8 +17,8 @@ const deleteUser = async (id) => {
     return message;
   } catch (error) {
     console.log(error);
-    
-    throw new Error("There was an error:" + error)
+
+    throw new Error("There was an error:" + error);
   }
 };
 
