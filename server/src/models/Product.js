@@ -29,10 +29,6 @@ module.exports= (sequelize)=>{
             type: DataTypes.INTEGER,
             defaultValue: 0,
         },
-        SKU:{
-            type: DataTypes.STRING,
-            allowNull:false,
-        },
         discount:{
             type:DataTypes.FLOAT,
             defaultValue: 0.0,

@@ -18,7 +18,9 @@ const getFilteredProducts = async (category, min, max, order) => {
       products.sort((a, b) => a.title.localeCompare(b.title));
     } else if (order === 'Z-A') {
       products.sort((a, b) => b.title.localeCompare(a.title));
-    } 
+    } else if (order === "date") {
+      products.sort((a, b) => a.createdAt - b.createdAt);
+    }
   } 
   return products;
 };
