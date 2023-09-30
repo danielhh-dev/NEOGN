@@ -1,6 +1,9 @@
+//en este componente solamente hay estilos para aplicar al componente detail real
+//modificar lo que sea necesario
+
 import React from 'react';
 
-const Detail = () => {
+const DetailT = () => {
 
 
   return (
@@ -53,7 +56,7 @@ const Detail = () => {
           <div className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-absolutestaticwhite-s text-[18px] tracking-[0] leading-[normal] whitespace-nowrap">
             Add To Cart
           </div>
-          {/* <IconlyLightArrow className="bg-[url(image.svg)] !relative" /> */}
+          
         </div>
       </div>
       <div className="flex flex-col w-[342px] items-start gap-[16px] absolute top-[425px] left-0">
@@ -108,4 +111,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default DetailT;

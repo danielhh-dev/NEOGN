@@ -1,6 +1,8 @@
+//en este componente solamente hay estilos para aplicar al componente home real
+//modificar lo que sea necesario
 import React from 'react';
 
-const Home = () => {
+const HomeT = () => {
   return (
     <div className='mt-20'>
       <div className="bg-white flex flex-row justify-center w-full">
@@ -137,4 +139,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeT;

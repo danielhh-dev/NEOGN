@@ -1,6 +1,9 @@
+//en este componente solamente hay estilos para aplicar al componente filter real
+//modificar lo que sea necesario
+
 import React from "react";
 
-export const Filter = () => {
+export const FilterT = () => {
   return (
     <div className="flex flex-col h-[420px] items-center justify-center gap-[35px] pl-0 pr-[8px] pt-[13px] pb-[15px] relative bg-white">
       <div className="flex w-[297px] items-center gap-[35px] relative flex-[0_0_auto]">
@@ -81,7 +84,7 @@ export const Filter = () => {
   );
 };
 
-export default Filter;
+export default FilterT;
 
 
 
