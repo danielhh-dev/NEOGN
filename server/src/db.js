@@ -41,23 +41,6 @@ modelDefiners.forEach((model) => model(sequelize));
 
 const { User, Order, Product } = sequelize.models;
 
-// User.hasMany(Payment);
-// Payment.belongsTo(User);
-
-// //
-
-// PurchaseOrder.belongsTo(User);
-// User.hasMany(PurchaseOrder);
-
-// PurchaseOrder.belongsToMany(Product, { through: "OrderProduct" });
-// Product.belongsToMany(PurchaseOrder, { through: "OrderProduct" });
-
-// Favorite.hasMany(User);
-// User.belongsTo(Favorite);
-
-// Product.belongsToMany(Favorite, { through: "ProductFavorite" });
-// Favorite.belongsToMany(Product, { through: "ProductFavorite" });
-
 Product.belongsToMany(User, { through: "ProductsUser" });
 User.belongsToMany(Product, { through: "ProductsUser" });
 
