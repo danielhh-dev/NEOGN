@@ -1,8 +1,19 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import fetchProducts from "../redux/actions/getProducts";
 import HomeCard from "../components/Cards/HomeCard";
 import Slider from "../components/Home/Slider";
 import TopCategories from "../components/Home/TopCategories";
 
+
 const Home = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   return (
     <div className="h-full pb-32">
       <div className="h-auto mx-10 mt-10 w-auto">
