@@ -1,27 +1,32 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import imagePaths from "./imagePaths";
 
-const AuxBar = ({ theme }) => {
+const AppBar = ({ theme }) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-
-  
-    return (  
-      <div className={`font-general-sans w-full h-[80px] justify-around items-center inline-flex ${theme === "dark" ? 'dark:bg-neutral-950 border-t border-white border-opacity-20' : 'bg-white border-t border-black border-opacity-20'}`}>
+  return (
+    <div
+      className={`font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
+        theme === "dark"
+          ? "dark:bg-neutral-950 border-t border-white border-opacity-20"
+          : "bg-white border-t border-black border-opacity-20"
+      }`}
+    >
       <div className="w-full h-[80px] border-t border-black border-opacity-20 justify-around items-center inline-flex">
-          <Link to={currentPath === "/" ? "/" : "/"}>
+        <Link to={currentPath === "/" ? "/" : "/"}>
           <div className="flex-col justify-start items-center inline-flex">
             <img
-              alt="Home line"
+              alt="Home"
               src={
                 theme === "dark" && currentPath === "/"
-                  ? "https://i.postimg.cc/prtyL6FP/active-home-svgrepo-com.png"
+                  ? imagePaths.Home.inactive
                   : theme === "dark"
-                  ? "https://i.postimg.cc/yNBf01CR/Dark-home-svgrepo-com.png"
+                  ? imagePaths.Home.dark
                   : theme !== "dark" && currentPath === "/"
-                  ? "https://i.postimg.cc/prtyL6FP/active-home-svgrepo-com.png"
-                  : "https://i.postimg.cc/J4xtRK4W/home-svgrepo-com.png"
+                  ? imagePaths.Home.active
+                  : imagePaths.Home.inactive
               }
               className="w-6 h-6"
             />
@@ -46,12 +51,12 @@ const AuxBar = ({ theme }) => {
               alt="MyCart"
               src={
                 theme === "dark" && currentPath === "/Cart"
-                  ? "https://i.postimg.cc/1Xq6bnN4/active-basket-alt-3-svgrepo-com.png"
+                  ? imagePaths.Cart.inactive
                   : theme === "dark"
-                  ? "https://i.postimg.cc/XNGwrhD3/Dark-basket-alt-3-svgrepo-com.png"
+                  ? imagePaths.Cart.dark
                   : theme !== "dark" && currentPath === "/Cart"
-                  ? "https://i.postimg.cc/1Xq6bnN4/active-basket-alt-3-svgrepo-com.png"
-                  : "https://i.postimg.cc/59h8L3Zz/basket-alt-3-svgrepo-com.png"
+                  ? imagePaths.Cart.active
+                  : imagePaths.Cart.inactive
               }
               className="w-6 h-6"
             />
@@ -76,12 +81,12 @@ const AuxBar = ({ theme }) => {
               alt="Search"
               src={
                 theme === "dark" && currentPath === "/Search"
-                  ? "https://i.postimg.cc/2SmvX5j8/active-search-alt-svgrepo-com.png"
+                  ? imagePaths.Search.inactive
                   : theme === "dark"
-                  ? "https://i.postimg.cc/tCFW56jM/Dark-search-alt-svgrepo-com.png"
+                  ? imagePaths.Search.dark
                   : theme !== "dark" && currentPath === "/Search"
-                  ? "https://i.postimg.cc/2SmvX5j8/active-search-alt-svgrepo-com.png"
-                  : "https://i.postimg.cc/wjVJKd35/search-alt-svgrepo-com.png"
+                  ? imagePaths.Search.active
+                  : imagePaths.Search.inactive
               }
               className="w-6 h-6"
             />
@@ -103,15 +108,15 @@ const AuxBar = ({ theme }) => {
         <Link to="/Wishlist">
           <div className="flex-col justify-start items-center inline-flex">
             <img
-              alt="Saved"
+              alt="Wishlist"
               src={
                 theme === "dark" && currentPath === "/Wishlist"
-                  ? "https://i.postimg.cc/vTLTgtrf/active-heart-svgrepo-com.png"
+                  ? imagePaths.Wishlist.inactive
                   : theme === "dark"
-                  ? "https://i.postimg.cc/Dy9pyQCB/Dark-heart-svgrepo-com.png"
+                  ? imagePaths.Wishlist.dark
                   : theme !== "dark" && currentPath === "/Wishlist"
-                  ? "https://i.postimg.cc/vTLTgtrf/active-heart-svgrepo-com.png"
-                  : "https://i.postimg.cc/4xFd9d9L/heart-svgrepo-com.png"
+                  ? imagePaths.Wishlist.active
+                  : imagePaths.Wishlist.inactive
               }
               className="w-6 h-6"
             />
@@ -130,21 +135,21 @@ const AuxBar = ({ theme }) => {
             </div>
           </div>
         </Link>
-       
+
         <Link to="/Account">
           <div className="flex-col justify-start items-center inline-flex">
             <img
+              alt="Account"
               src={
                 theme === "dark" && currentPath === "/Account"
-                  ? "https://i.postimg.cc/c1Qrb0pC/active-profile-svgrepo-com.png"
+                  ? imagePaths.Account.inactive
                   : theme === "dark"
-                  ? "https://i.postimg.cc/rmwQYfmF/Dark-profile-svgrepo-com.png"
+                  ? imagePaths.Account.dark
                   : theme !== "dark" && currentPath === "/Account"
-                  ? "https://i.postimg.cc/c1Qrb0pC/active-profile-svgrepo-com.png"
-                  : "https://i.postimg.cc/Wb5pB3XN/profile-svgrepo-com.png"
+                  ? imagePaths.Account.active
+                  : imagePaths.Account.inactive
               }
               className="w-6 h-6"
-              alt="Account"
             />
             <div
               className={`text-xs font-medium ${
@@ -166,4 +171,4 @@ const AuxBar = ({ theme }) => {
   );
 };
 
-export default AuxBar;
+export default AppBar;

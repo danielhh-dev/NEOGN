@@ -1,4 +1,4 @@
-const db = require('../../database/db');
+const db = require('../../db');
 
 const deleteProduct = async (productId) => {
   const product = await db.Product.findByPk(productId);

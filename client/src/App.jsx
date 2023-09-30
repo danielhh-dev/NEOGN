@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import AppBar from "./components/AppBar";
+import AppBar from "./components/AppBar/AppBar";
 import Home from "./views/Home";
 import Cart from "./views/Cart"
 import Search from "./views/Search";
 import Wishlist from "./views/Wishlist";
 import Account from "./views/Account";
+import TopBar from "./components/TopBar/TopBar";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -37,7 +38,8 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <div>
+      <TopBar/>
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Cart" element={<Cart />} />

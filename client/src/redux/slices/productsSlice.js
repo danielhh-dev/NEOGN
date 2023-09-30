@@ -1,93 +1,36 @@
-// src/redux/productsSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import productsData from "../../fakeProducts.json";
 
-const initialState = {
-  products: [],
-  searchTerm: '',
-  status: "idle",
-  currentPage: 1,
-  itemsPerPage: 10,
-  totalItems: 0
-};
-
-export const productsSlice = createSlice({
+const productSlice = createSlice({
   name: "products",
-  initialState,
+  initialState:{
+    products:[],
+  },
   reducers: {
-    setProducts: (state, action) => {
+    getProducts(state, action) {
       state.products = action.payload;
-      state.status = "succeeded";
     },
-    setLoading: (state) => {
-      state.status = "loading";
+    addProduct(state, action) {
+      state.products.push(action.payload);
     },
-    setError: (state) => {
-      state.status = "failed";
+    removeProduct(state, action) {
+      state.products = state.products.filter(
+        (product) => product.SKU !== action.payload
+      );
     },
-    setSearchTerm: (state, action) => {
-      state.searchTerm = action.payload;
+    filterProducts(state,action){
+      state.products = action.payload;
     },
-    setCurrentPage: (state, action) => {
-      state.currentPage = action.payload
-      state.status = "succeeded";
+    updateProduct(state, action) {
+      const { SKU, ...updatedProduct } = action.payload;
+      const index = state.products.findIndex((product) => product.SKU === SKU);
+      if (index !== -1) {
+        state.products[index] = { ...state.products[index], ...updatedProduct };
+      }
     },
-    setItemsPerPage: (state, action) =>{
-      state.itemsPerPage = action.payload
-      state.status = "succeeded";
-    },
-    setTotalItems: (state, action) => {
-      state.totalItems = action.payload
-      state.status = "succeeded";
-    }
   },
 });
 
-// funcion para buscar los productos 
-export const buscarProductos =(productos, busqueda)=>{
-  return productos.filter((producto) =>
-  producto.name.toLowerCase().includes(busqueda.toLowerCase())
+export const { getProducts, addProduct, filterProducts, removeProduct, updateProduct } =
+  productSlice.actions;
 
-  );
-};
-export const selectSearchTerm = (state) => state.products.searchTerm;
-
-export const selectFilteredProducts = (state) => {
-  const searchTerm = selectSearchTerm(state);
-  return state.products.products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-}
-
-export const { setProducts, setLoading, setError, setCurrentPage, setItemsPerPage, setTotalItems, setSearchTerm } = productsSlice.actions;
-
-
-// Exporta una función asincrónica para cargar los productos desde el archivo JSON
-//mas adelante tenemos que cambiar esto por el endpoint del back
-export const fetchProducts = () => async (dispatch) => {
-  try {
-    dispatch(setLoading()); // Indicamos que la carga está en progreso
-
-    const response = await new Promise((resolve) => {
-      setTimeout(() =>{
-        resolve(productsData);
-      }, 1000);
-    })
-
-    // En lugar de cargar productos ficticios, ahora cargamos los datos del archivo JSON
-    dispatch(setProducts(productsData)); // Cargamos los productos desde el archivo JSON en el estado
-  } catch (error) {
-    dispatch(setError()); // Indicamos que ha ocurrido un error
-  }
-};
-
-export const changePage = (page) => async (dispatch) => {
-  try {
-    dispatch(setLoading());
-    dispatch(setCurrentPage(page))
-  }catch (error){
-    dispatch(setError(error.message));
-  }
-}
-
-export default productsSlice.reducer;
+export default productSlice.reducer;

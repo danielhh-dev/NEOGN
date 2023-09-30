@@ -33,5 +33,3 @@ const signUp = async ({name, username, email, password, photo}) => {
 };
 
 module.exports = signUp;
-
-//Xz

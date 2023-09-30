@@ -1,19 +1,17 @@
 import { combineReducers } from "redux";
 import userReducer from "./slices/userSlice";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import productsReducer from "./slices/productsSlice";
-import searchReducer from "./slices/searchSlice";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from 'redux-persist';
 
 const userPersistConfig = {
-  key: "user",
+  key: 'user',
   storage: storage,
 };
 
 const rootReducer = combineReducers({
   products: productsReducer,
   user: persistReducer(userPersistConfig, userReducer),
-  search: searchReducer,
 });
 
-export default rootReducer;
+export {rootReducer};
