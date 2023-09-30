@@ -23,5 +23,3 @@ const deleteUser = async (id) => {
 };
 
 module.exports = deleteUser;
-
-//Xz

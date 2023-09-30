@@ -1,46 +1,36 @@
-// src/components/Home.jsx
-import { useEffect } from "react";
-import {  useSelector } from "react-redux";
-// import Pagination from "../components/Pagination"
-
+import HomeCard from "../components/Cards/HomeCard";
+import Slider from "../components/Home/Slider";
+import TopCategories from "../components/Home/TopCategories";
 
 const Home = () => {
-
-  const user = useSelector((state) => state.user);
-  // const products = useSelector((state) => state.products.products);
-  const status = useSelector((state) => state.products.status);
-  // const currentPage = useSelector((state) => state.products.currentPage );
-  // const itemsPerPage = 10;
-
-  // console.log("startIndex:", startIndex);
-  // console.log("endIndex:", endIndex);
-  // console.log("productsToShow:", productsToShow);
-  
-  useEffect(() => {
-
-    if (status === "idle") {
-      // Solo cargamos productos si el estado está en "idle"
-    }
-  }, []);
-
-
-  // const handlePageChange = (newPage) => {
-  //   console.log("handlePageChange called with newPage:", newPage);
-    
-  // };
-
   return (
-    <div className="flex flex-col items-center justify-center min-hscreen">
-      <h1  className="texte-3x1 font-semibold my-4 justify-center">Home</h1>
-      <p>Welcome, {user.name}</p>
-      <p>Email: {user.email}</p>
-      
-      {/* <Pagination
-        currentPage={currentPage} 
-        handlePagination={handlePageChange}
-        allProducts={products}
-        productsPerPage={itemsPerPage}
-      /> */}
+    <div className="h-full pb-32">
+      <div className="h-auto mx-10 mt-10 w-auto">
+        <Slider />
+      </div>
+      <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
+        <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
+          Top Categories
+        </h1>
+        <p className="text-red-500 text-[10px] font-semibold">SEE ALL</p>
+      </div>
+      <div className="w-auto h-auto m-6">
+        <TopCategories />
+      </div>
+      <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
+        <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
+          Latest Products
+        </h1>
+        <p className="text-red-500 text-[10px] font-semibold">SEE ALL</p>
+      </div>
+      <div className="w-full flex justify-center items-center">
+        <div className="w-auto h-auto grid grid-cols-2 gap-4">
+          <HomeCard image="https://i.postimg.cc/KYqvqjQY/hyperx-alloy-origins-60-ar-angle-removebg-preview.png" />
+          <HomeCard image="https://i.postimg.cc/ZRXYmQGt/hyperx-clutch-wireless-gaming-co-removebg-preview.png" />
+          <HomeCard image="https://i.postimg.cc/50X9ZJkS/g502x-plus-gallery-2-black.png" />
+          <HomeCard image="https://i.postimg.cc/dQTt6qCq/h732.png" />
+        </div>
+      </div>
     </div>
   );
 };
