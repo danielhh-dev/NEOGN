@@ -1,22 +1,17 @@
 const db = require("../../database/db");
 
 const getUser = async (id) => {
+try {
   const user = await db.User.findByPk(id, {
-    include: [
-      {
-        model: db.Order,
-      },
-      {
-        model: db.Product,
-      },
-    ],
+    include: [db.Order, db.Product]
   });
 
-  if (!user) {
-    throw new Error("User not found");
-  };
+  return user ? user : (() => { throw new Error("User not found"); })();
+} catch (error) {
+  console.log(error);
 
-  return user;
+  throw new Error("There was an error:" + error);
+}
 };
 
 module.exports = getUser;

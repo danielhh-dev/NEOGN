@@ -1,19 +1,25 @@
 const db = require("../../database/db");
 
 const deleteUser = async (id) => {
-  let user = await db.User.findByPk(id);
+  try {
+    let user = await db.User.findByPk(id);
 
-  if (!user) {
-    throw new Error("User not found");
-  };
+    const message = !user
+      ? "User not found"
+      : user.isDisabled
+      ? "User is already disabled"
+      : ((user.isDisabled = true), "The user has been deleted");
 
-  if (user.isDisabled) {
-    throw new Error("User is already disable")
-  };
+    if (message === "The user has been deleted") {
+      await user.save();
+    }
 
-  user.isDisabled = true;
-
-  await user.save();
+    return message;
+  } catch (error) {
+    console.log(error);
+    
+    throw new Error("There was an error:" + error)
+  }
 };
 
 module.exports = deleteUser;

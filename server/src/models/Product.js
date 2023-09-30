@@ -29,11 +29,11 @@ module.exports= (sequelize)=>{
             type: DataTypes.INTEGER,
             defaultValue: 0,
         },
-        sku:{
-            type: DataTypes.INTEGER,
+        SKU:{
+            type: DataTypes.STRING,
             allowNull:false,
         },
-        diiscount:{
+        discount:{
             type:DataTypes.FLOAT,
             defaultValue: 0.0,
         },
