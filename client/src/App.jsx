@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 
 import AppBar from "./components/AppBar/AppBar";
 import Home from "./views/Home";
-import Cart from "./views/Cart"
+import Cart from "./views/Cart";
 import Search from "./views/Search";
 import Wishlist from "./views/Wishlist";
 import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
+import Categories from "./views/Categories";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -39,21 +40,22 @@ const App = () => {
 
   return (
     <div>
-      <TopBar/>
+      <TopBar />
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/Cart" element={<Cart />} />
-      <Route path="/Search" element={<Search />} />
-      <Route path="/Wishlist" element={<Wishlist />} />
-      <Route path="/Account" element={<Account />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Search" element={<Search />} />
+        <Route path="/Wishlist" element={<Wishlist />} />
+        <Route path="/Account" element={<Account />} />
+        <Route path="/Categories" element={<Categories />} />
       </Routes>
       <div
-          className={`fixed bottom-0 left-0 w-full z-[1000] ${
-            Desktop ? "hidden" : ""
-          }`}
-        >
-          <AppBar theme={theme} handleThemeSwitch={handleThemeSwitch} />
-        </div>
+        className={` fixed bottom-0 left-0 w-full z-[1000] ${
+          Desktop ? "hidden" : ""
+        }`}
+      >
+        <AppBar theme={theme} handleThemeSwitch={handleThemeSwitch} />
+      </div>
     </div>
   );
 };
