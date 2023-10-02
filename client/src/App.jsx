@@ -49,7 +49,7 @@ const App = () => {
         <Route path="/Wishlist" element={<Wishlist />} />
         <Route path="/Account" element={<Account />} />
         <Route path="/Categories" element={<Categories />} />
-      <Route path="/detail" element={<Detail/>} />
+        <Route path="/:id" element={<Detail/>} />
       </Routes>
       <div
         className={` fixed bottom-0 left-0 w-full z-[1000] ${

@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux"
+import  fetchProductById from "../redux/actions/fetchProductById"
+
+
 
 const Detail = () => {
 
   const imageTest = "https://i.postimg.cc/prChmM25/58.png";
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  console.log(id)
+  console.log("Detail component is rendering.");
+  const product = useSelector(state => {
+    console.log("Accessing product state:", state.detail);
+    return state.detail;
+  });
+  
+  useEffect(()=>{
+    console.log("Fetching product details...");
+    dispatch(fetchProductById(id));
+  },[dispatch, id])
+  console.log("product sss",product)
+
 
   return (
     <div className="allHome relative w-full max-w-[366px] h-auto">
-      <div className="Big image absolute w-[293px] h-[277px] top-0 left-[73px] bg-[#f6eaec] rounded-[20px_0px_0px_20px] overflow-hidden md:w-[500px] md:top-[30px] md:left-[300px] lg:w-[670px] lg:h-[450px] lg:left-[500px] lg:top-[29px]" style={{ backgroundImage: `url(${imageTest})` }} >
+      <div className="Big image absolute w-[293px] h-[277px] top-0 left-[73px] bg-[#f6eaec] rounded-[20px_0px_0px_20px] overflow-hidden md:w-[500px] md:top-[30px] md:left-[300px] lg:w-[670px] lg:h-[450px] lg:left-[500px] lg:top-[29px]" style={{ backgroundImage: `url(${product.detail.image})` }} >
         <div className="relative w-[3px] h-[330px] top-[-26px] left-[-43px] " >
           <div className="relative w-[42px] h-[42px] top-[39px] left-[280px]" >
             <div className=" inline-flex items-start gap-[10px] p-[9px] relative bg-absolutestaticwhite-s rounded-[10px] border border-solid " >
@@ -19,28 +39,28 @@ const Detail = () => {
         <img
           className="relative w-[50px] h-[50px] object-cover"
           alt="small img"
-          src={imageTest}
+          src={product.detail.image}
         />
       </div>
       <div className="inline-flex items-start gap-[10px] absolute top-[66px] left-[4px] md:left-[150px] md:top-[60px] md:w-[100px] md:h-[100px] lg:left-[80px] lg:top-[230px] lg:w-[180px] lg:h-[180px] bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
         <img
           className="relative w-[50px] h-[50px] object-cover"
           alt="small img"
-          src={imageTest}
+          src={product.detail.image}
         />
       </div>
       <div className="inline-flex items-start gap-[10px] absolute top-[132px] left-[4px] md:left-[10px] md:top-[170px] md:left-[40px] md:w-[100px] md:h-[100px] lg:left-[280px] lg:top-[30px] lg:w-[180px] lg:h-[180px] bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
         <img
           className="relative w-[50px] h-[50px] object-cover"
           alt="small img"
-          src={imageTest}
+          src={product.detail.image}
         />
       </div>
       <div className="inline-flex items-start gap-[10px] absolute top-[198px] left-[4px] md:left-[10px] md:left-[150px] md:top-[170px] md:w-[100px] md:h-[100px] lg:left-[280px] lg:top-[230px] lg:w-[180px] lg:h-[180px] bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
         <img
           className="relative w-[50px] h-[50px] object-cover"
           alt="small img"
-          src={imageTest}
+          src={product.detail.image}
         />
       </div>
       <div className="flex w-[342px] items-center justify-between absolute top-[584px] left-0 md:top-[430px] md:left-[300px] lg:left-[880px] lg:top-[490px]">

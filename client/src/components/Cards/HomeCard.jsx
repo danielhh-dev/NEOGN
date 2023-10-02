@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom"
-const HomeCard = ({ image }) => {
+const HomeCard = ({ image,id }) => {
   return (
     <div className="inline-flex flex-col items-start gap-[8px] relative">
-      <Link to={`/detail`}>
+      <Link to={`/${id}`}>
         <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl">
           <img
             className="relative w-auto h-auto object-cover"

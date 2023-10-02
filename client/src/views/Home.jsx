@@ -11,7 +11,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const products = useSelector((state)=> state.products)
-
+  console.log(products)
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -42,7 +42,7 @@ const Home = () => {
       <div className="w-full flex justify-center items-center">
         <div className="w-auto h-auto grid grid-cols-2 gap-4">
         {products.products.map((product) => (
-      <HomeCard  image={product.image} />
+      <HomeCard  image={product.image} id={product.id} />
     ))}
         </div>
       </div>
