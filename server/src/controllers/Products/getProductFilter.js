@@ -1,6 +1,13 @@
 const db = require("../../db");
 
-const getFilteredProducts = async (category, min, max, order, price) => {
+const getFilteredProducts = async (
+  category,
+  min,
+  max,
+  order,
+  price,
+  review
+) => {
   let products = await db.Product.findAll();
 
   if (category) {
