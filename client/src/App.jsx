@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
-
 import AppBar from "./components/AppBar/AppBar";
 import Home from "./views/Home";
 import Cart from "./views/Cart";
