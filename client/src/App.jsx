@@ -8,7 +8,7 @@ import Search from "./views/Search";
 import Wishlist from "./views/Wishlist";
 import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
-
+import Detail from "./views/Detail"
 const App = () => {
   const [theme, setTheme] = useState("light");
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
@@ -46,6 +46,7 @@ const App = () => {
       <Route path="/Search" element={<Search />} />
       <Route path="/Wishlist" element={<Wishlist />} />
       <Route path="/Account" element={<Account />} />
+      <Route path="/detail" element={<Detail/>} />
       </Routes>
       <div
           className={`fixed bottom-0 left-0 w-full z-[1000] ${

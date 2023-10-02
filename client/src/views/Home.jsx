@@ -1,18 +1,23 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import fetchProducts from "../redux/actions/getProducts";
 import HomeCard from "../components/Cards/HomeCard";
 import Slider from "../components/Home/Slider";
 import TopCategories from "../components/Home/TopCategories";
 
 
+
 const Home = () => {
 
   const dispatch = useDispatch();
-
+  const products = useSelector((state)=> state.products)
+  console.log(products)
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  console.log("Productos en el estado de Redux:", products);
+
 
   return (
     <div className="h-full pb-32">
@@ -36,10 +41,9 @@ const Home = () => {
       </div>
       <div className="w-full flex justify-center items-center">
         <div className="w-auto h-auto grid grid-cols-2 gap-4">
-          <HomeCard image="https://i.postimg.cc/KYqvqjQY/hyperx-alloy-origins-60-ar-angle-removebg-preview.png" />
-          <HomeCard image="https://i.postimg.cc/ZRXYmQGt/hyperx-clutch-wireless-gaming-co-removebg-preview.png" />
-          <HomeCard image="https://i.postimg.cc/50X9ZJkS/g502x-plus-gallery-2-black.png" />
-          <HomeCard image="https://i.postimg.cc/dQTt6qCq/h732.png" />
+        {products.products.map((product) => (
+      <HomeCard  image={product.image} />
+    ))}
         </div>
       </div>
     </div>
