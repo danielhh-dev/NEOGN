@@ -28,7 +28,9 @@ function Sidebar() {
 
   return (
     <div
-      className={`w-full bg-gray-100 ${isSidebarOpen ? "overflow-hidden" : "lg:hidden"}`}
+      className={`w-full bg-gray-100 ${
+        isSidebarOpen ? "overflow-hidden" : "lg:hidden"
+      }`}
     >
       <div ref={sidebarRef}>
         <nav className="bg-white p-4 ">
@@ -89,14 +91,13 @@ function Sidebar() {
                 <path d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
-
-            <div></div>
           </div>
           <ul className="py-6 px-6 space-y-2 ml-8">
             <li>
               <Link
                 to="/"
                 className="text-black text-xl font-normal block mb-6"
+                onClick={toggleSidebar}
               >
                 HOME
               </Link>
@@ -105,6 +106,7 @@ function Sidebar() {
               <Link
                 to="/products"
                 className="text-black text-xl font-normal block mb-6"
+                onClick={toggleSidebar}
               >
                 PRODUCTS
               </Link>
@@ -113,6 +115,7 @@ function Sidebar() {
               <Link
                 to="/categories"
                 className="text-black text-xl font-normal block mb-6"
+                onClick={toggleSidebar}
               >
                 CATEGORIES
               </Link>
@@ -121,6 +124,7 @@ function Sidebar() {
               <Link
                 to="/contact"
                 className="text-black text-xl font-normal block mb-6"
+                onClick={toggleSidebar}
               >
                 CONTACT US
               </Link>
@@ -129,11 +133,11 @@ function Sidebar() {
               <Link
                 to="/about"
                 className="text-black text-xl font-normal block mb-6"
+                onClick={toggleSidebar}
               >
                 ABOUT US
               </Link>
             </li>
-            
           </ul>
         </aside>
       </div>
