@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Detail = () => {
-  // URL de la imagen de prueba (imageTest)
+
   const imageTest = "https://i.postimg.cc/prChmM25/58.png";
 
   return (

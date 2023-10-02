@@ -11,12 +11,12 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const products = useSelector((state)=> state.products)
-  console.log(products)
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log("Productos en el estado de Redux:", products);
+
 
 
   return (
