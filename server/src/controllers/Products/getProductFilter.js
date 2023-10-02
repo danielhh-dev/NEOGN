@@ -1,53 +1,49 @@
-const db = require("../../db");
+const db = require('../../db');
+const {calculateAverageRating} = require ('../auxfunction/calculateAverageRating');
 
-const getFilteredProducts = async (
-  category,
-  min,
-  max,
-  order,
-  price,
-  review
-) => {
-  let products = await db.Product.findAll();
+
+const getFilteredProducts = async (category, min, max, order) => {
+ 
+  let productsPrefilter = await db.Product.findAll();
+  
+  productsPrefilter = productsPrefilter.map(product =>{
+    const averageRating = calculateAverageRating(product.rating);
+    product.averageRating = parseFloat(averageRating.toFixed(2));
+    return product;
+    });
+
+   
+
+
 
   if (category) {
-    products = products.filter((product) => product.category === category);
+    
+    productsPrefilter = productsPrefilter.filter((product) => product.category === category);
   }
 
   if (min && max) {
-    products = products.filter(
+    productsPrefilter = productsPrefilter.filter(
       (product) => product.price >= min && product.price <= max
     );
   }
 
-  if (price) {
-    if (price === "high") {
-      products.sort((a, b) => b.price - a.price);
-    } else if (priceFilter === "low") {
-      products.sort((a, b) => a.price - b.price);
-    }
-  }
-
-  if (review) {
-    products.forEach((product) => {
-      const average =
-        product.rating.reduce((total, raiting) => total + raiting, 0) /
-        product.rating.length;
-      product.averageRating = average;
-    });
-    products.sort((a, b) => b.averageRating - a.averageRating);
-  }
-
   if (order) {
-    if (order === "A-Z") {
-      products.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (order === "Z-A") {
-      products.sort((a, b) => b.title.localeCompare(a.title));
+    if (order === 'A-Z') {
+      productsPrefilter.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (order === 'Z-A') {
+      productsPrefilter.sort((a, b) => b.title.localeCompare(a.title));
     } else if (order === "date") {
-      products.sort((a, b) => a.createdAt - b.createdAt);
-    }
-  }
-  return products;
+      productsPrefilter.sort((a, b) => a.createdAt - b.createdAt);
+    } else if (order === 'rating') {
+      productsPrefilter.sort((a, b) => b.averageRating - a.averageRating);
+    }else if (order === "price-high") {
+        productsPrefilter.sort((a, b) => b.price - a.price);
+    } else if (order === "price-low") {
+        productsPrefilter.sort((a, b) => a.price - b.price);
+    } 
+  } 
+  
+  return productsPrefilter;
 };
 
-module.exports = getFilteredProducts;
+module.exports = {getFilteredProducts};
