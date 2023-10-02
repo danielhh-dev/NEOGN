@@ -9,6 +9,7 @@ import Wishlist from "./views/Wishlist";
 import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
 import Categories from "./views/Categories";
+import RegistroForm from "./views/RegistroForm"
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/Wishlist" element={<Wishlist />} />
         <Route path="/Account" element={<Account />} />
         <Route path="/Categories" element={<Categories />} />
+        <Route path="/registroform" element={<RegistroForm />} />
       </Routes>
       <div
         className={` fixed bottom-0 left-0 w-full z-[1000] ${

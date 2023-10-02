@@ -1,22 +1,40 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import fetchProducts from "../redux/actions/getProducts";
 import HomeCard from "../components/Cards/HomeCard";
 import Slider from "../components/Home/Slider";
 import TopCategories from "../components/Home/TopCategories";
+import Pagination from "../components/Pagination"
+import RegistroForm from "./RegistroForm";
+import { Link } from "react-router-dom";
+
 
 
 const Home = () => {
-
   const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.products.currentPage);
+  console.log("Current Page:", currentPage);
+  const products = useSelector(state => state.products.products)
+  const productsPerPage = useSelector(state => state.products.productsPerPage)
+  
+
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+
+const indexOFlastProduct = currentPage * productsPerPage;
+const indexOfFirstPrduct = indexOFlastProduct - productsPerPage;
+const currentProducts = products.slice(indexOfFirstPrduct, indexOFlastProduct)
+
+
+  console.log(products);
   return (
+    
     <div className="h-full pb-32">
       <div className="h-auto mx-10 mt-10 w-auto">
+      <Link to="/RegistroForm">Ir al Formulario de Registro</Link>
         <Slider />
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
@@ -42,6 +60,19 @@ const Home = () => {
           <HomeCard image="https://i.postimg.cc/dQTt6qCq/h732.png" />
         </div>
       </div>
+      {currentProducts.map((product) =>(
+        <HomeCard key={product.id} image={product.imageUrl}/>
+
+      ))}
+      
+      <Pagination       
+      totalProducts={products.length}
+      productsPerPage={productsPerPage}
+      currentPage={currentPage}
+      handlePagination={(pageNumber) => dispatch(setCurrentPage(pageNumber))}
+      
+       />
+      
     </div>
   );
 };

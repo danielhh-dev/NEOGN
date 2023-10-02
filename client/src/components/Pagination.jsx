@@ -1,11 +1,11 @@
 
 const Pagination = ({allProducts, currentPage, productsPerPage, handlePagination}) => {
-  const startIndex =(currentPage - 1) * productsPerPage;
+  const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = allProducts ? allProducts.slice(startIndex, endIndex) : [];
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 flex flex-col items-center">
     <div className="grid grid-cols-2 gap-4">
       {displayedProducts.map((product) => (
         <div key={product.id} className="border p-4 shadow-lg rounded-lg">
@@ -15,14 +15,15 @@ const Pagination = ({allProducts, currentPage, productsPerPage, handlePagination
         </div>
       ))}
     </div>
-    <div className="mt-4">
+    <div className="mt-4 flex gap-4">
       <button
         onClick={() => {
           if (currentPage > 1) {
             handlePagination(currentPage - 1);
           }
         }}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+        className="bg-white hover:bg-gray-200 text-black-500 font-bold py-2 px-4 rounded mr-4"
+        
       >
         Anterior
       </button>
@@ -32,7 +33,7 @@ const Pagination = ({allProducts, currentPage, productsPerPage, handlePagination
             handlePagination(currentPage + 1);
           }
         }}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-white hover:bg-gray-200 text-black-500 font-bold py-2 px-4 rounded mr-4"
       >
         Siguiente
       </button>
