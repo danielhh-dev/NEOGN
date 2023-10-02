@@ -7,21 +7,16 @@ import  fetchProductById from "../redux/actions/fetchProductById"
 
 const Detail = () => {
 
-  const imageTest = "https://i.postimg.cc/prChmM25/58.png";
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id)
-  console.log("Detail component is rendering.");
   const product = useSelector(state => {
-    console.log("Accessing product state:", state.detail);
     return state.detail;
   });
   
   useEffect(()=>{
-    console.log("Fetching product details...");
     dispatch(fetchProductById(id));
   },[dispatch, id])
-  console.log("product sss",product)
+ 
 
 
   return (
