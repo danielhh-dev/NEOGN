@@ -7,6 +7,8 @@ import SearchCard from "../components/Cards/SearchCard";
 
 
 
+import FilterSortRange from "../components/FilterSortRange";
+
 const Search = () => {
 
   const dispatch = useDispatch();
