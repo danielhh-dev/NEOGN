@@ -9,6 +9,13 @@ import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
 import Detail from "./views/Detail"
 import Categories from "./views/Categories";
+import DashBoardAdmin from "./components/DashBoardAdmin/DashBoardAdmin";
+import EditedProduct from "./components/DashBoardAdmin/EditedProduct";
+import ManageStock from "./components/DashBoardAdmin/ManageStock";
+import ManageUser from "./components/DashBoardAdmin/ManageUser";
+import ProductsToModify from "./components/DashBoardAdmin/ProductToModify";
+import CreateProduct from "./components/CreateProduct/CreateProduct";
+import PurchaseHistory from "./components/DashBoardAdmin/PurchaseHistory";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -42,6 +49,14 @@ const App = () => {
     <div>
       <TopBar />
       <Routes>
+        <Route path="/admin" element={<DashBoardAdmin />}>
+          <Route path="purchaseHistory" element={<PurchaseHistory />} />
+          <Route path="createProduct" element={<CreateProduct />} />
+          <Route path="productsToModify" element={<ProductsToModify />} />
+          <Route path="productsTomodify/:id" element={<EditedProduct />} />
+          <Route path="manageStock" element={<ManageStock />} />
+          <Route path="manageUser" element={<ManageUser />} />
+        </Route>
         <Route path="/" element={<Home />} />
         <Route path="/Cart" element={<Cart />} />
         <Route path="/Search" element={<Search />} />

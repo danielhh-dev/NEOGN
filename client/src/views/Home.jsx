@@ -4,11 +4,10 @@ import fetchProducts from "../redux/actions/getProducts";
 import HomeCard from "../components/Cards/HomeCard";
 import Slider from "../components/Home/Slider";
 import TopCategories from "../components/Home/TopCategories";
-
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
-
   const dispatch = useDispatch();
   const products = useSelector((state)=> state.products)
   console.log(products)
@@ -28,7 +27,9 @@ const Home = () => {
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
           Top Categories
         </h1>
-        <p className="text-red-500 text-[10px] font-semibold">SEE ALL</p>
+        <Link to="/Categories">
+          <p className="text-red-500 text-[10px] font-semibold">SEE ALL</p>
+        </Link>
       </div>
       <div className="w-auto h-auto m-6">
         <TopCategories />
