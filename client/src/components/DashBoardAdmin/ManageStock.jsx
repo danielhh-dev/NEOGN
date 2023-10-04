@@ -7,15 +7,12 @@ import CardStock from "../Cards/CardStock";
 
 const ManageStock = () => {
   const detail = useSelector((state) => state.detail.detail);
-  console.log(detail);
   const dispatch = useDispatch();
 
   const getDetails = () => {
     return async function (dispatch) {
       try {
-        const json = await axios.get(
-          "hhttp://localhost:3001/api/products"
-        );
+        const json = await axios.get("hhttp://localhost:3001/api/products");
         const users = json.data;
         return dispatch(getDetail(users));
       } catch (error) {
@@ -31,13 +28,10 @@ const ManageStock = () => {
   const toggleStatus = async (userId, currentStatus, newStock) => {
     console.log(userId);
     try {
-      await axios.put(
-        `http://localhost:3001/products/update/${userId}`,
-        {
-          isAvailable: currentStatus,
-          stock: newStock,
-        }
-      );
+      await axios.put(`http://localhost:3001/products/update/${userId}`, {
+        isAvailable: currentStatus,
+        stock: newStock,
+      });
       dispatch(getDetails());
     } catch (error) {
       console.error("Error toggling available status:", error);

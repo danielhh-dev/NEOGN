@@ -10,7 +10,7 @@ import {
   validateDiscount,
 } from "./helpers/ProductValidation";
 import { useDispatch } from "react-redux";
-import { postProduct } from "../../actions/index";
+import { postProduct } from "../../redux/actions/postProduct";
 import { useNavigate } from "react-router-dom";
 import Category from "./Category";
 
