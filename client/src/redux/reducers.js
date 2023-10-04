@@ -11,6 +11,7 @@ const userPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  detail: detailReducer,
   products: productsReducer,
   detail: detailReducer,
   user: persistReducer(userPersistConfig, userReducer),

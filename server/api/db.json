@@ -1,6 +1,7 @@
 
 [
   {
+    "id": "SKU001",
     "name": "UltraView Pro X1",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHD.",
     "category": "Monitors",
@@ -9,6 +10,7 @@
     "rating": [5, 3, 4]
   },
   {
+    "id": "SKU002",
     "name": "UltraView Pro X2",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHDa.",
     "category": "Monitors",
@@ -17,6 +19,7 @@
     "rating": [5, 3, 4]
   },
   {
+    "id": "SKU003",
     "name": "UltraView Pro X3",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHDb.",
     "category": "Monitors",
@@ -24,7 +27,7 @@
     "price": 33,
     "rating": [5, 3, 4]
   },
-  {
+  {"id": "SKU004",
     "name": "UltraView Pro X4",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHDc.",
     "category": "Monitors",
@@ -33,6 +36,7 @@
     "rating": [5, 3, 4]
   },
   {
+    "id": "SKU005",
     "name": "UltraView Pro X5",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHDd.",
     "category": "Monitors",
@@ -41,6 +45,7 @@
     "rating": [5, 3, 4]
   },
   {
+    "id": "SKU006",
     "name": "UltraView Pro X6",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHDe.",
     "category": "Monitors",
@@ -49,6 +54,7 @@
     "rating": [5, 3, 4]
   },
   {
+    "id": "SKU007",
     "name": "UltraView Pro X7",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHDf.",
     "category": "Monitors",
@@ -57,6 +63,7 @@
     "rating": [5, 3, 4]
   },
   {
+    "id": "SKU008",
     "name": "UltraView Pro X8",
     "description": "Experimenta la última innovación en visualización con el monitor UltraView Pro X1. Este monitor de vanguardia presenta una pantalla curva de 32 pulgadas con una resolución 4K UHDg.",
     "category": "Monitors",
