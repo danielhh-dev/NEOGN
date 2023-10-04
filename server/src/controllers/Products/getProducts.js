@@ -13,4 +13,4 @@ const getProducts = async (name) => {
   return products;
 };
 
-module.exports = { getProducts };
+module.exports = getProducts;

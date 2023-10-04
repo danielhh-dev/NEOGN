@@ -1,7 +1,7 @@
 const db = require("../../db");
 const {
   calculateAverageRating,
-} = require("../auxfunction/calculateAverageRating");
+} = require("../../utils/helpers/Average/avgRating");
 const { Op } = require("sequelize");
 
 const getFilteredProducts = async (category, min, max, order) => {
@@ -33,23 +33,23 @@ const getFilteredProducts = async (category, min, max, order) => {
 
   if (order) {
     if (order === "A-Z") {
-      productsPrefilter.sort((a, b) => a.title.localeCompare(b.title));
+      productsPrefilter.sort((a, b) => a.name.localeCompare(b.name));
     } else if (order === "Z-A") {
-      productsPrefilter.sort((a, b) => b.title.localeCompare(a.title));
+      productsPrefilter.sort((a, b) => b.name.localeCompare(a.name));
     } else if (order === "Newest") {
       productsPrefilter.sort((a, b) => a.createdAt - b.createdAt);
     } else if (order === "Oldest") {
       productsPrefilter.sort((a, b) => b.createdAt - a.createdAt);
-    } else if (order === "rating") {
-      productsPrefilter.sort((a, b) => b.averageRating - a.averageRating);
-    } else if (order === "price-high") {
-      productsPrefilter.sort((a, b) => b.price - a.price);
-    } else if (order === "price-low") {
-      productsPrefilter.sort((a, b) => a.price - b.price);
+      // } else if (order === "rating") {
+      //   productsPrefilter.sort((a, b) => b.averageRating - a.averageRating);
+      // } else if (order === "price-high") {
+      //   productsPrefilter.sort((a, b) => b.price - a.price);
+      // } else if (order === "price-low") {
+      //   productsPrefilter.sort((a, b) => a.price - b.price);
     }
   }
 
   return productsPrefilter;
 };
 
-module.exports = { getFilteredProducts };
+module.exports = getFilteredProducts;
