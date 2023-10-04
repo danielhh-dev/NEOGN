@@ -2,10 +2,17 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux"
 import  fetchProductById from "../redux/actions/fetchProductById"
-
-
+import heart from "../utils/images/AppbarIcons/DarkHeart.png"
+import backIcon from "../utils/images/BasicIcons/backIcon.png"
+import { useNavigate } from 'react-router-dom';
 
 const Detail = () => {
+  const navigate = useNavigate();
+
+  const goBackHandler = () => {
+    navigate(-1); // Navega hacia atrás en la pila de historial
+  };
+
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -20,40 +27,73 @@ const Detail = () => {
 
 
   return (
-    <div className="allHome relative w-full max-w-[366px] h-auto">
-      <div className="Big image absolute w-[293px] h-[277px] top-0 left-[73px] bg-[#f6eaec] rounded-[20px_0px_0px_20px] overflow-hidden md:w-[500px] md:top-[30px] md:left-[300px] lg:w-[670px] lg:h-[450px] lg:left-[500px] lg:top-[29px]" style={{ backgroundImage: `url(${product.detail.image})` }} >
-        <div className="relative w-[3px] h-[330px] top-[-26px] left-[-43px] " >
-          <div className="relative w-[42px] h-[42px] top-[39px] left-[280px]" >
-            <div className=" inline-flex items-start gap-[10px] p-[9px] relative bg-absolutestaticwhite-s rounded-[10px] border border-solid " >
-              <img src={''} className="relative w-[24px] h-[24px]" alt="Small Image" />
+    
+    <div className="allHome relative w-full max-w-[366px] left-[15px] h-auto mt-[30px] mb-[770px] md:mb-[600px] lg:mb-[700px]" >
+      <div className="detail-header relative w-full left-[10px] ">
+      <button className="arrow-left absolute top-[50%] left-0 transform -translate-y-1/2 mt-[-20px]">
+        <img
+          src={backIcon}
+          alt="Arrow"
+          className="w-[24px] h-[24px]"
+          onClick={goBackHandler}
+        />
+      </button>
+      <h1 className="detail-text absolute top-[50%] left-[40px] transform -translate-y-1/2 mt-[-20px] [font-family:'Roboto-Regular',Helvetica] font-normal">
+        Detail
+      </h1>
+    </div>
+      <div className="Big image absolute w-[293px] h-[277px] top-0 left-[73px] bg-[#f6eaec] rounded-[20px_0px_0px_20px] overflow-hidden md:w-[500px] md:top-[30px] md:left-[300px] lg:w-[670px] lg:h-[450px] lg:left-[500px] lg:top-[29px] ">
+
+       <div >
+
+      </div>
+          <div className="relative w-[42px] h-[42px] top-[9px] left-[230px] md:top-[20px] md:left-[420px] lg:left-[580px]  " >
+            <div className="Wishlist-Heart inline-flex items-start gap-[10px] p-[1px] top-[10px] right-[1px] top-[20px]  relative bg-absolutestaticwhite-s rounded-[10px] border border-solid " >
+            <div
+            className="bg-white rounded-[10px] overflow-hidden flex items-center justify-center"
+            style={{ width: '34px', height: '34px' }}
+          >
+            <img
+              src={heart}
+              className="relative w-[24px] h-[24px]"
+              alt="Small Image"
+            />
+          </div>
             </div>
           </div>
-        </div>
+
+        <img
+          className="relative w-[293px] h-[277px] top-[-50px] md:w-[300px] md:h-[280px] md:left-[95px]  bg-cover md:w-[100px] md:h-[100px] lg:w-[480px] lg:h-[450px] lg:top-[-20px] bg-no-repeat  "
+          style={{ backgroundImage: `url(${product.detail.image})`, 
+          border: 'none', }}
+          
+        />
+        
       </div>
       <div className="inline-flex items-start gap-[10px] absolute top-0 left-[4px] md:left-[40px] md:w-[100px] md:h-[100px] md:top-[60px]  lg:left-[80px] lg:top-[30px] lg:w-[180px] lg:h-[180px] bg-absolutestaticwhite-s rounded-[12px] border-[1.5px] border-solid border-primary-color">
         <img
-          className="relative w-[50px] h-[50px] object-cover"
+          className="relative w-[50px] h-[50px] bg-cover md:w-[100px] md:h-[100px] lg:w-[200px] lg:h-[200px] bg-no-repeat  "
           alt="small img"
           src={product.detail.image}
         />
       </div>
       <div className="inline-flex items-start gap-[10px] absolute top-[66px] left-[4px] md:left-[150px] md:top-[60px] md:w-[100px] md:h-[100px] lg:left-[80px] lg:top-[230px] lg:w-[180px] lg:h-[180px] bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
         <img
-          className="relative w-[50px] h-[50px] object-cover"
+          className="relative w-[50px] h-[50px] bg-cover md:w-[100px] md:h-[100px] lg:w-[200px] lg:h-[200px] bg-no-repeat "
           alt="small img"
           src={product.detail.image}
         />
       </div>
       <div className="inline-flex items-start gap-[10px] absolute top-[132px] left-[4px] md:left-[10px] md:top-[170px] md:left-[40px] md:w-[100px] md:h-[100px] lg:left-[280px] lg:top-[30px] lg:w-[180px] lg:h-[180px] bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
         <img
-          className="relative w-[50px] h-[50px] object-cover"
+          className="relative w-[50px] h-[50px] bg-cover md:w-[100px] md:h-[100px] lg:w-[200px] lg:h-[200px] bg-no-repeat"
           alt="small img"
           src={product.detail.image}
         />
       </div>
       <div className="inline-flex items-start gap-[10px] absolute top-[198px] left-[4px] md:left-[10px] md:left-[150px] md:top-[170px] md:w-[100px] md:h-[100px] lg:left-[280px] lg:top-[230px] lg:w-[180px] lg:h-[180px] bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
         <img
-          className="relative w-[50px] h-[50px] object-cover"
+          className="relative w-[50px] h-[50px] bg-cover md:w-[100px] md:h-[100px] lg:w-[200px] lg:h-[200px] bg-no-repeat"
           alt="small img"
           src={product.detail.image}
         />
@@ -61,15 +101,15 @@ const Detail = () => {
       <div className="flex w-[342px] items-center justify-between absolute top-[584px] left-0 md:top-[430px] md:left-[300px] lg:left-[880px] lg:top-[490px]">
         <p className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-[#0d0d0d] text-[24px] tracking-[0] leading-[normal] whitespace-nowrap">
           <span className="[font-family:'Roboto-Medium',Helvetica] font-medium text-[#0d0d0d] text-[24px] tracking-[0]">
-            $349.
+          {`$${product.detail.price}`}
           </span>
           <span className="text-[18px]">99</span>
         </p>
-        <div className="flex w-[200px] items-center justify-center gap-[4px] p-[12px] relative bg-primary-color rounded-[15px]">
+        <button style={{ backgroundColor: 'rgba(229, 70, 96, 1)' }} className="flex w-[200px] items-center justify-center gap-[4px] p-[12px] relative rounded-[15px]">
           <div className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-absolutestaticwhite-s text-[18px] tracking-[0] leading-[normal] whitespace-nowrap">
             Add To Cart
           </div>
-        </div>
+        </button>
       </div>
       <div className="flex flex-col w-[342px] items-start gap-[16px] absolute top-[425px] left-0 md:top-[330px] md:-h[50px] md:w-[200px] md:left-[40px] lg:left-[80px] lg:top-[430px]">
         <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
@@ -104,7 +144,7 @@ const Detail = () => {
       <div className="flex flex-col w-[342px] items-start gap-[16px] absolute top-[317px] left-0  md:left-[300px] md:top-[340px] lg:top-[500px] lg:left-[500px]">
         <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
           <div className="relative w-fit mt-[-1.00px] [font-family:'Roboto-Bold',Helvetica] font-bold text-oil-11 text-[24px] tracking-[0] leading-[normal] whitespace-nowrap">
-            Sony WH-1000XM4
+          {`${product.detail.name}`}
           </div>
           <div className="inline-flex items-center justify-center gap-[4px] px-[10px] py-[6px] relative flex-[0_0_auto] bg-absolutestaticwhite-s rounded-[10px] border border-solid border-oil-03">
             <img className="relative w-[16px] h-[16px]" alt="Star" src="https://i.postimg.cc/YCvVthCt/star-1-svgrepo-com.png" />
