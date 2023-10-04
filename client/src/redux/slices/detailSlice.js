@@ -6,6 +6,7 @@ const detailSlice = createSlice({
     detail: [],
   },
   reducers: {
+
     setProductDetail(state, action) {
       state.detail = action.payload;
     },
