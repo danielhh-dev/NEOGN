@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux"
 import  fetchProductById from "../redux/actions/fetchProductById"
-
+import addToCartAction from "../redux/actions/inCartActions"
 
 
 const Detail = () => {
@@ -12,11 +12,23 @@ const Detail = () => {
   const product = useSelector(state => {
     return state.detail;
   });
-  
+
   useEffect(()=>{
     dispatch(fetchProductById(id));
   },[dispatch, id])
  
+  const handleAddToCart = () => {
+    const productData = {
+      id:product.detail.id,
+      name:product.detail.name,
+      price:product.detail.price,
+      image:product.detail.image,
+      description:product.detail.description
+    };
+    console.log('Producto a agregar al carrito:', productData);
+
+    dispatch(addToCartAction(productData))
+  }
 
 
   return (
@@ -66,9 +78,11 @@ const Detail = () => {
           <span className="text-[18px]">99</span>
         </p>
         <div className="flex w-[200px] items-center justify-center gap-[4px] p-[12px] relative bg-primary-color rounded-[15px]">
-          <div className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-absolutestaticwhite-s text-[18px] tracking-[0] leading-[normal] whitespace-nowrap">
+          <button className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-absolutestaticwhite-s text-[18px] tracking-[0] leading-[normal] whitespace-nowrap"
+                 onClick={handleAddToCart}
+          >
             Add To Cart
-          </div>
+          </button>
         </div>
       </div>
       <div className="flex flex-col w-[342px] items-start gap-[16px] absolute top-[425px] left-0 md:top-[330px] md:-h[50px] md:w-[200px] md:left-[40px] lg:left-[80px] lg:top-[430px]">
