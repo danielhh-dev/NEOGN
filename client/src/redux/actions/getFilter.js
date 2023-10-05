@@ -1,14 +1,17 @@
 import axios from "axios"
 import { setFilter } from "../slices/filterSlice"
 
-const getFilter = (filter, value) => {
+const getFilter = (filterParams) => {
 
     return async function (dispatch) {
         try {
-            const response = await axios.get(`http://localhost:3000/api/products/filter/?${filter}=${value}`) 
+            const response = await axios.get(`http://localhost:3000/api/products/filter` ,{
+              params: filterParams
+            });
+            
             dispatch(setFilter(response.data))
         } catch (error) {
-            
+            console.error(error)
         }
     }
 }

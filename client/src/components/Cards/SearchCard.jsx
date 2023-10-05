@@ -25,11 +25,13 @@
 
 import React from "react";
 import Heart from "../../utils/images/AppbarIcons/DarkHeart.png"
+import {Link} from "react-router-dom"
 
 const SearchCard = ({ id, name, image, price, description }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-lg mb-4">
       <div className="flex flex-row md:flex-row">
+      <Link to={`/${id}`}>
         <div className="md:w-1/5 ">
           <img
             src={image}
@@ -37,6 +39,7 @@ const SearchCard = ({ id, name, image, price, description }) => {
             className="w-full h-auto object-cover rounded-lg"
           />
         </div>
+      </Link>  
         <div className="md:w-1/2 md:pl-4">
           <div className="w-1/2 flex flex-col items-end ml-auto md: w-10 h-10 ">
           <img
