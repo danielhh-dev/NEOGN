@@ -45,6 +45,7 @@ router.get("/", async (req, res) => {
 
     if (page) {
       const products = await getProductsPage(page);
+      if (!products.results.length) throw Error("The page is invalid");
       return res.json(products);
     }
     let products = name ? await getProducts(name) : await getProducts();
