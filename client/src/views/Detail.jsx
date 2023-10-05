@@ -123,7 +123,7 @@ const Detail = () => {
           </div>
           <img src="https://i.postimg.cc/SxrvL3Nt/right-arrow-svgrepo-com.png" className="relative w-[24px] h-[24px]" alt="Right Arrow" />
         </div>
-        <img className="relative w-[325px] h-px object-cover" alt="Line" src="line-1.svg" />
+        <img className="relative w-[325px] h-px object-cover" alt="Line" src="" />
         <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
           <div className="gap-[12px] inline-flex items-center relative flex-[0_0_auto]">
             <div className="justify-center gap-[10px] p-[9px] bg-[#f6eaec] rounded-[10px] inline-flex items-center relative flex-[0_0_auto]">
@@ -140,7 +140,7 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      <img className="absolute top-[573px] left-[5px] w-[325px] h-px object-cover" alt="Line" src="line-2.svg" />
+      <img className="absolute top-[573px] left-[5px] w-[325px] h-px object-cover" alt="Line" src="" />
       <div className="flex flex-col w-[342px] items-start gap-[16px] absolute top-[317px] left-0  md:left-[300px] md:top-[340px] lg:top-[500px] lg:left-[500px]">
         <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
           <div className="relative w-fit mt-[-1.00px] [font-family:'Roboto-Bold',Helvetica] font-bold text-oil-11 text-[24px] tracking-[0] leading-[normal] whitespace-nowrap">
