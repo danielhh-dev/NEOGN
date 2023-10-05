@@ -10,6 +10,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const [showFilter, setShowFilter] = useState(false);
+  const productFiltered = useSelector((state) => state.filter)
 
   const toFilter = () => {
     setShowFilter(!showFilter); // Alternar la visibilidad del componente FilterSortRange
