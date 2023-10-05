@@ -49,4 +49,4 @@ const createProduct = async (data) => {
   return newProduct;
 };
 
-module.exports = { createProduct };
+module.exports = createProduct;

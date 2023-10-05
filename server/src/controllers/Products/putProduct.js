@@ -1,5 +1,8 @@
 const db = require("../../db");
-const { deleteImg, uploadImgProduct } = require("../../utils/cloudinary");
+const {
+  deleteImg,
+  uploadImgProduct,
+} = require("../../utils/helpers/Cloudinary/cloudinary");
 
 const putProduct = async (id, data, fileUrl, filePath) => {
   const product = await db.Product.findByPk(id);
