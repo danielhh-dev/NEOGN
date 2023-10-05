@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
     },
     averageRating: {
       type: DataTypes.FLOAT,
-      defaultValue: 0,
+      defaultValue: null,
     },
     isAvailable: {
       type: DataTypes.BOOLEAN,

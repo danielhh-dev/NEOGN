@@ -10,13 +10,13 @@ config({
 
 const uploadImgProduct = async (filePath) => {
   return await uploader.upload(filePath, {
-    folder: "swiftbuy/products",
+    folder: "NEOGN/products",
   });
 };
 
 const uploadImgUser = async (filePath) => {
   return await uploader.upload(filePath, {
-    folder: "swiftbuy/users",
+    folder: "NEOGN/users",
   });
 };
 
