@@ -16,7 +16,7 @@ const Search = () => {
 
 
   const toFilter = () => {
-    setShowFilter(!showFilter); // Alternar la visibilidad del componente FilterSortRange
+    setShowFilter(!showFilter); 
   };
 
   
@@ -40,7 +40,7 @@ const Search = () => {
           <LuSettings2 className="text-black-500 text-[30px] font-semibold" />
         </button>
       </div>
-      {showFilter && <FilterSortRange />} {/* Renderizar FilterSortRange si showFilter es true */}
+      {showFilter && <FilterSortRange />} 
       <div className="w-auto h-auto m-6">
         <CategoriesFilter />
       </div>
