@@ -17,8 +17,7 @@ conn
       const products = dataProducts.map((product) => {
         const rating = product.rating.map((rat) => Math.round(rat));
 
-        const averageRating = calculateAverageRating(rating);
-        product.averageRating = parseFloat(averageRating.toFixed(2));
+        product.averageRating = calculateAverageRating(rating);
         product.discount = Math.floor(Math.random() * 25);
 
         let number = parseInt(idHard.split("U")[1]);

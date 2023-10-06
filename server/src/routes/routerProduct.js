@@ -73,10 +73,7 @@ router.post("/create", async (req, res) => {
   try {
     const data = req.body;
 
-    const newProduct = await createProduct(data, filePath);
-
-    // const averageRating = calculateAverageRating(newProduct.rating);
-    // newProduct.averageRating = parseFloat(averageRating.toFixed(2));
+    const newProduct = await createProduct(data);
 
     res.status(200).json(newProduct);
   } catch (error) {
@@ -85,7 +82,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-/**----               Modificar usuario          ----**/
+/**----               Modificar producto          ----**/
 router.put("/update/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -114,6 +111,8 @@ router.put("/rating/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+/**----          Borrado logico producto          ----**/
 
 router.delete("/:id", async (req, res) => {
   try {

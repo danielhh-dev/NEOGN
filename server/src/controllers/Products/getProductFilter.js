@@ -14,10 +14,6 @@ const getFilteredProducts = async (category, min, max, order, page) => {
     );
   }
 
-  // filtro por descuento
-  // paginado
-  // put actualiza array y promedio rating
-
   if (order) {
     if (order === "A-Z") {
       products.sort((a, b) => a.name.localeCompare(b.name));
