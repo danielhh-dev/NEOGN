@@ -6,6 +6,8 @@ const dataProducts = require("./api/db.json");
 const { Product } = require("./src/db");
 const PORT = 3000;
 
+const calculateAverageRating = require("./src/utils/helpers/Average/avgRating");
+
 conn
   .sync({ force: true })
   .then(() => {
@@ -13,6 +15,12 @@ conn
       let idHard = "SKU000";
 
       const products = dataProducts.map((product) => {
+        const rating = product.rating.map((rat) => Math.round(rat));
+
+        const averageRating = calculateAverageRating(rating);
+        product.averageRating = parseFloat(averageRating.toFixed(2));
+        product.discount = Math.floor(Math.random() * 25);
+
         let number = parseInt(idHard.split("U")[1]);
         number = number + 1;
         if (number >= 100) {

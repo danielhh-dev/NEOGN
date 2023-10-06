@@ -1,7 +1,10 @@
 const db = require("../../db");
 
-const getProductsPage = async (page) => {
-  const allProducts = await db.Product.findAll();
+const getProductsPage = async (page, products) => {
+  const allProducts =
+    Array.isArray(products) && products.length > 0
+      ? products
+      : await db.Product.findAll();
 
   const lastProduct = page * 10;
   const firstProduct = lastProduct - 10;
@@ -11,7 +14,6 @@ const getProductsPage = async (page) => {
 
   const next = page + 1 <= Math.ceil(allProducts.length / 10) ? page + 1 : null;
   const prev = page - 1 >= 1 ? page - 1 : null;
-  console.log(page + 1);
 
   const data = {
     info: {

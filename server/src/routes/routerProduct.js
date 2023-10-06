@@ -9,32 +9,29 @@ const putRatingProduct = require("../controllers/Products/putRatingProducts");
 const getFilteredProductsHandler = require("../controllers/Products/getProductFilter");
 const deleteProduct = require("../controllers/Products/delProductById");
 
-const calculateAverageRating = require("../utils/helpers/Average/avgRating");
-
 const router = Router();
 
 router.get("/filter", async (req, res) => {
   try {
-    const { category, min, max, order } = req.query;
+    const { category, min, max, order, page } = req.query;
 
-    let products = await getFilteredProductsHandler(category, min, max, order);
-    if (products.length === 0) {
+    let products = await getFilteredProductsHandler(
+      category,
+      min,
+      max,
+      order,
+      page
+    );
+    if (products.results.length === 0) {
       res
         .status(400)
         .json({ mensaje: "There are no products matching the filters" });
     } else {
-      // Calcula el promedio de calificaciones y asigna a cada producto
-      // products = products.map((product) => {
-      //   const averageRating = calculateAverageRating(product.rating);
-      //   product.averageRating = parseFloat(averageRating.toFixed(2));
-      //   return product;
-      // });
-
       res.status(200).json(products);
     }
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({ error: "An expected error has ocurred" });
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -45,16 +42,10 @@ router.get("/", async (req, res) => {
 
     if (page) {
       const products = await getProductsPage(page);
-      if (!products.results.length) throw Error("The page is invalid");
+      if (!products.results.length) throw Error("Invalid page");
       return res.json(products);
     }
     let products = name ? await getProducts(name) : await getProducts();
-
-    products = products.map((product) => {
-      const averageRating = calculateAverageRating(product.rating);
-      product.averageRating = parseFloat(averageRating.toFixed(2));
-      return product;
-    });
 
     res.json(products);
   } catch (error) {
@@ -68,11 +59,6 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
     let product = await getProductById(id);
-
-    console.log(product);
-
-    // const averageRating = calculateAverageRating(product.rating);
-    // product.averageRating = parseFloat(averageRating.toFixed(2));
 
     res.status(200).json(product);
   } catch (error) {
@@ -89,8 +75,8 @@ router.post("/create", async (req, res) => {
 
     const newProduct = await createProduct(data, filePath);
 
-    const averageRating = calculateAverageRating(newProduct.rating);
-    newProduct.averageRating = parseFloat(averageRating.toFixed(2));
+    // const averageRating = calculateAverageRating(newProduct.rating);
+    // newProduct.averageRating = parseFloat(averageRating.toFixed(2));
 
     res.status(200).json(newProduct);
   } catch (error) {
@@ -105,7 +91,7 @@ router.put("/update/:id", async (req, res) => {
     const { id } = req.params;
     const data = req.body;
 
-    const product = await putProduct(id, data, fileUrl, filePath);
+    const product = await putProduct(id, data);
 
     res.status(200).json(product);
   } catch (error) {
