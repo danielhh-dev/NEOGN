@@ -1,26 +1,38 @@
+const bcryptjs = require("bcryptjs");
 const db = require("../../db");
 
-const login = async (email, password) => {
-  if (!email || !password) {
-    throw new Error("Missing data");
+const userLogin = async (username, password, email, token) => {
+  let userToLogin;
+
+  if (email) {
+    const user = await db.User.findOne({
+      where: {
+        email,
+      },
+    });
+    userToLogin = user;
+  } else if (username) {
+    const user = await db.User.findOne({
+      where: {
+        username,
+      },
+    });
+    userToLogin = user;
   }
 
-  try {
-    const user = await db.User.findOne({ where: { email } });
+  if (!userToLogin) throw new Error("The user isn't registered");
 
-    if (!user) {
-      throw new Error("User not found");
-    }
-    if (user.password != password) {
-      throw new Error("Incorrect password");
-    }
+  if (password) {
+    const validPassword = await bcryptjs.compare(
+      password,
+      userToLogin.password
+    );
 
-    return user;
-  } catch (error) {
-    console.log(error);
-
-    throw new Error("Login failed: " + error);
+    if (!validPassword)
+      throw new Error("The password or username/email/phone are incorrect");
   }
+
+  return { token, userToLogin };
 };
 
-module.exports = login;
+module.exports = userLogin;

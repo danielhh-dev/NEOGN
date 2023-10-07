@@ -1,21 +1,18 @@
+const { createProduct } = require("../Products/createProduct");
+const { calculateAverageRating } = require("../helpers/calculateAverageRating");
 
-const {createProduct} = require('../Products/createProduct');
-const {calculateAverageRating} = require ('../auxfunction/calculateAverageRating')
+const handlersCreateProducts = async (req, res) => {
+  try {
+    const data = req.body;
+    const newProduct = await createProduct(data);
 
-const handlersCreateProducts = async (req, res)=>{    
-    try{
-        const data = req.body;
-        const newProduct =await createProduct(data);
-        
-        const averageRating = calculateAverageRating(newProduct.rating);
-        newProduct.averageRating = parseFloat(averageRating.toFixed(2));
-        
-        res.status(200).json(newProduct);
+    const averageRating = calculateAverageRating(newProduct.rating);
+    newProduct.averageRating = parseFloat(averageRating.toFixed(2));
 
-    }catch(err){
-        console.log("error create", err.message);
-    }
+    res.status(200).json(newProduct);
+  } catch (err) {
+    console.log("error create", err.message);
+  }
 };
 
-
-module.exports = {handlersCreateProducts};
+module.exports = { handlersCreateProducts };

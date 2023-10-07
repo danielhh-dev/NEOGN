@@ -8,6 +8,11 @@ const mercadopago = require("mercadopago");
 
 const server = express();
 
+server.use((req, res, next) => {
+  res.setHeader('Referrer-Policy', 'no-referrer-when-downgrade');
+  next();
+});
+
 mercadopago.configure({
 	access_token: process.env.MP_TOKEN,
 });

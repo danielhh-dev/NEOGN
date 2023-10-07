@@ -1,9 +1,9 @@
 const server = require("./src/server");
 const { conn } = require("./src/db.js");
 const axios = require("axios");
-const bcryptjs = require("bcryptjs");
+const calculateAverageRating = require("./src/controllers/helpers/calculateAverageRating.js")
 
-const { Product } = require("./src/db");
+const { Product, User } = require("./src/db");
 const PORT = 3000;
 
 conn
@@ -11,36 +11,43 @@ conn
   .then(() => {
     server.listen(PORT, async () => {
       const dataProducts = await axios.get(
-        "http://localhost:3000/api/products"
+        "http://localhost:5000/products"
+      );
+
+      const dataUsers = await axios.get(
+        "http://localhost:5000/users"
       );
 
       let idHard = "SKU000";
 
-      const products = dataProducts.data.map((product) => {
-        let number = parseInt(idHard.split("U")[1]);
-        number = number + 1;
-        if (number >= 100) {
-          idHard = idHard;
-          return {
-            ...product,
-            id: `SKU${number}`,
-          };
-        }
-        if (number < 10) {
-          idHard = `SKU00${number}`;
-          return {
-            ...product,
-            id: idHard,
-          };
-        }
-        idHard = `SKU0${number}`;
-        return {
-          ...product,
-          id: idHard,
-        };
-      });
+      const users = dataUsers.data.map((user) => {
+        return user
+      })
 
-      await Product.bulkCreate(products);
+      for (const product of dataProducts.data) {
+        if (!product.id) {
+          let number = parseInt(idHard.split("U")[1]);
+          number = number + 1;
+          if (number >= 100) {
+            idHard = idHard;
+            product.id = `SKU${number}`;
+          } else if (number < 10) {
+            idHard = `SKU00${number}`;
+            product.id = idHard;
+          } else {
+            idHard = `SKU0${number}`;
+            product.id = idHard;
+          }
+        }
+
+        let avgRating = calculateAverageRating(product.rating);
+        avgRating = parseFloat(avgRating.toFixed(2));
+        product.averageRating = avgRating;
+
+        await Product.upsert(product, { where: { id: product.id } });
+      }
+
+      await User.bulkCreate(users)
 
       console.log(`Server listening on port ${PORT}`);
     });

@@ -5,13 +5,9 @@ const {handlerGetById} = require("../controllers/handlers/handlerGetByID");
 const {handlersCreateProducts} = require("../controllers/handlers/handlersCreateProducts");
 const {handlerDeleteById} = require("../controllers/handlers/handlerDeleteById");
 const {handlerFilterProducts} = require('../controllers/handlers/handlerFilterProducts');
-const products = require("../../api/db.json");
 
 router.get("/:id", handlerGetById);
-// router.get("/", handlerGetProducts);
-router.get("/", (req, res) => {
-  res.json(products);
-});
+router.get("/", handlerGetProducts);
 router.get("/filter", handlerFilterProducts);
 
 router.post("/create", handlersCreateProducts);

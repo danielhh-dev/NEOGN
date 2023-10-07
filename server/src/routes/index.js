@@ -9,7 +9,7 @@ const routerAdmin = require("./routerAdmin");
 const router = Router();
 
 router.use("/products", routerProduct);
-router.use("/users", routerUser);
+router.use("/user", routerUser);
 router.use("/payment", routerPayment);
 router.use("/favorite", routerWishList);
 router.use("/admin", routerAdmin);

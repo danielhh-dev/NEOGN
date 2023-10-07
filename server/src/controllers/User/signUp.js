@@ -1,34 +1,30 @@
 const db = require("../../db");
+const { tokenGenerator } = require("../../middlewares/jsonWebToken");
+const { JWT_SIGN } = process.env;
+const { sendRegistrationEmail } = require("../../utils/email");
 
-const signUp = async ({ name, username, email, password, photo }) => {
-  try {
-    if (!name || !username || !email || !password) {
-      throw new Error("Missing data");
-    }
+const signUp = async (clientId, name, email, photo) => {
 
-    const userData = {
-      name: name,
-      username: username,
-      email: email,
-      password: password,
-      photo: photo,
-    };
+  const newUser = await db.User.create({
+    clientId,
+    name,
+    email,
+    photo,
+  });
 
-    const [user, created] = await db.User.findOrCreate({
-      where: { email: email },
-      defaults: userData,
-    });
+  const token = await tokenGenerator(
+    {
+      clientId: newUser.clientId,
+      name: newUser.name,
+      email: newUser.email,
+      photo: newUser.photo,
+    },
+    `${JWT_SIGN}`
+  );
 
-    if (!created) {
-      throw new Error("Email already exists");
-    }
+  sendRegistrationEmail(newUser.id);
 
-    return user;
-  } catch (error) {
-    console.log(error);
-
-    throw new Error("Error creating user: " + error);
-  }
+  return token;
 };
 
 module.exports = signUp;
