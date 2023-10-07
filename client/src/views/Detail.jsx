@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux"
 import  fetchProductById from "../redux/actions/fetchProductById"
+import addToCartAction from "../redux/actions/inCartActions"
 import heart from "../utils/images/AppbarIcons/DarkHeart.png"
 import backIcon from "../utils/images/BasicIcons/backIcon.png"
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +26,18 @@ const Detail = () => {
     dispatch(fetchProductById(id));
   },[dispatch, id])
  
+  const handleAddToCart = () => {
+    const productData = {
+      id:product.detail.id,
+      name:product.detail.name,
+      price:product.detail.price,
+      image:product.detail.image,
+      description:product.detail.description
+    };
+    console.log('Producto a agregar al carrito:', productData);
+
+    dispatch(addToCartAction(productData))
+  }
 
 
   return (
