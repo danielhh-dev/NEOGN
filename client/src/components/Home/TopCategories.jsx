@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const TopCategories = () => {
     return (
         <div className="w-auto flex justify-around items-center">

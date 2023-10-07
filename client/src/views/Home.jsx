@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import fetchProducts from "../redux/actions/getProducts";
 import HomeCard from "../components/Cards/HomeCard";
 import Slider from "../components/Home/Slider";
 import TopCategories from "../components/Home/TopCategories";
-
+import Footer from "../components/Footer";
 
 const Home = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,17 +19,19 @@ const Home = () => {
       <div className="h-auto mx-10 mt-10 w-auto">
         <Slider />
       </div>
-      <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
-        <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
+      <div className="font-general-sans w-auto flex justify-between items-center mx-10 my-6">
+        <h1 className="text-stone-900 text-[18px] font-semibold tracking-wide">
           Top Categories
         </h1>
-        <p className="text-red-500 text-[10px] font-semibold">SEE ALL</p>
+        <Link to={`/categories`}>
+          <p className="text-red-500 text-[10px] font-semibold">SEE ALL</p>
+        </Link>
       </div>
       <div className="w-auto h-auto m-6">
         <TopCategories />
       </div>
-      <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
-        <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
+      <div className="font-general-sans w-auto flex justify-between items-center mx-10 my-6">
+        <h1 className="text-stone-900 text-[18px] font-semibold tracking-wide">
           Latest Products
         </h1>
         <p className="text-red-500 text-[10px] font-semibold">SEE ALL</p>
@@ -42,6 +44,7 @@ const Home = () => {
           <HomeCard image="https://i.postimg.cc/dQTt6qCq/h732.png" />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

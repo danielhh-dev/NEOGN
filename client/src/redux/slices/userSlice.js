@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUser } from "../actions/getUser";
 
 const initialState = {
   name: null,
   username: null,
   email: null,
-  photo_secure_url: null,
+  photo: null,
   address: null,
-  favorites: null,
+  wishlist: null,
   isDisable: false,
   isAdmin: false,
 };
@@ -16,37 +15,42 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-  },
-  extraReducers: (builder) => {
-    builder
-    .addCase(fetchUser.fulfilled, (state, action) => {
+    getUser(state, action) {
       const {
         name,
         username,
         email,
-        photo_secure_url,
+        photo,
         address,
-        favorites,
+        wishlist,
         isDisable,
         isAdmin,
       } = action.payload;
-          state.name = name;
-          state.username = username;
-          state.email = email;
-          state.photo_secure_url = photo_secure_url;
-          state.address = address;
-          state.favorites = favorites;
-          state.isDisable = isDisable;
-          state.isAdmin = isAdmin;
-          state.status = "succeeded";
-        })
-        .addCase(fetchUser.pending, (state) => {
-          state.status = "loading";
-        })
-        .addCase(fetchUser.rejected, (state) => {
-          state.status = "failed";
-        });
-
+      return {
+        ...state,
+        ...(name ? { name } : {}),
+        ...(username ? { username } : {}),
+        ...(email ? { email } : {}),
+        ...(photo ? { photo } : {}),
+        ...(address ? { address } : {}),
+        ...(wishlist ? { wishlist } : {}),
+        ...(isDisable ? { isDisable } : {}),
+        ...(isAdmin ? { isAdmin } : {}),
+      };
+    },
+    clearUser(state) {
+      return {
+        ...state,
+        name: null,
+        username: null,
+        email: null,
+        photo: null,
+        address: null,
+        wishlist: null,
+        isDisable: false,
+        isAdmin: false,
+      };
+    },
   },
 });
 
