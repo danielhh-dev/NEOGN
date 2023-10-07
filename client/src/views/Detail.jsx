@@ -12,7 +12,7 @@ const Detail = () => {
 
   const goBackHandler = () => {
     navigate(-1); 
-  };
+  };  
 
 
   const dispatch = useDispatch();
@@ -21,6 +21,15 @@ const Detail = () => {
     return state.detail;
   });
   console.log(product)
+
+  const enCar = useSelector(state => {
+   return state.inCart
+  })
+  console.log(enCar)
+
+  const productInCartCount = enCar.items.filter((item) => item.id === product.detail.id).length;
+
+  
   
   useEffect(()=>{
     dispatch(fetchProductById(id));
@@ -190,9 +199,10 @@ const Detail = () => {
             <span className="text-[18px]">99</span>
           </p>
         </div>
-        <button style={{ backgroundColor: 'rgba(229, 70, 96, 1)' }} className="flex w-[200px] items-center justify-center gap-[4px] p-[12px] relative rounded-[15px]">
+        <button style={{ backgroundColor: 'rgba(229, 70, 96, 1)' }} className="flex w-[200px] items-center justify-center gap-[4px] p-[12px] relative rounded-[15px]"
+        onClick={handleAddToCart}>
           <div className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-absolutestaticwhite-s text-[18px] tracking-[0] leading-[normal] whitespace-nowrap">
-            Add To Cart
+            Add To Cart ({productInCartCount})
           </div>
         </button>
       </div>
