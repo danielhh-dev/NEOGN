@@ -1,4 +1,5 @@
 const db = require("../../db");
+const avgRating = require("../../utils/helpers/Average/avgRating");
 
 const ratingProduct = async (id, rating) => {
   const product = await db.Product.findByPk(id);
@@ -9,9 +10,12 @@ const ratingProduct = async (id, rating) => {
     product.rating.shift();
   }
 
+  const newRating = [...product.rating, rating];
+
   await product.update({
     ...product,
-    rating: [...product.rating, rating],
+    rating: newRating,
+    averageRating: avgRating(newRating),
   });
 
   return product;

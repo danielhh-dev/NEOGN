@@ -4,25 +4,12 @@ const {
   uploadImgProduct,
 } = require("../../utils/helpers/Cloudinary/cloudinary");
 
-const putProduct = async (id, data, fileUrl, filePath) => {
+const putProduct = async (id, data) => {
   const product = await db.Product.findByPk(id);
 
   if (!product) throw new Error("Product not found");
 
   let updateProduct = { ...data };
-
-  if (filePath || fileUrl) {
-    // await deleteImg(product.image_public_id);
-    const result = filePath
-      ? await uploadImgProduct(filePath)
-      : await uploadImgProduct(fileUrl);
-    updateProduct = {
-      ...updateProduct,
-      price: Number(updateProduct.price),
-      image_public_id: result.public_id,
-      image_secure_url: result.secure_url,
-    };
-  }
 
   await product.update(updateProduct);
 

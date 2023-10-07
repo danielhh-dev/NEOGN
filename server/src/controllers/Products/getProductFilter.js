@@ -1,55 +1,44 @@
 const db = require("../../db");
-const {
-  calculateAverageRating,
-} = require("../../utils/helpers/Average/avgRating");
-const { Op } = require("sequelize");
+const getPage = require("./getProductsPage");
 
-const getFilteredProducts = async (category, min, max, order) => {
-  // let productsPrefilter = category
-  //   ? await db.Product.findAll({
-  //       where: { category: { [Op.like]: `%${category}` } },
-  //     })
-  //   : await db.Product.findAll();
-
-  let productsPrefilter = await db.Product.findAll();
-
-  // productsPrefilter = productsPrefilter.map((product) => {
-  //   const averageRating = calculateAverageRating(product.rating);
-  //   product.averageRating = parseFloat(averageRating.toFixed(2));
-  //   return product;
-  // });
+const getFilteredProducts = async (category, min, max, order, page) => {
+  let products = await db.Product.findAll();
 
   if (category) {
-    productsPrefilter = productsPrefilter.filter(
-      (product) => product.category === category
-    );
+    products = products.filter((product) => product.category === category);
   }
 
   if (min && max) {
-    productsPrefilter = productsPrefilter.filter(
+    products = products.filter(
       (product) => product.price >= min && product.price <= max
     );
   }
 
   if (order) {
     if (order === "A-Z") {
-      productsPrefilter.sort((a, b) => a.name.localeCompare(b.name));
+      products.sort((a, b) => a.name.localeCompare(b.name));
     } else if (order === "Z-A") {
-      productsPrefilter.sort((a, b) => b.name.localeCompare(a.name));
+      products.sort((a, b) => b.name.localeCompare(a.name));
     } else if (order === "Newest") {
-      productsPrefilter.sort((a, b) => a.createdAt - b.createdAt);
+      products.sort((a, b) => a.createdAt - b.createdAt);
     } else if (order === "Oldest") {
-      productsPrefilter.sort((a, b) => b.createdAt - a.createdAt);
-      // } else if (order === "rating") {
-      //   productsPrefilter.sort((a, b) => b.averageRating - a.averageRating);
-      // } else if (order === "price-high") {
-      //   productsPrefilter.sort((a, b) => b.price - a.price);
-      // } else if (order === "price-low") {
-      //   productsPrefilter.sort((a, b) => a.price - b.price);
+      products.sort((a, b) => b.createdAt - a.createdAt);
+    } else if (order === "rating") {
+      products.sort((a, b) => b.averageRating - a.averageRating);
+    } else if (order === "price-high") {
+      products.sort((a, b) => b.price - a.price);
+    } else if (order === "price-low") {
+      products.sort((a, b) => a.price - b.price);
+    } else if (order === "discount") {
+      products.sort((a, b) => b.discount - a.discount);
+    } else {
+      throw Error("Invalid order");
     }
   }
 
-  return productsPrefilter;
+  page = page && page > 0 ? page : 1;
+
+  return getPage(page, products);
 };
 
 module.exports = getFilteredProducts;
