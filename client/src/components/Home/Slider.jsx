@@ -10,7 +10,7 @@ const Slider = () => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 640 },
-      items: 1,
+      items: 2,
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },
@@ -32,7 +32,7 @@ const Slider = () => {
       infinite={true}
       removeArrowOnDeviceType={["tablet", "mobile"]}
       customDot={<CustomDot />}
-      className=" rounded-3xl h-auto sm:h-auto lg:w-auto "
+      className=" rounded-3xl h-auto sm:h-auto lg:w-auto"
     >
       {slides.map((imageUrl, index) => (
         <div key={index}>

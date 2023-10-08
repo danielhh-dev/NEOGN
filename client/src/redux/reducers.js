@@ -5,6 +5,8 @@ import userReducer from "./slices/userSlice";
 import allUsersReducer from "./slices/allUsersSlice";
 import cartReducer from "./slices/cartSlice";
 import detailReducer from "./slices/detailSlice";
+import inCartReducer from "./slices/inCartSlice"
+import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import filteredReducer from "./slices/filteredSlice";
 import storage from "redux-persist/lib/storage";
@@ -15,6 +17,9 @@ const userPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+
+  inCart:inCartReducer,
+  detail: detailReducer,
   products: productsReducer,
   allUsers: allUsersReducer,
   user: persistReducer(userPersistConfig, userReducer),
