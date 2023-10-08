@@ -3,6 +3,7 @@ import userReducer from "./slices/userSlice";
 import productsReducer from "./slices/productsSlice";
 import detailReducer from "./slices/detailSlice";
 import filterReducer from "./slices/filterSlice"
+import inCartReducer from "./slices/inCartSlice"
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import wishlistReducer from "./slices/WishlistSlice";
@@ -16,6 +17,7 @@ const userPersistConfig = {
 const rootReducer = combineReducers({
   wishlist: persistReducer(userPersistConfig, wishlistReducer),
   filter: filterReducer,
+  inCart:inCartReducer,
   detail: detailReducer,
   products: productsReducer,
   detail: detailReducer,
