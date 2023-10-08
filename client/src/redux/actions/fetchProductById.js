@@ -4,7 +4,7 @@ const fetchProductById = (id) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/products/${id}`
+        `http://neogn-back.up.railway.app/api/products/${id}`
       );
       dispatch(setProductDetail(response.data));
     } catch (error) {
