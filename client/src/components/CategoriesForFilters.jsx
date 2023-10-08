@@ -16,7 +16,9 @@ const CategoriesFilter = () => {
 
 
     return (
-        <div className="w-auto flex justify-around items-center">
+      <div className="w-auto ">
+
+        <div className="flex justify-center items-center">
           <button
             onClick={() => handleSelection("Monitors")}
             className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center ${
@@ -73,8 +75,72 @@ const CategoriesFilter = () => {
               Mice
             </div>
           </button>
+          </div>
+          <div className="mt-4" />
+
           
+          <div className="flex flex-wrap justify-center">
+          <button
+            onClick={() => handleSelection("Mousepads")}
+            className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center ${
+              selectCategory === "Mousepads" ? "bg-gray-200" : ""
+            }`}
+          >
+
+            <img
+              src="https://i.postimg.cc/cHHDyF8k/Mousepads.png"
+              className="w-[30px] h-[30px]"
+            />
+            <div className="font-jakarta-sans font-semibold text-stone-900 text-[10px]">
+              MousePads
+            </div>
+          </button>
+          <button
+            onClick={() => handleSelection("Controllers")}
+            className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center ${
+              selectCategory === "Controllers" ? "bg-gray-200" : ""
+            }`}
+          >
+            <img
+              src="https://i.postimg.cc/Xqzjn1J2/Controllers.png"
+              className="w-[30px] h-[30px]"
+            />
+            <div className="font-jakarta-sans font-semibold text-stone-900 text-[10px]">
+              Controllers
+            </div>
+          </button>
+          <button
+            onClick={() => handleSelection("Earbuds")}
+            className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center ${
+              selectCategory === "Earbuds" ? "bg-gray-200" : ""
+            }`}
+          >
+            <img
+              src="https://i.postimg.cc/L4YLZck6/Earbuds.png"
+              className="w-[30px] h-[30px]"
+            />
+            <div className="font-jakarta-sans font-semibold text-stone-900 text-[10px]">
+              Earbuds
+            </div>
+          </button>
+          <button
+            onClick={() => handleSelection("Microphones")}
+            className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center ${
+              selectCategory === "Microphones" ? "bg-gray-200" : ""
+            }`}
+          >
+            <img
+              src="https://i.postimg.cc/3xKk9VGG/Microphones.png"
+              className="w-[30px] h-[30px]"
+            />
+            <div className="font-jakarta-sans font-semibold text-stone-900 text-[10px]">
+              Microphones
+            </div>
+          </button>
+        </div>  
         </div>
+        
+          
       );
     };
     

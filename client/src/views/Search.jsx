@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LuSettings2 } from "react-icons/lu";
@@ -5,30 +6,34 @@ import CategoriesFilter from "../components/CategoriesForFilters";
 import SearchCard from "../components/Cards/SearchCard";
 import FilterSortRange from "../components/FilterSortRange";
 import fetchProducts from "../redux/actions/getProducts";
-import getFilter from '../redux/actions/getFilter'
+import getFilter from '../redux/actions/getFilter';
+import { addToWishlist, removeFromWishlist } from "../redux/slices/WishlistSlice";
 
 const Search = () => {
+  
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const productFiltered = useSelector((state) => state.filter);
+  const wishlist = useSelector((state) => state.wishlist);
   const [showFilter, setShowFilter] = useState(false);
-  const productFiltered = useSelector((state) => state.filter)
-  console.log(productFiltered)
-
 
   const toFilter = () => {
-    setShowFilter(!showFilter); 
+    setShowFilter(!showFilter);
   };
 
-  
+  const toggleWishlist = (productId) => {
+    const product = productFiltered.filterResult.results.find(
+      (product) => product.id === productId
+    );
+    if (product) {
+      dispatch(addToWishlist(product));
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchProducts());
-    
-    dispatch(getFilter({category :'Monitors'}))
-
-
+    dispatch(getFilter({ category: 'Monitors' }));
   }, [dispatch]);
-
 
   return (
     <div className="h-full pb-32">
@@ -50,18 +55,24 @@ const Search = () => {
         </h1>
       </div>
       <div className="w-full flex justify-center items-center">
-        <div className="w-auto h-auto grid grid-cols-1 gap-4">
-          {/* {products.products.map((product) => ( */}
-          {productFiltered.filterResult.map((product) => (
-            <SearchCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              image={product.image}
-              description={product.description}
-            />
-          ))}
+        <div className="w-auto h-0 grid grid-cols-1 gap-1 justify-center mx-3 border font-bold">
+          {Array.isArray(productFiltered.filterResult.results) ? (
+            productFiltered.filterResult.results.map((product) => (
+              <SearchCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                description={product.description}
+                smallCard={true}
+                //isInWishlist={wishlist.some((p) => p.id === product.id)}
+                toggleWishlist={toggleWishlist}
+              />
+            ))
+          ) : (
+            <p>No results.</p>
+          )}
         </div>
       </div>
     </div>

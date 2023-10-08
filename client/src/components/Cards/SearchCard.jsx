@@ -1,65 +1,77 @@
-// import React from "react";
 
-// const SearchCard =({id,name, image,price,description}) =>{
-//     return (
-        
-//         <div className="bg-white p-4 rounded-lg shadow-lg">
-//         <div className="w-1/3 h-auto">
-//           <img
-//             src={image}
-//             alt={name}
-//             className="w-full h-auto object-cover rounded-lg"
-//           />
-//         </div>
-//         <div className="w-2/3 pl-4">
-//           <div className="text-gray-800 text-lg font-semibold">{name}</div>
-//           <div className="text-gray-600 text-sm ">{description}</div>
-//           <div className="text-red-600 text-sm font-semibold">$ {price}</div>
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Heart from "../../utils/images/AppbarIcons/DarkHeart.png";
+import { addToWishlist, removeFromWishlist } from "../../redux/slices/WishlistSlice";
 
-//         </div>
-//       </div>
-//     )
-// };
+import { Link } from "react-router-dom";
 
-// export default SearchCard
+const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
 
-import React from "react";
-import Heart from "../../utils/images/AppbarIcons/DarkHeart.png"
-import {Link} from "react-router-dom"
+  const dispatch = useDispatch();
 
-const SearchCard = ({ id, name, image, price, description }) => {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  //const isInWishlist = wishlist.some((product) => product.id === id);
+
+  const toggleWishlist = () => {
+    if (isInWishlist) {
+      dispatch(removeFromWishlist({ id }));
+    } else {
+      dispatch(addToWishlist({ id, name, image, price, description }));
+    }
+  };
+
+
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
+  const displayDescription = showFullDescription
+    ? description
+    : description.slice(0, 81);
+
   return (
-    <div className="bg-white p-4 rounded-lg shadow-lg mb-4">
+    <div className="bg-red p-3 rounded-lg shadow-lg mb-4 rounded-md md:rounded-lg mx-2 md:mx-0 border border-red max-w-screen-xl">
       <div className="flex flex-row md:flex-row">
-      <Link to={`/${id}`}>
-        <div className="md:w-1/5 ">
-          <img
-            src={image}
-            alt={name}
-            className="w-full h-auto object-cover rounded-lg"
-          />
-        </div>
-      </Link>  
-        <div className="md:w-1/2 md:pl-4">
-          <div className="w-1/2 flex flex-col items-end ml-auto md: w-10 h-10 ">
-          <img
-            src={Heart}
-            className="w-5 h-5 md:w-full md:h-auto object-cover rounded-lg"
-          />
-            
+        <Link to={`/${id}`}>
+          <div className="md:w-1/4 bg-red">
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-auto object-cover rounded-lg bg-red"
+              style={{
+                maxHeight: "800px",
+                width: "100%",
+              }}
+            />
           </div>
-
-          <div className="text-gray-800 text-lg font-semibold">{name}</div>
-          <div className="text-gray-600 text-sm">{description}</div>
-
-          <div className="price py-5 text-red-600 text-lg font-semibold " >$ {price}</div>
-          <div className="button container w-1/2 flex flex-col items-end ml-auto md: w-10 h-10"> 
-          <button
-            className="button bg-red-500 text-white text-sm px-3 py-1 rounded-md mt-2 "
-          >
-            Buy
-          </button>
-
+        </Link>
+        <div className="md:w-3/4 md:pl-4 flex flex-col">
+          <div className="flex justify-between items-start">
+            <div className="text-gray-800 text-lg font-semibold">{name}</div>
+            <img
+              src={Heart}
+              className={`w-5 h-5 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ${
+                isInWishlist ? "text-red-500" : "text-gray-500"
+              }`}
+              onClick={() => toggleWishlist(id)}
+            />
+          </div>
+          <div className="text-gray-600 text-sm mt-2">{displayDescription}</div>
+          {description.length > 81 && (
+            <button
+              onClick={toggleDescription}
+              className="text-red-600 text-sm mt-2 cursor-pointer"
+            >
+              {showFullDescription ? "Mostrar menos" : "..."}
+            </button>
+          )}
+          <div className="price py-1 text-red-600 text-lg font-semibold flex flex-row items-center justify-between mt-auto">
+            <div>$ {price}</div>
+            <button className="button bg-red-500 text-white text-lg px-3 py-1 rounded-md">
+              Buy
+            </button>
           </div>
         </div>
       </div>
@@ -68,9 +80,3 @@ const SearchCard = ({ id, name, image, price, description }) => {
 };
 
 export default SearchCard;
-
-
-
-
-
-

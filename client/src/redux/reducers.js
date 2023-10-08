@@ -5,6 +5,8 @@ import detailReducer from "./slices/detailSlice";
 import filterReducer from "./slices/filterSlice"
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
+import wishlistReducer from "./slices/WishlistSlice";
+
 
 const userPersistConfig = {
   key: "user",
@@ -12,6 +14,7 @@ const userPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  wishlist: persistReducer(userPersistConfig, wishlistReducer),
   filter: filterReducer,
   detail: detailReducer,
   products: productsReducer,
