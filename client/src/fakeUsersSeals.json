@@ -1,0 +1,63 @@
+[
+    {
+      "IdUser": 1,
+      "name": "John Doe",
+      "userName": "johndoe",
+      "email": "john78doe@gmail.com"
+    },
+    {
+      "IdUser": 2,
+      "name": "Jane Smith",
+      "userName": "janesmith",
+      "email": "janesmith85@gmail.com"
+    },
+    {
+      "IdUser": 3,
+      "name": "Robert Johnson",
+      "userName": "robertjohnson",
+      "email": "robertjohnson784@gmail.com"
+    },
+    {
+      "IdUser": 4,
+      "name": "Emily Davis",
+      "userName": "emilydavis",
+      "email": "emily_davis12@gmail.com"
+    },
+    {
+      "IdUser": 5,
+      "name": "Michael Wilson",
+      "userName": "michaelwilson",
+      "email": "michael-wilson578@gmail.com"
+    },
+    {
+      "IdUser": 6,
+      "name": "Sarah Brown",
+      "userName": "sarahbrown",
+      "email": "sarah_brown0031@gmail.com"
+    },
+    {
+      "IdUser": 7,
+      "name": "David Lee",
+      "userName": "davidlee",
+      "email": "davidlee1215@gmail.com"
+    },
+    {
+      "IdUser": 8,
+      "name": "Olivia Taylor",
+      "userName": "oliviataylor",
+      "email": "oliviataylor4588@gmail.com"
+    },
+    {
+      "IdUser": 9,
+      "name": "James Wilson",
+      "userName": "jameswilson",
+      "email": "jameswilson1@gmail.com"
+    },
+    {
+      "IdUser": 10,
+      "name": "Linda Johnson",
+      "userName": "lindajohnson",
+      "email": "linda_11_johnson5@gmail.com"
+    }
+  ]
+  
