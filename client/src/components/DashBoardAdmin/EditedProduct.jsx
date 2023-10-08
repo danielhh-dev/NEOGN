@@ -31,7 +31,7 @@ const EditedProduct = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
-          `http://localhost:3001/api/products/${id}`
+          `http://neogn-back.up.railway.app/api/products/${id}`
         );
         const detail = json.data;
         return dispatch(getDetail(detail));
