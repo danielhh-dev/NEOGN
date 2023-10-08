@@ -1,21 +1,22 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../redux/slices/userSlice";
+import { getUsers } from "../../redux/slices/allUsersSlice";
+
 import CardUser from "../Cards/CardUser";
 
 const ManageUser = () => {
-  const user = useSelector((state) => state.user.user);
+  const allUsers = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
 
-  const getUsers = () => {
+  const getAllUsers = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
-          "http://localhost:3001/api/user"
+          "http://neogn-back.up.railway.app/api/user"
         );
         const users = json.data;
-        return dispatch(setUser(users));
+        return dispatch(getUsers(users));
       } catch (error) {
         console.error("Error getting users:", error);
       }
@@ -23,18 +24,18 @@ const ManageUser = () => {
   };
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   const toggleAdminStatus = async (userId, newAdminStatus) => {
     try {
       await axios.put(
-        `http://localhost:3001/api/user/update/${userId}`,
+        `http://neogn-back.up.railway.app/api/user/update/${userId}`,
         {
           isAdmin: newAdminStatus,
         }
       );
-      dispatch(getUsers());
+      dispatch(getAllUsers());
     } catch (error) {
       console.error("Error toggling admin status:", error);
     }
@@ -44,12 +45,12 @@ const ManageUser = () => {
     console.log(userId);
     try {
       await axios.put(
-        `http://localhost:3001/api/user/update/${userId}`,
+        `http://neogn-back.up.railway.app/api/user/update/${userId}`,
         {
           isDisable: newStatus,
         }
       );
-      dispatch(getUsers());
+      dispatch(getAllUsers());
     } catch (error) {
       console.error("Error toggling admin status:", error);
     }
@@ -89,7 +90,7 @@ const ManageUser = () => {
                     </th>
                   </tr>
                 </thead>
-                {user
+                {allUsers
                   ?.slice()
                   .sort((a, b) => a.name.localeCompare(b.name)) // Ordenar por nombres
                   .map((el) => (

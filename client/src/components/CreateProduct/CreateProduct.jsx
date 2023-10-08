@@ -6,7 +6,6 @@ import {
   validateCategory,
   validateStock,
   validatePrice,
-  validateRating,
   validateDiscount,
 } from "./helpers/ProductValidation";
 import { useDispatch } from "react-redux";
@@ -28,7 +27,6 @@ const CreateProduct = () => {
     stock: 0,
     price: 0,
     discount: 0,
-    rating: 0,
   });
 
   const [errors, setErrors] = useState({
@@ -39,7 +37,6 @@ const CreateProduct = () => {
     stock: "",
     price: "",
     discount: "",
-    rating: "",
   });
 
   const [descriptionLength, setDescriptionLength] = useState(0);
@@ -134,18 +131,6 @@ const CreateProduct = () => {
     }));
   };
 
-  const handleRatingChange = (event) => {
-    const { name, value } = event.target;
-    setInput((prevInput) => ({
-      ...prevInput,
-      [name]: parseInt(value),
-    }));
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      rating: validateRating(value),
-    }));
-  };
   //***************************************************************** */
 
   function handleSubmit(event) {
@@ -159,7 +144,6 @@ const CreateProduct = () => {
       stock: validateStock(input.stock),
       price: validatePrice(input.price),
       discount: validateDiscount(input.discount),
-      rating: validateRating(input.rating),
     };
 
     setErrors(fieldErrors);
@@ -170,12 +154,7 @@ const CreateProduct = () => {
       return;
     }
 
-    const updatedInput = {
-      ...input,
-      rating: [input.rating],
-    };
-
-    dispatch(postProduct(updatedInput));
+    dispatch(postProduct(input));
     alert("Product Created Successfully");
 
     setInput({
@@ -186,7 +165,6 @@ const CreateProduct = () => {
       stock: 0,
       price: 0,
       discount: 0,
-      rating: 0,
     });
     history("/admin/createProduct");
   }
@@ -365,29 +343,6 @@ const CreateProduct = () => {
                 {errors.discount && (
                   <div className="mb-3 text-normal text-red-500 ">
                     {errors.discount}
-                  </div>
-                )}
-              </div>
-              <div>
-                <label
-                  htmlFor="rating"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Rating
-                </label>
-                <input
-                  type="number"
-                  name="rating"
-                  id="rating"
-                  autoComplete="off"
-                  onChange={handleRatingChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500 text-sm rounded-lg  block w-full p-2.5 dark:bg-stone-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="1/5"
-                  required=""
-                />
-                {errors.rating && (
-                  <div className="mb-3 text-normal text-red-500 ">
-                    {errors.rating}
                   </div>
                 )}
               </div>
