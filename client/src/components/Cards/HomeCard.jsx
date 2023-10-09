@@ -15,8 +15,8 @@ const HomeCard = ({ image,id }) => {
         <div className="text-stone-900 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
           HyperX Alloy FPS
         </div>
-        <div className="text-stone-900 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
-          $126.00
+        <div className="text-red-600 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
+          $ 126.00
         </div>
       </div>
       <div className="inline-flex items-center justify-center gap-[10px] p-[6px] absolute top-[6px] left-[130px] bg-white rounded-[5px] shadow-[0px_1px_10px_#00000040]">

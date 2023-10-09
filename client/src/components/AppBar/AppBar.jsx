@@ -131,7 +131,7 @@ const AppBar = ({ theme }) => {
                   : "text-gray-500"
               }`}
             >
-              Saved
+              Wishlist
             </div>
           </div>
         </Link>

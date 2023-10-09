@@ -9,6 +9,7 @@ import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
 import Detail from "./views/Detail"
 import Categories from "./views/Categories";
+import AboutUs from "./views/AboutUs";
 import DashBoardAdmin from "./components/DashBoardAdmin/DashBoardAdmin";
 import EditedProduct from "./components/DashBoardAdmin/EditedProduct";
 import ManageStock from "./components/DashBoardAdmin/ManageStock";
@@ -66,6 +67,7 @@ const App = () => {
         <Route path="/Categories" element={<Categories />} />
         <Route path="/contact" element={<ContactUs/>}/>
         <Route path="/:id" element={<Detail/>} />
+        <Route path="/about" element={<AboutUs/>} />
       </Routes>
       <div
         className={` fixed bottom-0 left-0 w-full z-[1000] ${
