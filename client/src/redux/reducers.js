@@ -3,10 +3,13 @@ import { combineReducers } from "redux";
 import productsReducer from "./slices/productsSlice";
 import userReducer from "./slices/userSlice";
 import allUsersReducer from "./slices/allUsersSlice";
-import cartReducer from "./slices/CartSlice";
 import detailReducer from "./slices/detailSlice";
-import { persistReducer } from "redux-persist";
+import filterReducer from "./slices/filterSlice"
+import inCartReducer from "./slices/CartSlice"
 import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+import wishlistReducer from "./slices/WishlistSlice";
+
 
 const userPersistConfig = {
   key: "user",
@@ -14,10 +17,13 @@ const userPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  wishlist: wishlistReducer,
+  filter: filterReducer,
+  inCart:inCartReducer,
+  detail: detailReducer,
   products: productsReducer,
   allUsers: allUsersReducer,
   user: persistReducer(userPersistConfig, userReducer),
-  cart: cartReducer,
   detail: detailReducer,
 });
 

@@ -1,40 +1,25 @@
 
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Heart from "../../utils/images/AppbarIcons/DarkHeart.png";
-import { addToWishlist, removeFromWishlist } from "../../redux/slices/WishlistSlice";
-
 import { Link } from "react-router-dom";
+import Heart from "../../utils/images/AppbarIcons/ActiveHeart.png";
 
-const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromWishlist } from "../../redux/slices/WishlistSlice";
 
+const WishlistCard = ({ id, name, image, price, description,isInWishlist,toggleWishlist  }) => {
   const dispatch = useDispatch();
-  const [isAdded, setIsAdded] = useState(false);
-  const wishlist = useSelector((state)=>state.wishlist)
-
 
   const [showFullDescription, setShowFullDescription] = useState(false);
 
 
-  const toggleWishlist = () => {
-    const existingProduct = wishlist.find((product) => product.id === id);
-    if (isInWishlist && existingProduct ) {
+
+  const removeCard = () => {
+    if (isInWishlist) {
       dispatch(removeFromWishlist({ id }));
+
     } else {
       dispatch(addToWishlist({ id, name, image, price, description }));
     }
-  };
-
-  const handleToggleWishlist = () => {
-    const existingProduct = wishlist.find((product) => product.id === id);
-
-    if (isAdded && existingProduct) {
-      alert('This item is already on the wishlist.');
-      return;
-    }
-    toggleWishlist(id);
-    setIsAdded(true);
-    alert('Added to Wishlist');
   };
 
 
@@ -66,12 +51,12 @@ const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
           <div className="flex justify-between items-start">
             <div className="text-gray-800 text-lg font-semibold">{name}</div>
             <img
-        src={Heart}
-        className={`w-5 h-5 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ${
-          isAdded ? "text-red-500" : "text-gray-500"
-        }`}
-        onClick={handleToggleWishlist}
-      />
+              src={Heart}
+              className={`w-5 h-5 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ${
+                isInWishlist ? "text-red-500" : "text-gray-500"
+              }`}
+              onClick={() => removeCard(id)}
+            />
           </div>
           <div className="text-gray-600 text-sm mt-2">{displayDescription}</div>
           {description.length > 81 && (
@@ -94,4 +79,4 @@ const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
   );
 };
 
-export default SearchCard;
+export default WishlistCard;
