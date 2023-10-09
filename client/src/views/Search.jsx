@@ -15,18 +15,30 @@ const Search = () => {
   const products = useSelector((state) => state.products);
   const productFiltered = useSelector((state) => state.filter);
   const wishlist = useSelector((state) => state.wishlist);
+  console.log("wishlist en view Search",wishlist);
   const [showFilter, setShowFilter] = useState(false);
+  const [addedProducts, setAddedProducts] = useState([]);
+  console.log("addedProducts en view Search",addedProducts);
+
 
   const toFilter = () => {
     setShowFilter(!showFilter);
   };
 
+  
+  
   const toggleWishlist = (productId) => {
     const product = productFiltered.filterResult.results.find(
       (product) => product.id === productId
     );
     if (product) {
+      if (addedProducts.some((p) => p.id === product.id)) {
+        alert('This item is already on the wishlist.');
+        return; // No hagas nada si el producto ya está en addedProducts
+      }
       dispatch(addToWishlist(product));
+      setAddedProducts([...addedProducts, product]);
+      alert('Added to Wishlist');
     }
   };
 
@@ -66,7 +78,6 @@ const Search = () => {
                 image={product.image}
                 description={product.description}
                 smallCard={true}
-                //isInWishlist={wishlist.some((p) => p.id === product.id)}
                 toggleWishlist={toggleWishlist}
               />
             ))

@@ -15,7 +15,7 @@ const userPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  wishlist: persistReducer(userPersistConfig, wishlistReducer),
+  wishlist: wishlistReducer,
   filter: filterReducer,
   inCart:inCartReducer,
   detail: detailReducer,

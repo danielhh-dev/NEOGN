@@ -9,17 +9,32 @@ import { Link } from "react-router-dom";
 const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
 
   const dispatch = useDispatch();
+  const [isAdded, setIsAdded] = useState(false);
+  const wishlist = useSelector((state)=>state.wishlist)
+
 
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  //const isInWishlist = wishlist.some((product) => product.id === id);
 
   const toggleWishlist = () => {
-    if (isInWishlist) {
+    const existingProduct = wishlist.find((product) => product.id === id);
+    if (isInWishlist && existingProduct ) {
       dispatch(removeFromWishlist({ id }));
     } else {
       dispatch(addToWishlist({ id, name, image, price, description }));
     }
+  };
+
+  const handleToggleWishlist = () => {
+    const existingProduct = wishlist.find((product) => product.id === id);
+
+    if (isAdded && existingProduct) {
+      alert('This item is already on the wishlist.');
+      return;
+    }
+    toggleWishlist(id);
+    setIsAdded(true);
+    alert('Added to Wishlist');
   };
 
 
@@ -51,12 +66,12 @@ const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
           <div className="flex justify-between items-start">
             <div className="text-gray-800 text-lg font-semibold">{name}</div>
             <img
-              src={Heart}
-              className={`w-5 h-5 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ${
-                isInWishlist ? "text-red-500" : "text-gray-500"
-              }`}
-              onClick={() => toggleWishlist(id)}
-            />
+        src={Heart}
+        className={`w-5 h-5 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ${
+          isAdded ? "text-red-500" : "text-gray-500"
+        }`}
+        onClick={handleToggleWishlist}
+      />
           </div>
           <div className="text-gray-600 text-sm mt-2">{displayDescription}</div>
           {description.length > 81 && (

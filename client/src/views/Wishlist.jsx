@@ -5,18 +5,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Back from "../utils/images/BasicIcons/BackIcon.png";
 import { removeFromWishlist } from "../redux/slices/WishlistSlice";
-
-import SearchCard from "../components/Cards/SearchCard";
 import WishlistCard from "../components/Cards/WishlistCard";
-
+import SearchCard from "../components/Cards/SearchCard";
 
 const Wishlist = () => {
 
     const dispatch = useDispatch();
     const wishlist = useSelector((state) => state.wishlist);
+  console.log("wishlist en view", wishlist);
   
     const handleRemoveFromWishlist = (productId) => {
       dispatch(removeFromWishlist({ id: productId }));
+      alert('Item removed');
     };
 
   return (
@@ -43,7 +43,7 @@ const Wishlist = () => {
               />
             ))
           ) : (
-            <p>No products in wishlist.</p>
+            <p>You still do not have products on Wishlist.</p>
           )}
         </div>
       </div>
