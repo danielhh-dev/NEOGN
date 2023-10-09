@@ -131,19 +131,3 @@ const ContactUs = () => {
 
 export default ContactUs;
 
-
-
-// @media (max-width: 96px){
-//     .contact-container {
-//         margin: 0 auto;
-//         width: 90%;
-//     }
-// }
-
-// @media (max-width: 700px){
-//     .container-conatiner {
-//         grid-template-columns: 1fr;
-//         gap: 1rem;
-//         margin-top: 20rem !important;
-//     }
-// }
