@@ -37,19 +37,29 @@ const ContactUs = () => {
     console.log('Mensaje enviado:', messageData);
   };
 
-  useEffect(()=>{
-
-    (function(d, m){
-        var kommunicateSettings = 
-            {"appId":"d0be590bfd72faa7b9777f5f8ab7dc4e","popupWidget":true,"automaticChatOpenOnNavigation":true};
-        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+  useEffect(() => {
+    // Check if the Kommunicate script has already been loaded
+    if (!window.kommunicate) {
+      (function (d, m) {
+        var kommunicateSettings = {
+          "appId": "d0be590bfd72faa7b9777f5f8ab7dc4e",
+          "popupWidget": true,
+          "automaticChatOpenOnNavigation": true
+        };
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
         s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-        window.kommunicate = m; m._globals = kommunicateSettings;
-    })(document, window.kommunicate || {});
-/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
-
-  },[])
+        var h = document.getElementsByTagName("head")[0];
+        h.appendChild(s);
+        window.kommunicate = m;
+        m._globals = kommunicateSettings;
+      })(document, window.kommunicate || {});
+    }
+    /* NOTE: Use web server to view HTML files as real-time update will not work
+    if you directly open the HTML file in the browser. */
+  
+  }, []);
   return (
     <div className='flex flex-col  items-center scroll-smooth w-full  min-h-screen overflow-y-auto text-black bg-white'>
       <div className='contact-container mx-auto pb-60 grid grid-cols-1 gap-4 bg-white rounded rounded-md overflow-hidden md:w-80 lg:max-w-2xl md:m-auto md:w-90 md:max-w-full lg:grid-cols-2 lg:gap-6 lg:w-full lg:mt-20'>
@@ -112,6 +122,7 @@ const ContactUs = () => {
           .kommunicate-custom-iframe {
             bottom: 80px !important; /* Ajusta este valor según tu preferencia */
           }
+          
         `}
       </style>
     </div>
