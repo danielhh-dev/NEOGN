@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../redux/slices/userSlice";
+import { getUser } from "../../redux/slices/userSlice";
 import CardUser from "../Cards/CardUser";
 
 const ManageUser = () => {
@@ -12,10 +12,10 @@ const ManageUser = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
-          "http://localhost:3001/api/user"
+          "http://localhost:3000/api/users"
         );
         const users = json.data;
-        return dispatch(setUser(users));
+        return dispatch(getUser(users));
       } catch (error) {
         console.error("Error getting users:", error);
       }
@@ -29,7 +29,7 @@ const ManageUser = () => {
   const toggleAdminStatus = async (userId, newAdminStatus) => {
     try {
       await axios.put(
-        `http://localhost:3001/api/user/update/${userId}`,
+        `http://localhost:3000/api/users/update/${userId}`,
         {
           isAdmin: newAdminStatus,
         }
@@ -44,7 +44,7 @@ const ManageUser = () => {
     console.log(userId);
     try {
       await axios.put(
-        `http://localhost:3001/api/user/update/${userId}`,
+        `http://localhost:3000/api/users/update/${userId}`,
         {
           isDisable: newStatus,
         }

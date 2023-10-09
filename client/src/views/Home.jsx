@@ -1,22 +1,19 @@
 import { useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import fetchProducts from "../redux/actions/getProducts";
 import HomeCard from "../components/Cards/HomeCard";
 import Slider from "../components/Home/Slider";
 import TopCategories from "../components/Home/TopCategories";
+import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-
 
 const Home = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state)=> state.products)
-  console.log(products)
+  const products = useSelector((state) => state.products);
+  console.log(products);
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
-
-
 
   return (
     <div className="h-full pb-32">
@@ -42,11 +39,12 @@ const Home = () => {
       </div>
       <div className="w-full flex justify-center items-center">
         <div className="w-auto h-auto grid grid-cols-2 gap-4">
-        {products.products.map((product) => (
-      <HomeCard  image={product.image} id={product.id} />
-    ))}
+          {products.products.map((product, index) => (
+            <HomeCard key={index} image={product.image} id={product.id} />
+          ))}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Slider = () => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 640 },
-      items: 2,
+      items: 1,
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },

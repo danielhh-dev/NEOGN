@@ -9,7 +9,6 @@ const getProducts = async (name) => {
     : await db.Product.findAll();
 
   if (!products) throw new Error("Products not found");
-
   return products;
 };
 

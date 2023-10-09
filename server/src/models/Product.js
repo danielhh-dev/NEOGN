@@ -35,6 +35,7 @@ module.exports = (sequelize) => {
     },
     rating: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue: null,
     },
     averageRating: {
       type: DataTypes.FLOAT,
