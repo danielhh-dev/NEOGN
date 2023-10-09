@@ -10,7 +10,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const [showFilter, setShowFilter] = useState(false);
-  const productFiltered = useSelector((state) => state.filter)
+  const productFiltered = useSelector((state) => state.filter);
 
   const toFilter = () => {
     setShowFilter(!showFilter); // Alternar la visibilidad del componente FilterSortRange
@@ -30,7 +30,8 @@ const Search = () => {
           <LuSettings2 className="text-black-500 text-[30px] font-semibold" />
         </button>
       </div>
-      {showFilter && <FilterSortRange />} {/* Renderizar FilterSortRange si showFilter es true */}
+      {showFilter && <FilterSortRange />}{" "}
+      {/* Renderizar FilterSortRange si showFilter es true */}
       <div className="w-auto h-auto m-6">
         <TopCategories />
       </div>
@@ -47,7 +48,7 @@ const Search = () => {
               id={product.id}
               name={product.name}
               price={product.price}
-              image={product.image}
+              image={product.image_url}
               description={product.description}
             />
           ))}

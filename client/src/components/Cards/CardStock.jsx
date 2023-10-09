@@ -1,7 +1,14 @@
 import { useState } from "react";
 
-const CardStock = ({ id, title, toggleStatus, image_secure_url, isAvailable, stock }) => {
-  const [status, setStatus] = useState(isAvailable)
+const CardStock = ({
+  id,
+  title,
+  toggleStatus,
+  image_url,
+  isAvailable,
+  stock,
+}) => {
+  const [status, setStatus] = useState(isAvailable);
   const [newStock, setNewStock] = useState(stock);
 
   const handleToggleStatus = () => {
@@ -27,7 +34,7 @@ const CardStock = ({ id, title, toggleStatus, image_secure_url, isAvailable, sto
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="flex items-center">
             <div className="flex-shrink-0 w-10 h-10">
-              <img className="w-10 h-10 rounded-full" src={image_secure_url} alt="" />
+              <img className="w-10 h-10 rounded-full" src={image_url} alt="" />
             </div>
             <div className="ml-4">
               <div className="text-sm font-medium text-gray-900">{title}</div>
@@ -35,7 +42,7 @@ const CardStock = ({ id, title, toggleStatus, image_secure_url, isAvailable, sto
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-        {status ? (
+          {status ? (
             <button
               onClick={() => handleToggleStatus(id, !status)}
               className="inline-flex px-4 py-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-[5px] hover:bg-green-600 hover:text-gray-100"
@@ -55,7 +62,7 @@ const CardStock = ({ id, title, toggleStatus, image_secure_url, isAvailable, sto
           {stock}
         </td>
         <td className="px-3 py-4 text-sm font-medium text-right whitespace-nowrap">
-        <input
+          <input
             className="border-2 mr-2 rounded-lg h-9 p-2"
             type="number"
             value={newStock}
