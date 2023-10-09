@@ -17,6 +17,7 @@ import ManageUser from "./components/DashBoardAdmin/ManageUser";
 import ProductsToModify from "./components/DashBoardAdmin/ProductToModify";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import PurchaseHistory from "./components/DashBoardAdmin/PurchaseHistory";
+import ContactUs from "./views/ContactUs";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -64,6 +65,7 @@ const App = () => {
         <Route path="/Wishlist" element={<Wishlist />} />
         <Route path="/Account" element={<Account />} />
         <Route path="/Categories" element={<Categories />} />
+        <Route path="/contact" element={<ContactUs/>}/>
         <Route path="/:id" element={<Detail/>} />
         <Route path="/about" element={<AboutUs/>} />
       </Routes>
