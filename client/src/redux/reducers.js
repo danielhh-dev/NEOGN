@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import productsReducer from "./slices/productsSlice";
 import userReducer from "./slices/userSlice";
 import allUsersReducer from "./slices/allUsersSlice";
+import cartReducer from "./slices/CartSlice";
 import detailReducer from "./slices/detailSlice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -18,7 +19,6 @@ const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   cart: cartReducer,
   detail: detailReducer,
-  users: usersReducer,
 });
 
 export default rootReducer;

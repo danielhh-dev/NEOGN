@@ -74,20 +74,17 @@ const ManageStock = () => {
                     </th>
                   </tr>
                 </thead>
-                {detail
-                  ?.slice() // Crea una copia superficial de la matriz para evitar mutar la original
-                  .sort((a, b) => a.title.localeCompare(b.title)) // Ordena la matriz por nombres
-                  .map((el) => (
-                    <CardStock
-                      key={el.id}
-                      id={el.id}
-                      title={el.title}
-                      toggleStatus={toggleStatus}
-                      image_secure_url={el.image_secure_url}
-                      isAvailable={el.isAvailable}
-                      stock={el.stock}
-                    />
-                  ))}
+                {detail.map((el) => (
+                  <CardStock
+                    key={el.id}
+                    id={el.id}
+                    title={el.name}
+                    toggleStatus={toggleStatus}
+                    image_url={el.image_url}
+                    isAvailable={el.isAvailable}
+                    stock={el.stock}
+                  />
+                ))}
               </table>
             </div>
           </div>
