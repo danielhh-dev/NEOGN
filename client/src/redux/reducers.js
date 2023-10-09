@@ -1,9 +1,11 @@
+// src/redux/reducers.js
 import { combineReducers } from "redux";
-import userReducer from "./slices/userSlice";
 import productsReducer from "./slices/productsSlice";
+import userReducer from "./slices/userSlice";
+import allUsersReducer from "./slices/allUsersSlice";
 import detailReducer from "./slices/detailSlice";
-import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const userPersistConfig = {
   key: "user",
@@ -11,10 +13,12 @@ const userPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  detail: detailReducer,
   products: productsReducer,
-  detail: detailReducer,
+  allUsers: allUsersReducer,
   user: persistReducer(userPersistConfig, userReducer),
+  cart: cartReducer,
+  detail: detailReducer,
+  users: usersReducer,
 });
 
-export { rootReducer };
+export default rootReducer;
