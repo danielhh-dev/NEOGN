@@ -6,14 +6,14 @@ import { getUsers } from "../../redux/slices/allUsersSlice";
 import CardUser from "../Cards/CardUser";
 
 const ManageUser = () => {
-  const allUsers = useSelector((state) => state.users.users);
+  const allUsers = useSelector((state) => state.allUsers.users);
   const dispatch = useDispatch();
 
   const getAllUsers = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
-          "http://neogn-back.up.railway.app/api/user"
+          "http://neogn-back.up.railway.app/api/users"
         );
         const users = json.data;
         return dispatch(getUsers(users));
@@ -101,7 +101,7 @@ const ManageUser = () => {
                       toggleAdminStatus={toggleAdminStatus}
                       name={el.name}
                       email={el.email}
-                      image={el.photoURL}
+                      image={el.photo_url}
                       isAdmin={el.isAdmin}
                       isDisable={el.isDisable}
                     />

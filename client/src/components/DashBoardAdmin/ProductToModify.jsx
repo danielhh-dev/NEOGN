@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const ProductsToModify = () => {
   const products = useSelector((state) => state.products.products);
+  console.log(products === true);
   const dispatch = useDispatch();
 
   const fetchProducts = () => {
@@ -30,19 +31,13 @@ const ProductsToModify = () => {
   return (
     <div className="flex justify-center">
       <div className="w-auto h-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-16 mb-4">
-        {products
-          ?.slice()
-          .sort((a, b) => a.title.localeCompare(b.title))
-          .map((el) => (
-            <div key={el.id}>
-              <Link to={`/admin/productsTomodify/${el.id}`}>
-                <CardProduct
-                  title={el.title}
-                  image_secure_url={el.image_secure_url}
-                />
-              </Link>
-            </div>
-          ))}
+        {products.map((el) => (
+          <div key={el.id}>
+            <Link to={`/admin/productsTomodify/${el.id}`}>
+              <CardProduct title={el.name} image_url={el.image_url[0]} />
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
