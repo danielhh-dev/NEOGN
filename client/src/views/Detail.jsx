@@ -72,28 +72,28 @@ const Detail = () => {
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image}
+              src={product.detail.image_url}
             />
           </div>
           <div className="inline-flex bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image}
+              src={product.detail.image_url}
             />
           </div>
           <div className="inline-flex bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image}
+              src={product.detail.image_url}
             />
           </div>
           <div className="flex bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image}
+              src={product.detail.image_url}
             />
           </div>
         </div>
@@ -115,7 +115,7 @@ const Detail = () => {
           </div>
           <img
             className="relative bg-cover bg-no-repeat"
-            src={product.detail.image}
+            src={product.detail.image_url}
           />
         </div>
       </div>
