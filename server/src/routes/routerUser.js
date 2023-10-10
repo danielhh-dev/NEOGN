@@ -1,28 +1,24 @@
 const { Router } = require("express");
+const fs = require("fs-extra");
 
-// Controladores
-const getUsers = require("../controllers/User/getUsers");
-const getUserById = require("../controllers/User/getUserById");
+
 const deleteUser = require("../controllers/User/deleteUser");
+const getUserById = require("../controllers/User/getUserById");
+const getUsers = require("../controllers/User/getUsers");
+const putUser = require("../controllers/User/putUser");
+const restoreUser = require("../controllers/User/restoreUser");
 const signUp = require("../controllers/User/signUp");
-const login = require("../controllers/User/login");
-
-// Middlewares
-// const verifyToken = require("../middlewares/verifyToken");
-// const refreshToken = require("../middlewares/refreshToken");
-// const signTokens = require("../middlewares/signTokens");
 
 const router = Router();
 
-//GET
+// traer
 router.get("/", async (req, res) => {
   try {
     const users = await getUsers();
 
-    return res.status(200).json(users);
+    res.status(200).json(users);
   } catch (error) {
     console.log(error.message);
-
     res.status(400).json({ error: error.message });
   }
 });
@@ -30,80 +26,84 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-
     const user = await getUserById(id);
 
-    return res.status(200).json(user);
+    res.status(200).json(user);
   } catch (error) {
-    console.log(error.message);
-
-    res.status(400).json({ error: error.message });
+    res.status(404).json({ error: error.message });
   }
 });
 
-//LOGICAL DELETION
+// Registrarse
+router.post("/signUp", async (req, res) => {
+  try {
+    console.log(req.body);
+    const { clientId, name, email, photo } = req.body;
+    const response = await signUp(clientId, name, email, photo);
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.log(error.message);
+    res.status(404).json({ error: error.message });
+  }
+});
+
+//borrado logico y restaurar
 router.delete("/delete/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    await deleteUser(id);
 
-    const message = await deleteUser(id);
-
-    return res.status(200).json({ message });
+    res.status(200).json({ message: "The user has been deleted" });
   } catch (error) {
     console.log(error.message);
-
     res.status(400).json({ error: error.message });
   }
 });
 
-//POST
-router.post("/signup", async (req, res) => {
+router.put("/restore/:id", async (req, res) => {
   try {
-    const { name, username, email, password, photo } = req.body;
-    console.log(req.body);
+    const { id } = req.params;
+    await restoreUser(id);
 
-    const newUser = await signUp({ name, username, email, password, photo });
-
-    return res.status(200).json(newUser);
+    res.status(200).json({ message: "The user has been restored" });
   } catch (error) {
     console.log(error.message);
-
-    res.status(400).send(error.message);
+    res.status(400).json({ error: error.message });
   }
 });
 
-// router.post("/login", async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
+//modificar
+router.put("/update/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
 
-//     const user = await login(email, password);
+    const fileUrl = data.photo_secure_url ?? "";
 
-//     const { accessToken, refreshToken } = signTokens(user.id);
+    const filePath = req.files ? req.files.image.tempFilePath : "";
 
-//     return res.status(200).json({ access: true, accessToken, refreshToken });
-//   } catch (error) {
-//     console.log(error.message);
+    const user = await putUser(id, data, fileUrl, filePath);
 
-//     res.status(400).send(error.message);
-//   };
-// });
+    if (filePath) {
+      await fs.unlink(filePath);
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ error: error.message });
+  }
+});
 
-// Refresh token
-// router.post("/refresh", refreshToken, (req, res) => {
-//   try {
-//     const newAccessToken = req.locals.newAccessToken;
-//     const newRefreshToken = req.locals.newRefreshToken;
-
-//     if (!newAccessToken || !newRefreshToken) {
-//       throw new Error("Unable to renew access tokens.");
-//     }
-
-//     res.status(200).json({ auth: true, accessToken: newAccessToken, refreshToken: newRefreshToken });
-//   } catch (error) {
-//     console.log(error.message);
-
-//     res.status(400).json({ auth: false, message: error.message });
-//   };
-// });
+router.post("/respond", async (req, res) => {
+  try {
+    const { questionId, response } = req.body;
+    await respondToQuestions(questionId, response);
+    res.status(200).json({ message: "Question successfully answered" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(404).json({ error: "Error answering the question" });
+  }
+});
 
 module.exports = router;

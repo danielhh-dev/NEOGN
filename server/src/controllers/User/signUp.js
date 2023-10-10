@@ -1,34 +1,17 @@
 const db = require("../../db");
+const { sendRegistrationEmail } = require("../../utils/email");
 
-const signUp = async ({ name, username, email, password, photo }) => {
-  try {
-    if (!name || !username || !email || !password) {
-      throw new Error("Missing data");
-    }
+const signUp = async (clientId, name, email, photo) => {
+  const newUser = await db.User.create({
+    clientId,
+    name,
+    email,
+    photo,
+  });
 
-    const userData = {
-      name: name,
-      username: username,
-      email: email,
-      password: password,
-      photo: photo,
-    };
+  sendRegistrationEmail(newUser.clientId);
 
-    const [user, created] = await db.User.findOrCreate({
-      where: { email: email },
-      defaults: userData,
-    });
-
-    if (!created) {
-      throw new Error("Email already exists");
-    }
-
-    return user;
-  } catch (error) {
-    console.log(error);
-
-    throw new Error("Error creating user: " + error);
-  }
+  return newUser;
 };
 
 module.exports = signUp;
