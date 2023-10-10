@@ -1,12 +1,10 @@
 const { Router } = require("express");
 const fs = require("fs-extra");
 
-const { tokenValidator } = require("../middlewares/jsonWebToken");
 
 const deleteUser = require("../controllers/User/deleteUser");
 const getUserById = require("../controllers/User/getUserById");
 const getUsers = require("../controllers/User/getUsers");
-const userLogin = require("../controllers/User/login");
 const putUser = require("../controllers/User/putUser");
 const restoreUser = require("../controllers/User/restoreUser");
 const signUp = require("../controllers/User/signUp");
@@ -41,9 +39,9 @@ router.post("/signUp", async (req, res) => {
   try {
     console.log(req.body);
     const { clientId, name, email, photo } = req.body;
-    const token = await signUp(clientId, name, email, photo);
+    const response = await signUp(clientId, name, email, photo);
 
-    res.status(200).json({ token });
+    res.status(200).json(response);
   } catch (error) {
     console.log(error.message);
     res.status(404).json({ error: error.message });
@@ -69,25 +67,6 @@ router.put("/restore/:id", async (req, res) => {
     await restoreUser(id);
 
     res.status(200).json({ message: "The user has been restored" });
-  } catch (error) {
-    console.log(error.message);
-    res.status(400).json({ error: error.message });
-  }
-});
-
-// login
-router.post("/login", tokenValidator, async (req, res) => {
-  try {
-    const token = req.headers.authorization?.split(" ")[1];
-    const { username, password, email, phone } = req.body;
-    const userToLogin = await userLogin(
-      username,
-      password,
-      email,
-      phone,
-      token
-    );
-    res.status(200).json(userToLogin);
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });

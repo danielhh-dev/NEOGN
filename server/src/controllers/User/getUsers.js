@@ -5,7 +5,6 @@ const getUsers = async () => {
 
   if (!allUsers.length) throw new Error("Users not found");
 
-  console.log(allUsers);
   return allUsers;
 };
 

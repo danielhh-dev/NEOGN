@@ -11,19 +11,9 @@ const signUp = async (clientId, name, email, photo) => {
     photo,
   });
 
-  const token = await tokenGenerator(
-    {
-      clientId: newUser.clientId,
-      name: newUser.name,
-      email: newUser.email,
-      photo: newUser.photo,
-    },
-    `${JWT_SIGN}`
-  );
+  sendRegistrationEmail(newUser.clientId);
 
-  sendRegistrationEmail(newUser.id);
-
-  return token;
+  return newUser;
 };
 
 module.exports = signUp;

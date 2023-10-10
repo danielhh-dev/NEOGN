@@ -3,6 +3,7 @@ import { useAuth } from "./Context/AuthContext";
 import NEOGN from "../../utils/images/Logo/NEOGN.png";
 import TitleSection from "../TitleSection";
 import { useNavigate } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 
 function SignUp() {
   const auth = useAuth();
@@ -24,9 +25,8 @@ function SignUp() {
     e.preventDefault();
     try {
       await auth.register(emailRegister, passwordRegister);
-      setIsUserAuthenticated(true);
     } catch (error) {
-      console.error("Error durante el registro:", error);
+      console.log(error);
     }
   };
 
@@ -178,6 +178,7 @@ function SignUp() {
           </div>
         </div>
       </div>
+      <Toaster/>
     </section>
   );
 }
