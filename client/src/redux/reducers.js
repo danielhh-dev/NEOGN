@@ -9,7 +9,7 @@ import inCartReducer from "./slices/CartSlice"
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import wishlistReducer from "./slices/WishlistSlice";
-
+import categoryReducer from "./slices/categorySlice";
 
 const userPersistConfig = {
   key: "user",
@@ -17,6 +17,7 @@ const userPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  category: categoryReducer,
   wishlist: wishlistReducer,
   filter: filterReducer,
   inCart:inCartReducer,
