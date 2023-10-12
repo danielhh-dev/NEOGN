@@ -13,14 +13,14 @@ import Back from "../utils/images/BasicIcons/BackIcon.png";
 
 const Categories = () => {
   return (
-    <div>
-      <div className="flex flex-row gap-3 px-4 mb-8 mt-8 font-general-sans">
+    <div className="px-4 pt-8">
+      <div className="flex flex-row gap-3  mb-8 items-center font-general-sans">
         <Link to={"/"}>
-          <img src={Back} className="w-[30px] h-[30px]" />
+          <img src={Back} className="w-8 h-8" />
         </Link>
         <p className=" font-general-sans">Categories</p>
       </div>
-      <div className="grid grid-cols-2 gap-y-3 mb-4 px-4 gap-2">
+      <div className="grid grid-cols-2 gap-6 ">
         {[
           { image: Monitors, name: "Monitors" },
           { image: Headsets, name: "Headsets" },
@@ -32,10 +32,10 @@ const Categories = () => {
           { image: Microphones, name: "Microphones" },
         ].map((el) => (
           <Link to={`/products?category=${el.name}`}>
-            <div className="flex flex-col justify-center items-center w-[190px] h-[120px] border border-gray-100 rounded-[18px] shadow-lg">
-              <img className="w-[70px] h-[70px]" src={el.image} />
+            <div className="flex flex-col items-center p-4 border-gray-300 rounded-lg shadow-md transition  duration-300 ease-in-out transform hover:scale-105 cursor-pointer">
+              <img className="w-20 h-20 mb-2" src={el.image} />
 
-              <p>{el.name}</p>
+              <p className="text-center font-semibold">{el.name}</p>
             </div>
           </Link>
         ))}
