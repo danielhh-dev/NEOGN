@@ -76,6 +76,14 @@ const App = () => {
       >
         <AppBar theme={theme} handleThemeSwitch={handleThemeSwitch} />
       </div>
+      <style>
+        {`
+          .kommunicate-custom-iframe {
+            bottom: 80px ; /* Ajusta este valor según tu preferencia */
+          }
+        `}
+      </style>
+
     </div>
   );
 };
