@@ -7,7 +7,7 @@ import Search from "./views/Search";
 import Wishlist from "./views/Wishlist";
 import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
-import Detail from "./views/Detail"
+import Detail from "./views/Detail";
 import Categories from "./views/Categories";
 import DashBoardAdmin from "./components/DashBoardAdmin/DashBoardAdmin";
 import EditedProduct from "./components/DashBoardAdmin/EditedProduct";
@@ -63,8 +63,9 @@ const App = () => {
         <Route path="/Wishlist" element={<Wishlist />} />
         <Route path="/Account" element={<Account />} />
         <Route path="/Categories" element={<Categories />} />
-        <Route path="/:id" element={<Detail/>} />
+        <Route path="/:id" element={<Detail />} />
       </Routes>
+
       <div
         className={` fixed bottom-0 left-0 w-full z-[1000] ${
           Desktop ? "hidden" : ""

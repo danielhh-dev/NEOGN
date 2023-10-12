@@ -1,39 +1,40 @@
 import { useState } from "react";
 import {
-  validateTitle,
+  validateName,
   validateDescription,
-  validateImage,
   validateCategory,
   validateStock,
   validatePrice,
   validateDiscount,
 } from "./helpers/ProductValidation";
 import { useDispatch } from "react-redux";
-import { postProduct } from "../../redux/actions/postProduct";
 import { useNavigate } from "react-router-dom";
 import Category from "./Category";
+// import submitMultipleImg from "./helpers/SubmitMultipleImg";
 
 import { categories } from "./helpers/FormHelpers";
+import axios from "axios";
 
 const CreateProduct = () => {
+  const [files, setFiles] = useState([]);
   const dispatch = useDispatch();
   const history = useNavigate();
 
   const [input, setInput] = useState({
-    title: "",
+    name: "",
     description: "",
     category: "",
-    image: "",
+    images: "",
     stock: 0,
     price: 0,
     discount: 0,
   });
 
   const [errors, setErrors] = useState({
-    title: "",
+    name: "",
     description: "",
     category: "",
-    image: "",
+    // image: "",
     stock: "",
     price: "",
     discount: "",
@@ -42,7 +43,7 @@ const CreateProduct = () => {
   const [descriptionLength, setDescriptionLength] = useState(0);
   const maxDescriptionLength = 255;
 
-  const handleTitleChange = (event) => {
+  const handleNameChange = (event) => {
     const { name, value } = event.target;
     setInput((prevInput) => ({
       ...prevInput,
@@ -50,7 +51,7 @@ const CreateProduct = () => {
     }));
     setErrors((prevErrors) => ({
       ...prevErrors,
-      title: validateDescription(value),
+      name: validateDescription(value),
     }));
   };
 
@@ -67,23 +68,19 @@ const CreateProduct = () => {
     setDescriptionLength(value.length);
   };
 
-  const handleImageChange = (event) => {
-    const { name, value } = event.target;
-    setInput((prevInput) => ({
-      ...prevInput,
-      [name]: value,
-    }));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      image: validateImage(value),
-    }));
+  const handleImagesChange = (event) => {
+    // const { name, value } = event.target;
+    setFiles(event.target.files);
+    // setInput((prevInput) => ({
+    //   ...prevInput,
+    //   [name]: value,
+    // }));
   };
 
   const handleCategoryChange = (selectedCategory) => {
     setInput((prevInput) => ({
       ...prevInput,
       category: selectedCategory,
-      size: [],
     }));
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -135,12 +132,11 @@ const CreateProduct = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(event);
+
     const fieldErrors = {
-      title: validateTitle(input.title),
+      name: validateName(input.name),
       description: validateDescription(input.description),
       category: validateCategory(input.category),
-      image: validateImage(input.image),
       stock: validateStock(input.stock),
       price: validatePrice(input.price),
       discount: validateDiscount(input.discount),
@@ -154,14 +150,30 @@ const CreateProduct = () => {
       return;
     }
 
-    dispatch(postProduct(input));
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      const image = files[i];
+      formData.append("image", image);
+    }
+
+    const post = async function (input) {
+      const response = await axios.post(
+        "http://localhost:3001/api/products/create",
+        input,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      return response;
+    };
+    post(input);
+
     alert("Product Created Successfully");
 
     setInput({
-      title: "",
+      name: "",
       description: "",
       category: "",
-      image: "",
+      images: "",
       stock: 0,
       price: 0,
       discount: 0,
@@ -192,18 +204,18 @@ const CreateProduct = () => {
                 </label>
                 <input
                   type="text"
-                  value={input.title}
-                  name="title"
-                  id="title"
+                  value={input.name}
+                  name="name"
+                  id="name"
                   placeholder="Type product name"
-                  onChange={handleTitleChange}
+                  onChange={handleNameChange}
                   autoComplete="off"
                   className="bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500 text-sm rounded-lg block w-full p-2.5  dark:bg-stone-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   required=""
                 />
-                {errors.title && (
+                {errors.name && (
                   <div className="mb-3 text-normal text-red-500 ">
-                    {errors.title}
+                    {errors.name}
                   </div>
                 )}
               </div>
@@ -229,27 +241,29 @@ const CreateProduct = () => {
 
               <div>
                 <label
-                  htmlFor="image"
+                  htmlFor="images"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Image
+                  Images
                 </label>
                 <input
-                  type="text"
-                  value={input.image}
-                  name="image"
-                  id="image"
+                  type="file"
+                  accept="image/*"
+                  multiple={true}
+                  value={input.images}
+                  name="images"
+                  id="images"
                   placeholder="Enter the image URL of the product"
-                  onChange={handleImageChange}
+                  onChange={handleImagesChange}
                   autoComplete="off"
                   className="bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500 text-sm rounded-lg block w-full p-2.5  dark:bg-stone-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   required=""
                 />
-                {errors.image && (
+                {/* {errors.image && (
                   <div className="mb-3 text-normal text-red-500 ">
-                    {errors.image}
+                    {errors.images}
                   </div>
-                )}
+                )} */}
               </div>
               <div className="sm:col-span-2">
                 <label
