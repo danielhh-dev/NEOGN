@@ -5,6 +5,7 @@ import {AiFillFacebook} from 'react-icons/ai'
 import {AiFillInstagram} from 'react-icons/ai'
 
 
+
 const ContactUs = () => {
     
     const entity = useSelector(state => state.user);
@@ -119,12 +120,17 @@ const ContactUs = () => {
       </div>
       <style>
         {`
-          .kommunicate-custom-iframe {
-            bottom: 80px !important; /* Ajusta este valor según tu preferencia */
-          }
           
-        `}
+          .kommunicate-custom-iframe   {
+            bottom: 85px ; 
+            
+
+            
+           }   
+          
+     `}
       </style>
+      
     </div>
   );
 };
