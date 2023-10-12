@@ -24,7 +24,6 @@ const rootReducer = combineReducers({
   products: productsReducer,
   allUsers: allUsersReducer,
   user: persistReducer(userPersistConfig, userReducer),
-  detail: detailReducer,
 });
 
 export default rootReducer;

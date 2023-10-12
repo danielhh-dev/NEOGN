@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { AuthProvider } from "./components/Account/Context/AuthContext";
+
 import AppBar from "./components/AppBar/AppBar";
 import Home from "./views/Home";
 import Cart from "./views/Cart";
@@ -18,6 +21,12 @@ import ProductsToModify from "./components/DashBoardAdmin/ProductToModify";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import PurchaseHistory from "./components/DashBoardAdmin/PurchaseHistory";
 import ContactUs from "./views/ContactUs";
+import SignUp from "./components/Account/SignUp";
+import EditProfile from "./components/DashboardUser/EditProfile";
+import OrderHistory from "./components/DashboardUser/OrderHistory";
+import WishlistAccount from "./components/DashboardUser/WishlistAccount";
+
+
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -47,9 +56,19 @@ const App = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  const location = useLocation();
+
+  const isTopBarHidden =
+    location.pathname === "/Account" ||
+    location.pathname.startsWith("/Account/EditProfile") ||
+    location.pathname.startsWith("/Account/Orders") ||
+    location.pathname.startsWith("/Account/Wishlist") ||
+    location.pathname.startsWith("/Account/SignUp");
+
   return (
+    <AuthProvider>
     <div>
-      <TopBar />
+    {!isTopBarHidden && <TopBar />}
       <Routes>
         <Route path="/admin" element={<DashBoardAdmin />}>
           <Route path="purchaseHistory" element={<PurchaseHistory />} />
@@ -63,18 +82,26 @@ const App = () => {
         <Route path="/Cart" element={<Cart />} />
         <Route path="/Search" element={<Search />} />
         <Route path="/Wishlist" element={<Wishlist />} />
-        <Route path="/Account" element={<Account />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/contact" element={<ContactUs/>}/>
         <Route path="/:id" element={<Detail/>} />
         <Route path="/about" element={<AboutUs/>} />
+        <Route
+            path="/Account"
+            element={<Account handleThemeSwitch={handleThemeSwitch} />}
+          />
+          <Route path="/Account/SignUp" element={<SignUp />} />
+          {/* User Dashboard */}
+          <Route path="/Account/EditProfile" element={<EditProfile />} />
+          <Route path="/Account/Orders" element={<OrderHistory />} />
+          <Route path="/Account/Wishlist" element={<WishlistAccount />} />
       </Routes>
       <div
         className={` fixed bottom-0 left-0 w-full z-[1000] ${
           Desktop ? "hidden" : ""
         }`}
       >
-        <AppBar theme={theme} handleThemeSwitch={handleThemeSwitch} />
+        <AppBar theme={theme} />
       </div>
       <style>
         {`
@@ -85,6 +112,7 @@ const App = () => {
       </style>
 
     </div>
+    </AuthProvider>
   );
 };
 
