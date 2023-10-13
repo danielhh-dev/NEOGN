@@ -1,33 +1,31 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import fetchProductById from "../redux/actions/fetchProductById";
-import addToCartAction from "../redux/actions/CartActions";
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../redux/slices/cartSlice";
 import heart from "../utils/images/AppbarIcons/DarkHeart.png";
 import backIcon from "../utils/images/BasicIcons/backIcon.png";
-import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast'
+
 
 const Detail = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
   const goBackHandler = () => {
     navigate(-1);
   };
 
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const product = useSelector((state) => {
-    return state.detail;
-  });
-  console.log(product);
+  const product = useSelector((state) =>  state.detail.detail);
 
   const enCar = useSelector((state) => {
-    return state.inCart;
+    return state.cart;
   });
-  console.log(enCar);
 
   const productInCartCount = enCar.items.filter(
-    (item) => item.id === product.detail.id
+    (item) => item.id === product.id
   ).length;
 
   useEffect(() => {
@@ -36,15 +34,16 @@ const Detail = () => {
 
   const handleAddToCart = () => {
     const productData = {
-      id: product.detail.id,
-      name: product.detail.name,
-      price: product.detail.price,
-      image: product.detail.image_url,
-      description: product.detail.description,
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image_url,
+      description: product.description,
     };
-    console.log("Producto a agregar al carrito:", productData);
+    toast.success('Added to cart successfully ')
 
-    dispatch(addToCartAction(productData));
+    console.log(productData);
+    dispatch(addToCart(productData));
   };
 
   return (
@@ -59,7 +58,7 @@ const Detail = () => {
           />
         </button>
         <h1
-          className="detail-text font-normal  font-bold text-[20px]"
+          className="detail-text font-bold text-[20px]"
           style={{ fontFamily: "Poppins, sans-serif" }}
         >
           Detail
@@ -72,28 +71,28 @@ const Detail = () => {
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image_url}
+              src={product.image_url}
             />
           </div>
           <div className="inline-flex bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image_url}
+              src={product.image_url}
             />
           </div>
           <div className="inline-flex bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image_url}
+              src={product.image_url}
             />
           </div>
           <div className="flex bg-absolutestaticwhite-s rounded-[12px] border border-solid border-oil-03">
             <img
               className="relative w-full h-full object-cover"
               alt="small img"
-              src={product.detail.image_url}
+              src={product.image_url}
             />
           </div>
         </div>
@@ -115,7 +114,7 @@ const Detail = () => {
           </div>
           <img
             className="relative bg-cover bg-no-repeat"
-            src={product.detail.image_url}
+            src={product.image_url}
           />
         </div>
       </div>
@@ -123,7 +122,7 @@ const Detail = () => {
       <div className="2part flex flex-col justify-between relative pt-6 pl-[20px] pr-[20px] md:pl-15 md:pl-15 lg:pr-20 lg:pl-20">
         <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
           <div className="relative w-fit mt-[-1.00px] [font-family:'Roboto-Bold',Helvetica] font-bold text-oil-11 text-[24px] tracking-[0] leading-[normal] whitespace-nowrap">
-            {`${product.detail.name}`}
+            {`${product.name}`}
           </div>
           <div className="inline-flex items-center justify-center gap-[4px] px-[10px] py-[6px] relative flex-[0_0_auto] bg-absolutestaticwhite-s rounded-[10px] border border-solid border-oil-03">
             <img
@@ -138,7 +137,7 @@ const Detail = () => {
         </div>
 
         <p className="  relative  justify-around font-[Roboto-Regular, Helvetica] font-normal text-oil-11 text-[14px] tracking-[0] leading-normal">
-          {product.detail.description}
+          {product.description}
         </p>
 
         <div className="flex flex-col pt-5 gap-[16px]  ">
@@ -189,7 +188,7 @@ const Detail = () => {
           <div className="flex w-[342px] items-center justify-between ">
             <p className="relative w-fit [font-family:'Roboto-Medium',Helvetica] font-medium text-[#0d0d0d] text-[24px] tracking-[0] leading-[normal] whitespace-nowrap">
               <span className="[font-family:'Roboto-Medium',Helvetica] font-medium text-[#0d0d0d] text-[24px] tracking-[0]">
-                {`$${product.detail.price}`}
+                {`$${product.price}`}
               </span>
               <span className="text-[18px]">99</span>
             </p>
@@ -205,6 +204,7 @@ const Detail = () => {
           </button>
         </div>
       </div>
+      <Toaster/>
     </div>
   );
 };

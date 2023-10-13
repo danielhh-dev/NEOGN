@@ -22,7 +22,7 @@ const DashBoardUser = ({ handleThemeSwitch }) => {
           setError(null);
 
           const json = await axios.get(
-            `https://neogn-back.up.railway.app/api/users/${auth.user.uid}`
+            `http://localhost:3001/api/users/${auth.user.uid}`
           );
           if (!json) console.log("No existe en la db");
           const detail = json.data;

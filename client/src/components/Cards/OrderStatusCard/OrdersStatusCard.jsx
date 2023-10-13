@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import imagePaths from "./imagePaths";
 
-const OrderStatusCard = ({ status }) => {
+import { Link } from "react-router-dom";
 
+const OrderStatusCard = ({ status, order }) => {
   const [statusInfo, setStatusInfo] = useState({
     statusColor: "",
     textColor: "",
@@ -81,6 +82,24 @@ const OrderStatusCard = ({ status }) => {
     setStatusInfo(newStatusInfo);
   }, [status]);
 
+  function formatOrderDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    };
+
+    const date = new Date(dateString);
+    return date.toLocaleString("en-US", options);
+  }
+
+  const originalDate = order && order.date;
+
+  const formattedDate = formatOrderDate(originalDate);
+
   return (
     <div className="font-maven-pro w-full h-auto flex justify-center">
       <div className="w-[340px] h-[180px] bg-rose-500 rounded-2xl px-5 py-4 flex flex-col gap-3">
@@ -94,51 +113,48 @@ const OrderStatusCard = ({ status }) => {
             <div
               className={`h-[32px] w-[32px] rounded-full ${statusInfo.confirmedColor} flex justify-center items-center`}
             >
-              <img
-                className="h-[26px] w-auto"
-                src={statusInfo.confirmedImg}
-              />
+              <img className="h-[26px] w-auto" src={statusInfo.confirmedImg} />
             </div>
             <div
               className={`h-[32px] w-[32px] rounded-full ${statusInfo.preparingColor} flex justify-center items-center`}
             >
-              <img
-                className="h-[22px] w-auto"
-                src={statusInfo.preparingImg}
-              />
+              <img className="h-[22px] w-auto" src={statusInfo.preparingImg} />
             </div>
             <div
               className={`h-[32px] w-[32px] rounded-full ${statusInfo.shippedColor} flex justify-center items-center`}
             >
-              <img
-                className="h-[20px] w-auto"
-                src={statusInfo.shippedImg}
-              />
+              <img className="h-[20px] w-auto" src={statusInfo.shippedImg} />
             </div>
             <div
               className={`h-[32px] w-[32px] rounded-full ${statusInfo.deliveredColor} flex justify-center items-center`}
             >
-              <img
-                className="h-[22px] w-auto"
-                src={statusInfo.deliveredImg}
-              />
+              <img className="h-[22px] w-auto" src={statusInfo.deliveredImg} />
             </div>
           </div>
         </div>
         <div className=" font-general-sans text-slate-200 text-sm font-medium">
-          #NG029931
+          {order ? `#${order.paymentId}` : "#NG029931"}
         </div>
         <div className="text-slate-200 text-xl font-semibold">
-          HyperX Cloud II
+          {order ? order.products[0].title : "HyperX Cloud II"}
         </div>
         <div className="flex justify-between w-auto h-auto">
           <h2 className="font-general-sans font-normal text-base text-slate-200">
-            22 Sep 2023 - 02:30PM
+            {formattedDate ? formattedDate : "22 Sep 2023 - 02:30PM"}
           </h2>
-          <img
-            className="w-auto h-[24px]"
-            src="https://i.postimg.cc/D0zVf70v/right-chevron-svgrepo-com-1.png"
-          />
+          {order ? (
+            <Link to={`/Account/Orders/${order.paymentId}`}>
+              <img
+                className="w-auto h-[24px]"
+                src="https://i.postimg.cc/D0zVf70v/right-chevron-svgrepo-com-1.png"
+              />
+            </Link>
+          ) : (
+            <img
+              className="w-auto h-[24px]"
+              src="https://i.postimg.cc/D0zVf70v/right-chevron-svgrepo-com-1.png"
+            />
+          )}
         </div>
       </div>
     </div>

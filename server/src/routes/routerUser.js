@@ -79,7 +79,7 @@ router.put("/update/:id", async (req, res) => {
     const { id } = req.params;
     const data = req.body;
 
-    const fileUrl = data.photo_secure_url ?? "";
+    const fileUrl = data.photo ?? "";
 
     const filePath = req.files ? req.files.image.tempFilePath : "";
 

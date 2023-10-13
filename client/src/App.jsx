@@ -25,6 +25,7 @@ import SignUp from "./components/Account/SignUp";
 import EditProfile from "./components/DashboardUser/EditProfile";
 import OrderHistory from "./components/DashboardUser/OrderHistory";
 import WishlistAccount from "./components/DashboardUser/WishlistAccount";
+import OrderDetails from "./components/DashboardUser/Orders/OrderDetails"
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -93,6 +94,7 @@ const App = () => {
           {/* Dashboard User */}
           <Route path="/Account/EditProfile" element={<EditProfile />} />
           <Route path="/Account/Orders" element={<OrderHistory />} />
+          <Route path="/Account/Orders/:id" element={<OrderDetails />} />
           <Route path="/Account/Wishlist" element={<WishlistAccount />} />
         </Routes>
         <div
