@@ -110,8 +110,6 @@ const App = () => {
           }
         `}
       </style>
-
-    </div>
     </AuthProvider>
   );
 };
