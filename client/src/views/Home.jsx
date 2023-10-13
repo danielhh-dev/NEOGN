@@ -50,6 +50,7 @@ const Home = () => {
       </div>
       <div className="w-full flex justify-center items-center">
         <div className="w-auto h-auto grid grid-cols-2 gap-4">
+
         {filtradolo && filtradolo.length > 0
       ? filtradolo.map((product, i) => (
           <HomeCard key={i} image={product.image_url[0]} id={product.id} price={product.price} name={product.name} />

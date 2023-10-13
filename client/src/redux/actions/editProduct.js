@@ -4,7 +4,7 @@ export function editProduct(id, payload) {
   return async function () {
     try {
       const response = await axios.put(
-        `http://neogn-back.up.railway.app/api/products/update/${id}`,
+        `https://neogn-back.up.railway.app/api/products/update/${id}`,
         payload
       );
       return response;

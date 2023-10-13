@@ -34,9 +34,35 @@ export function AuthProvider({ children }) {
         setAuthReady(true);
         return;
       }
+      console.log(currentUser);
 
-      setUser(currentUser);
-      setAuthReady(true);
+      try {
+        const checkUserResponse = await axios.get(
+          `http://localhost:3001/api/users/${currentUser.uid}`
+        );
+
+        if (checkUserResponse.status === 200) {
+          setUser(currentUser);
+          setAuthReady(true);
+        }
+      } catch (error) {
+        const createUserResponse = await axios.post(
+          "http://localhost:3001/api/users/signUp",
+          {
+            clientId: currentUser.uid,
+            email: currentUser.email,
+            photo: currentUser.photoURL,
+            name: currentUser.displayName,
+          }
+        );
+
+        if (createUserResponse.status === 200) {
+          console.log("Successful Registration");
+        }
+
+        setUser(currentUser);
+        setAuthReady(true);
+      }
     });
 
     return () => subscribed();
@@ -61,12 +87,12 @@ export function AuthProvider({ children }) {
       };
 
       const createUserResponse = await axios.post(
-        "http://localhost:3000/api/users/signUp",
+        "http://localhost:3001/api/users/signUp",
         userData
       );
 
       if (createUserResponse.status === 200) {
-        setUser(firebaseUser); 
+        setUser(firebaseUser);
       }
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -88,7 +114,7 @@ export function AuthProvider({ children }) {
       const authUid = auth.currentUser.uid;
 
       const checkUserResponse = await axios.get(
-        `http://localhost:3000/api/users/${authUid}`
+        `http://localhost:3001/api/users/${authUid}`
       );
 
       if (checkUserResponse.status === 200) {
