@@ -1,8 +1,8 @@
-export function validateTitle(name) {
+export function validateName(name) {
   if (name.length == 60 || name.length > 60)
-    return "Title cannot exceed 100 characters";
+    return "Name cannot exceed 100 characters";
   if (name.trim() === "") {
-    return "Title is required";
+    return "Name is required";
   }
   // Patrón de expresión regular que busca solo letras y espacios
   return "";
@@ -11,15 +11,6 @@ export function validateTitle(name) {
 export function validateDescription(description) {
   if (description.trim() === "") {
     return "Description is required";
-  }
-  return "";
-}
-
-export function validateImage(imageURL) {
-  const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
-
-  if (!urlPattern.test(imageURL)) {
-    return "Please enter a valid URL for the image";
   }
   return "";
 }

@@ -9,16 +9,11 @@ import getFilter from '../redux/actions/getFilter';
 import { addToWishlist, removeFromWishlist } from "../redux/slices/WishlistSlice";
 
 const Search = () => {
-  
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const categoryState = useSelector((state)=> state.category);  
   const productFiltered = useSelector((state) => state.filter);
-  console.log("productFiltered", productFiltered);
-  const wishlist = useSelector((state) => state.wishlist);
-  console.log("wishlist en view Search",wishlist);
   const [showFilter, setShowFilter] = useState(false);
   const [addedProducts, setAddedProducts] = useState([]);
-  console.log("addedProducts en view Search",addedProducts);
 
 
   const toFilter = () => {
@@ -32,13 +27,11 @@ const Search = () => {
       (product) => product.id === productId
     );
     if (product) {
-      if (addedProducts.some((p) => p.id === product.id)) {
-        alert('This item is already on the wishlist.');
-        return; // No hagas nada si el producto ya está en addedProducts
+      if (addedProducts.some((p) => p.id === product.id)) {        
+        return; 
       }
       dispatch(addToWishlist(product));
-      setAddedProducts([...addedProducts, product]);
-      alert('Added to Wishlist');
+      setAddedProducts([...addedProducts, product]);      
     }
   };
 
@@ -67,7 +60,9 @@ function isEmpty(obj) {
           <LuSettings2 className="text-black-500 text-[30px] font-semibold" />
         </button>
       </div>
-      {showFilter && <FilterSortRange />} 
+      {showFilter && <FilterSortRange/>   
+        
+         } 
       <div className="w-auto h-auto m-6">
         <CategoriesFilter />
       </div>

@@ -3,8 +3,8 @@ const { conn } = require("./src/db.js");
 
 const dataProducts = require("./api/db.json");
 
-const { Product } = require("./src/db");
-const PORT = 3000;
+const { Product, User } = require("./src/db");
+const PORT = 3001;
 
 const calculateAverageRating = require("./src/utils/helpers/Average/avgRating");
 
@@ -14,7 +14,11 @@ conn
     server.listen(PORT, async () => {
       let idHard = "SKU000";
 
-      const products = dataProducts.map((product) => {
+      const users = dataProducts.users.map((user) => {
+        return user;
+      });
+
+      const products = dataProducts.products.map((product) => {
         const rating = product.rating.map((rat) => Math.round(rat));
 
         product.averageRating = calculateAverageRating(rating);
@@ -44,6 +48,7 @@ conn
       });
 
       await Product.bulkCreate(products);
+      await User.bulkCreate(users);
 
       console.log(`Server listening on port ${PORT}`);
     });

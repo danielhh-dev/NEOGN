@@ -11,15 +11,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendRegistrationEmail = async (userId) => {
+const sendRegistrationEmail = async (clientId) => {
   try {
-    const user = await User.findByPk(userId);
+    const user = await User.findOne({ where: { clientId } });
     if (!user) {
       throw new Error("User not found");
     }
 
     const mailOptionsRegistro = {
-      from: "test.ecomerce420@gmail.com",
+      from: "neogn@support.com",
       to: user.email, // correo electrónico almacenado en User
       subject: "Successful registration",
       html: `

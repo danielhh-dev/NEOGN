@@ -104,6 +104,7 @@ function Sidebar() {
             </li>
             <li>
               <Link
+
                 to="/Search"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}

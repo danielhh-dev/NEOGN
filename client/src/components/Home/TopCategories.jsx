@@ -5,7 +5,6 @@ import {useState} from "react"
 
 
 const TopCategories = () => {
-
     const dispatch = useDispatch();
     const [selectCategory, setSelectCategory]= useState('')
     const handleSelection = (category) =>{
