@@ -1,8 +1,9 @@
 import axios from "axios";
 import { setFilter } from "../slices/filterSlice";
 
-const getFilter = (filterParams) => {
 
+const getFilter = (filterParams) => {
+  
     return async function (dispatch) {
         try {
             const response = await axios.get(`https://neogn-back.up.railway.app/api/products/filter` ,{
