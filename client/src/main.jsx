@@ -8,6 +8,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { store, persistor } from "./redux/store.js";
 
+// persistor.purge();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>

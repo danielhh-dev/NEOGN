@@ -6,7 +6,7 @@ theme: {
   fontFamily: {
     'jakarta-sans': ["Plus Jakarta Sans", 'sans-serif'],
     'general-sans': ["General Sans", 'sans-serif'],
-    'maven-pro': ["Maven Pro", 'sans-serif']
+    'maven-pro': ["Maven Pro", 'sans-serif'],
   },
   extend: {
     backgroundColor: {

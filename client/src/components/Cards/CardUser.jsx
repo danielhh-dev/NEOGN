@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CardUser = ({ id, name, toggleStatus, toggleAdminStatus, photo_secure_url, email, isAdmin, isDisable }) => {
+const CardUser = ({ id, name, toggleStatus, toggleAdminStatus, photo, email, isAdmin, isDisable }) => {
   const [adminStatus, setAdminStatus] = useState(isAdmin);
   const [status, setStatus] = useState(isDisable)
 
@@ -26,7 +26,7 @@ const CardUser = ({ id, name, toggleStatus, toggleAdminStatus, photo_secure_url,
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="flex items-center">
             <div className="flex-shrink-0 w-10 h-10">
-            <img className="w-10 h-10 rounded-full" src={photo_secure_url || defaultImageUrl} alt="" />
+            <img className="w-10 h-10 rounded-full" src={photo || defaultImageUrl} alt="" />
             </div>
             <div className="ml-4">
               <div className="text-sm font-medium text-gray-900">{name}</div>

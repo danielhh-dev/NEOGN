@@ -35,8 +35,33 @@ export function AuthProvider({ children }) {
         return;
       }
 
-      setUser(currentUser);
-      setAuthReady(true);
+      try {
+        const checkUserResponse = await axios.get(
+          `http://localhost:3000/api/users/${currentUser.uid}`
+        );
+
+        if (checkUserResponse.status === 200) {
+          setUser(currentUser);
+          setAuthReady(true);
+        }
+      } catch (error) {
+        const createUserResponse = await axios.post(
+          "http://localhost:3000/api/users/signUp",
+          {
+            clientId: currentUser.uid,
+            email: currentUser.email,
+            photo: currentUser.photoURL,
+            name: currentUser.displayName,
+          }
+        );
+
+        if (createUserResponse.status === 200) {
+          console.log("Successful Registration");
+        }
+
+        setUser(currentUser);
+        setAuthReady(true);
+      }
     });
 
     return () => subscribed();
