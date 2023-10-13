@@ -22,7 +22,7 @@ const DashBoardUser = ({ handleThemeSwitch }) => {
           setError(null);
 
           const json = await axios.get(
-            `http://localhost:3000/api/users/${auth.user.uid}`
+            `https://neogn-back.up.railway.app/api/users/${auth.user.uid}`
           );
           if (!json) console.log("No existe en la db");
           const detail = json.data;
@@ -54,7 +54,17 @@ const DashBoardUser = ({ handleThemeSwitch }) => {
         <ToggleDarkMode handleThemeSwitch={handleThemeSwitch} />
       </div>
       <div className="w-full h-auto flex flex-col justify-center items-center gap-6">
-        <img className="w-[120px] h-[120px] rounded-full" src={user.photo ? user.photo: "https://cdn.icon-icons.com/icons2/3446/PNG/512/account_profile_user_avatar_icon_219236.png"} />
+        <div className="w-[120px] h-[120px] rounded-full flex items-center justify-center overflow-hidden">
+          <img
+            className="h-full w-full"
+            src={
+              user.photo
+                ? user.photo
+                : "https://cdn.icon-icons.com/icons2/3446/PNG/512/account_profile_user_avatar_icon_219236.png"
+            }
+          />
+        </div>
+
         <h2 className="text-neutral-800 text-[21px] font-bold font-jakarta-sans">
           {user.name}
         </h2>

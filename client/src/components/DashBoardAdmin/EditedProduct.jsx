@@ -15,7 +15,7 @@ import { editProduct } from "../../redux/actions/editProduct";
 import { useNavigate, useParams } from "react-router-dom";
 import Category from "../CreateProduct/Category";
 
-import { getDetail, clearDetail } from "../../redux/slices/detailSlice";
+import { setProductDetail, clearDetail } from "../../redux/slices/detailSlice";
 
 import { categories } from "../CreateProduct/helpers/FormHelpers";
 
@@ -33,7 +33,7 @@ const EditedProduct = () => {
           `https://neogn-back.up.railway.app/api/products/${id}`
         );
         const detail = json.data;
-        return dispatch(getDetail(detail));
+        return dispatch(setProductDetail(detail));
       } catch (error) {
         console.error("Error fetching detail:", error);
       }

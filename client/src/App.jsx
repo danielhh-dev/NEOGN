@@ -68,6 +68,7 @@ const App = () => {
       <div>
         {!isTopBarHidden && <TopBar />}
         <Routes>
+          {/* Dashboard Admin */}
           <Route path="/admin" element={<DashBoardAdmin />}>
             <Route path="purchaseHistory" element={<PurchaseHistory />} />
             <Route path="createProduct" element={<CreateProduct />} />
@@ -81,9 +82,19 @@ const App = () => {
           <Route path="/Search" element={<Search />} />
           <Route path="/Wishlist" element={<Wishlist />} />
           <Route path="/Categories" element={<Categories />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/:id" element={<Detail />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route
+            path="/Account"
+            element={<Account handleThemeSwitch={handleThemeSwitch} />}
+          />
+          <Route path="/Account/SignUp" element={<SignUp />} />
+          {/* Dashboard User */}
+          <Route path="/Account/EditProfile" element={<EditProfile />} />
+          <Route path="/Account/Orders" element={<OrderHistory />} />
+          <Route path="/Account/Wishlist" element={<WishlistAccount />} />
         </Routes>
-
         <div
           className={` fixed bottom-0 left-0 w-full z-[1000] ${
             Desktop ? "hidden" : ""

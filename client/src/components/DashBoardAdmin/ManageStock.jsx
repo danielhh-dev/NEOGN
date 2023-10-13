@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDetail } from "../../redux/slices/detailSlice";
+import { setProductDetail } from "../../redux/slices/detailSlice";
 
 import CardStock from "../Cards/CardStock";
 
@@ -9,14 +9,14 @@ const ManageStock = () => {
   const detail = useSelector((state) => state.detail.detail);
   const dispatch = useDispatch();
 
-  const getDetails = () => {
+  const setProductDetails = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
           "https://neogn-back.up.railway.app/api/products"
         );
         const users = json.data;
-        return dispatch(getDetail(users));
+        return dispatch(setProductDetail(users));
       } catch (error) {
         console.error("Error getting users:", error);
       }
@@ -24,7 +24,7 @@ const ManageStock = () => {
   };
 
   useEffect(() => {
-    dispatch(getDetails());
+    dispatch(setProductDetails());
   }, [dispatch]);
 
   const toggleStatus = async (userId, currentStatus, newStock) => {
@@ -37,7 +37,7 @@ const ManageStock = () => {
           stock: newStock,
         }
       );
-      dispatch(getDetails());
+      dispatch(setProductDetails());
     } catch (error) {
       console.error("Error toggling available status:", error);
     }

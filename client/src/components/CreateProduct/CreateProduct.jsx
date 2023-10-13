@@ -7,24 +7,20 @@ import {
   validatePrice,
   validateDiscount,
 } from "./helpers/ProductValidation";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Category from "./Category";
-// import submitMultipleImg from "./helpers/SubmitMultipleImg";
 
 import { categories } from "./helpers/FormHelpers";
 import axios from "axios";
 
 const CreateProduct = () => {
   const [files, setFiles] = useState([]);
-  const dispatch = useDispatch();
   const history = useNavigate();
 
   const [input, setInput] = useState({
     name: "",
     description: "",
     category: "",
-    images: "",
     stock: 0,
     price: 0,
     discount: 0,
@@ -34,7 +30,6 @@ const CreateProduct = () => {
     name: "",
     description: "",
     category: "",
-    // image: "",
     stock: "",
     price: "",
     discount: "",
@@ -66,15 +61,6 @@ const CreateProduct = () => {
       description: validateDescription(value),
     }));
     setDescriptionLength(value.length);
-  };
-
-  const handleImagesChange = (event) => {
-    // const { name, value } = event.target;
-    setFiles(event.target.files);
-    // setInput((prevInput) => ({
-    //   ...prevInput,
-    //   [name]: value,
-    // }));
   };
 
   const handleCategoryChange = (selectedCategory) => {
@@ -130,7 +116,7 @@ const CreateProduct = () => {
 
   //***************************************************************** */
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const fieldErrors = {
@@ -150,22 +136,24 @@ const CreateProduct = () => {
       return;
     }
 
+    const responseInput = await axios.post(
+      "https://neogn-back.up.railway.app/api/products/create",
+      input
+    );
+
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       const image = files[i];
       formData.append("image", image);
     }
 
-    const post = async function (input) {
-      const response = await axios.post(
-        "http://localhost:3001/api/products/create",
-        input,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-      return response;
-    };
-    post(input);
+    const responseImage = await axios.post(
+      `https://neogn-back.up.railway.app/api/products/images/${responseInput.data.id}`,
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+
+    console.log(responseImage);
 
     alert("Product Created Successfully");
 
@@ -173,7 +161,6 @@ const CreateProduct = () => {
       name: "",
       description: "",
       category: "",
-      images: "",
       stock: 0,
       price: 0,
       discount: 0,
@@ -250,14 +237,8 @@ const CreateProduct = () => {
                   type="file"
                   accept="image/*"
                   multiple={true}
-                  value={input.images}
-                  name="images"
-                  id="images"
-                  placeholder="Enter the image URL of the product"
-                  onChange={handleImagesChange}
-                  autoComplete="off"
+                  onChange={(event) => setFiles(event.target.files)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500 text-sm rounded-lg block w-full p-2.5  dark:bg-stone-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                  required=""
                 />
                 {/* {errors.image && (
                   <div className="mb-3 text-normal text-red-500 ">
