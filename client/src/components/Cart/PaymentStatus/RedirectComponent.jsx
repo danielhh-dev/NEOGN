@@ -20,9 +20,8 @@ const RedirectComponent = ({status}) => {
           setSeconds((prevSeconds) => prevSeconds - 1);
         }, 1000);
 
-        // Realizar el fetch para enviar los parámetros al webhook
         const response = await axios.post(
-          "http://localhost:3000/api/payment/webhook",
+          "http://localhost:3001/api/payment/webhook",
           {
             status: status,
             preference_id: receivedId,
@@ -33,7 +32,6 @@ const RedirectComponent = ({status}) => {
 
         console.log(response.data);
 
-        // Limpiar el intervalo cuando el componente se desmonta
         return () => clearInterval(interval);
       } catch (error) {
         console.error("Error en la solicitud POST:", error);

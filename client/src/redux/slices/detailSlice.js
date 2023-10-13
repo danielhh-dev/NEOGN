@@ -6,11 +6,7 @@ const detailSlice = createSlice({
     detail: [],
   },
   reducers: {
-
     setProductDetail(state, action) {
-      state.detail = action.payload;
-    },
-    getDetail(state, action) {
       state.detail = action.payload;
     },
     clearDetail(state) {
@@ -19,6 +15,6 @@ const detailSlice = createSlice({
   },
 });
 
-export const { getDetail, clearDetail, setProductDetail } = detailSlice.actions;
+export const { clearDetail, setProductDetail } = detailSlice.actions;
 
 export default detailSlice.reducer;

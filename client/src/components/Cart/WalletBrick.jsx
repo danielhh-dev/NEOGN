@@ -13,7 +13,7 @@ const WalletPayment = ({ prefId }) => {
     try {
       console.log(user.id);
       const response = await axios.post(
-        "http://localhost:3000/api/payment/create-preference",
+        "http://localhost:3001/api/payment/create-preference",
         {
           userId: user.id,
           items: items.map((item) => ({
@@ -47,7 +47,6 @@ const WalletPayment = ({ prefId }) => {
       setPreferenceId(id);
     }
     fetchPreferenceId();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const LazyWallet = lazy(() => {

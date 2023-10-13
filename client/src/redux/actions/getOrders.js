@@ -5,7 +5,7 @@ const getAllOrders = (id) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/orders/${id}`
+        `http://localhost:3001/api/orders/${id}`
       );
       dispatch(getOrders(response.data));
     } catch (error) {

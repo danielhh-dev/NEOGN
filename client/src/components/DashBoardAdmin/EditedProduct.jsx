@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import {
-  validateTitle,
+  validateName,
   validateDescription,
-  validateImage,
   validateCategory,
   validateStock,
   validatePrice,
@@ -16,7 +15,7 @@ import { editProduct } from "../../redux/actions/editProduct";
 import { useNavigate, useParams } from "react-router-dom";
 import Category from "../CreateProduct/Category";
 
-import { getDetail, clearDetail } from "../../redux/slices/detailSlice";
+import { setProductDetail, clearDetail } from "../../redux/slices/detailSlice";
 
 import { categories } from "../CreateProduct/helpers/FormHelpers";
 
@@ -31,10 +30,10 @@ const EditedProduct = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
-          `http://neogn-back.up.railway.app/api/products/${id}`
+          `https://neogn-back.up.railway.app/api/products/${id}`
         );
         const detail = json.data;
-        return dispatch(getDetail(detail));
+        return dispatch(setProductDetail(detail));
       } catch (error) {
         console.error("Error fetching detail:", error);
       }
@@ -49,7 +48,7 @@ const EditedProduct = () => {
   }, [dispatch, id]);
 
   const [input, setInput] = useState({
-    title: "",
+    name: "",
     description: "",
     category: "",
     image: "",
@@ -74,7 +73,7 @@ const EditedProduct = () => {
       console.log(averageRating);
 
       setInput({
-        title: detail.title,
+        name: detail.name,
         description: detail.description,
         category: detail.category,
         image: detail.image,
@@ -89,7 +88,7 @@ const EditedProduct = () => {
   console.log(input);
 
   const [errors, setErrors] = useState({
-    title: "",
+    name: "",
     description: "",
     category: "",
     image: "",
@@ -102,7 +101,7 @@ const EditedProduct = () => {
   const [descriptionLength, setDescriptionLength] = useState(0);
   const maxDescriptionLength = 255;
 
-  const handleTitleChange = (event) => {
+  const handleNameChange = (event) => {
     const { name, value } = event.target;
     setInput((prevInput) => ({
       ...prevInput,
@@ -110,7 +109,7 @@ const EditedProduct = () => {
     }));
     setErrors((prevErrors) => ({
       ...prevErrors,
-      title: validateDescription(value),
+      name: validateDescription(value),
     }));
   };
 
@@ -132,10 +131,6 @@ const EditedProduct = () => {
     setInput((prevInput) => ({
       ...prevInput,
       [name]: value,
-    }));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      image: validateImage(value),
     }));
   };
 
@@ -209,10 +204,9 @@ const EditedProduct = () => {
     event.preventDefault();
     console.log(event);
     const fieldErrors = {
-      title: validateTitle(input.title),
+      name: validateName(input.name),
       description: validateDescription(input.description),
       category: validateCategory(input.category),
-      image: validateImage(input.image),
       stock: validateStock(input.stock),
       price: validatePrice(input.price),
       discount: validateDiscount(input.discount),
@@ -236,7 +230,7 @@ const EditedProduct = () => {
     alert("Product Edited Successfully");
 
     setInput({
-      title: "",
+      name: "",
       description: "",
       category: "",
       image: "",
@@ -271,18 +265,18 @@ const EditedProduct = () => {
                 </label>
                 <input
                   type="text"
-                  value={input.title}
-                  name="title"
-                  id="title"
+                  value={input.name}
+                  name="name"
+                  id="name"
                   placeholder="Type product name"
-                  onChange={handleTitleChange}
+                  onChange={handleNameChange}
                   autoComplete="off"
                   className="bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500 text-sm rounded-lg block w-full p-2.5  dark:bg-stone-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   required=""
                 />
-                {errors.title && (
+                {errors.name && (
                   <div className="mb-3 text-normal text-red-500 ">
-                    {errors.title}
+                    {errors.name}
                   </div>
                 )}
               </div>

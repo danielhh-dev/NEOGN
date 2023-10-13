@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Heart from "../../utils/images/AppbarIcons/ActiveHeart.png";
+import Heart from "../../utils/images/AppbarIcons/IconoDelete.gif";
 
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWishlist } from "../../redux/slices/WishlistSlice";
