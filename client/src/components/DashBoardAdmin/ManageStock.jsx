@@ -13,7 +13,7 @@ const ManageStock = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
-          "http://neogn-back.up.railway.app/api/products"
+          "https://neogn-back.up.railway.app/api/products"
         );
         const users = json.data;
         return dispatch(getDetail(users));
@@ -31,7 +31,7 @@ const ManageStock = () => {
     console.log(userId);
     try {
       await axios.put(
-        `http://neogn-back.up.railway.app/products/update/${userId}`,
+        `https://neogn-back.up.railway.app/products/update/${userId}`,
         {
           isAvailable: currentStatus,
           stock: newStock,

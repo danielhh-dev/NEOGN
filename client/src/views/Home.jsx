@@ -39,8 +39,8 @@ const Home = () => {
       </div>
       <div className="w-full flex justify-center items-center">
         <div className="w-auto h-auto grid grid-cols-2 gap-4">
-          {products.map((product, index) => (
-            <HomeCard key={index} image={product.image_url[0]} id={product.id} />
+          {products.map((product, i) => (
+            <HomeCard key={i} image={product.image_url[0]} id={product.id} />
           ))}
         </div>
       </div>
