@@ -13,6 +13,8 @@ const Search = () => {
   const dispatch = useDispatch();
   const categoryState = useSelector((state)=> state.category);  
   const productFiltered = useSelector((state) => state.filter);
+  const loginState = useSelector((state)=>state.login);
+  console.log("login state", loginState)
   const [showFilter, setShowFilter] = useState(false);
   const [addedProducts, setAddedProducts] = useState([]);
 

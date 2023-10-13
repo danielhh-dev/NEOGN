@@ -10,13 +10,14 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import wishlistReducer from "./slices/WishlistSlice";
 import categoryReducer from "./slices/categorySlice";
-
+import loginReducer from "./slices/LoginSlice"
 const userPersistConfig = {
   key: "user",
   storage: storage,
 };
 
 const rootReducer = combineReducers({
+  login : loginReducer,
   category: categoryReducer,
   wishlist: wishlistReducer,
   filter: filterReducer,
