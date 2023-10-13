@@ -2,20 +2,21 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Heart from "../../utils/images/AppbarIcons/DarkHeart.png";
+import ActiveHeart from '../../utils/images/AppbarIcons/ActiveHeart.png'
 import { addToWishlist, removeFromWishlist } from "../../redux/slices/WishlistSlice";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
 
-  const dispatch = useDispatch();
-  const [isAdded, setIsAdded] = useState(false);
-  const wishlist = useSelector((state)=>state.wishlist)
-
-
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state)=>state.wishlist)
+  const loginState = useSelector((state)=> state.login)
+  const navigate = useNavigate()
 
-
+ 
   const toggleWishlist = () => {
     const existingProduct = wishlist.find((product) => product.id === id);
     if (isInWishlist && existingProduct ) {
@@ -26,6 +27,10 @@ const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
   };
 
   const handleToggleWishlist = () => {
+    if (!loginState.login) {           
+       return navigate ("/Account")      
+    }
+    
     const existingProduct = wishlist.find((product) => product.id === id);
 
     if (isAdded && existingProduct) {
@@ -34,7 +39,7 @@ const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
     }
     toggleWishlist(id);
     setIsAdded(true);
-    alert('Added to Wishlist');
+    // alert('Added to Wishlist');
   };
 
 
@@ -65,13 +70,13 @@ const SearchCard = ({ id, name, image, price, description, isInWishlist, }) => {
         <div className="md:w-3/4 md:pl-4 flex flex-col">
           <div className="flex justify-between items-start">
             <div className="text-gray-800 text-lg font-semibold">{name}</div>
-            <img
-        src={Heart}
+            {<img 
+        src={ isAdded ? ActiveHeart: Heart}
         className={`w-5 h-5 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ${
           isAdded ? "text-red-500" : "text-gray-500"
         }`}
         onClick={handleToggleWishlist}
-      />
+      />}
           </div>
           <div className="text-gray-600 text-sm mt-2">{displayDescription}</div>
           {description.length > 81 && (
