@@ -13,7 +13,7 @@ const ManageUser = () => {
     return async function (dispatch) {
       try {
         const json = await axios.get(
-          "http://neogn-back.up.railway.app/api/users"
+          "https://neogn-back.up.railway.app/api/users"
         );
         const users = json.data;
         return dispatch(getUsers(users));
@@ -30,7 +30,7 @@ const ManageUser = () => {
   const toggleAdminStatus = async (userId, newAdminStatus) => {
     try {
       await axios.put(
-        `http://neogn-back.up.railway.app/api/user/update/${userId}`,
+        `https://neogn-back.up.railway.app/api/users/update/${userId}`,
         {
           isAdmin: newAdminStatus,
         }
@@ -45,7 +45,7 @@ const ManageUser = () => {
     console.log(userId);
     try {
       await axios.put(
-        `http://neogn-back.up.railway.app/api/user/update/${userId}`,
+        `https://neogn-back.up.railway.app/api/users/update/${userId}`,
         {
           isDisable: newStatus,
         }

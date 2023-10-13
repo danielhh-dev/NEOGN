@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function SignIn() {
   const auth = useAuth();
-  // const { displayName } = auth.user;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

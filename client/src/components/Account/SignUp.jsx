@@ -8,7 +8,6 @@ import { Toaster } from 'react-hot-toast';
 function SignUp() {
   const auth = useAuth();
   const navigate = useNavigate();
-  // const { displayName } = auth.user;
 
   const [emailRegister, setEmailRegister] = useState("");
   const [passwordRegister, setPasswordRegister] = useState("");

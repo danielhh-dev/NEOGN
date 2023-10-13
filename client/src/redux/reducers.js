@@ -5,7 +5,9 @@ import userReducer from "./slices/userSlice";
 import allUsersReducer from "./slices/allUsersSlice";
 import detailReducer from "./slices/detailSlice";
 import filterReducer from "./slices/filterSlice"
-import inCartReducer from "./slices/CartSlice"
+import myOrdersReducer from "./slices/myOrdersSlice"
+import orderDetailReducer from "./slices/orderDetailSlice"
+import cartReducer from "./slices/cartSlice"
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import wishlistReducer from "./slices/WishlistSlice";
@@ -18,14 +20,16 @@ const userPersistConfig = {
 
 const rootReducer = combineReducers({
   login : loginReducer,
+  user: persistReducer(userPersistConfig, userReducer),
+  orderDetail: orderDetailReducer,
+  myOrders: myOrdersReducer,
   category: categoryReducer,
   wishlist: wishlistReducer,
   filter: filterReducer,
-  inCart:inCartReducer,
+  cart:cartReducer,
   detail: detailReducer,
   products: productsReducer,
   allUsers: allUsersReducer,
-  user: persistReducer(userPersistConfig, userReducer),
 });
 
 export default rootReducer;
