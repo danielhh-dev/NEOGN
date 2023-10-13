@@ -1,17 +1,15 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch} from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
 import getFilter from "../redux/actions/getFilter"
 
 export const FilterSortRange = () => {
   const dispatch = useDispatch();
-
+  const categoryState = useSelector((state)=> state.category);  
   const [sortOrder, setSortOrder] = useState("");
-  console.log(sortOrder)
-
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  console.log(minPrice,maxPrice)
+ 
 
   const handleSortOrderChange = (order) =>{
     setSortOrder(order)
@@ -26,6 +24,7 @@ export const FilterSortRange = () => {
   const applyFilter = () => {
     dispatch(getFilter({
         //esto hay que cambiarlo mas adelante
+      category:categoryState.category,
       min: minPrice,
       max: maxPrice,
       order: sortOrder
@@ -73,16 +72,19 @@ export const FilterSortRange = () => {
           </div>
           <div className="inline-flex items-start gap-[12px] relative flex-[0_0_auto]">
             <button
+             onClick={()=> handleSortOrderChange("price-high")}
               className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
             >
               High Price
             </button>
             <button
+            onClick={()=> handleSortOrderChange("price-low")}
               className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
             >
               Low Price
             </button>
             <button
+            onClick={()=> handleSortOrderChange("rating")}
               className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
             >
               Review

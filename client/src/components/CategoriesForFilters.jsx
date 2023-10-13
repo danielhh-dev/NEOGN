@@ -1,15 +1,17 @@
 import getFilter from "../redux/actions/getFilter";
 import {useDispatch} from "react-redux"
 import {useState} from "react"
-
+import { setCategory } from "../redux/slices/categorySlice";
 
 const CategoriesFilter = () => {
 
     const dispatch = useDispatch();
     const [selectCategory, setSelectCategory]= useState('')
-
+     
     const handleSelection = (category) =>{
+        
         setSelectCategory(category)
+        dispatch(setCategory({category:category}));
         dispatch(getFilter({category:category}))
     }
 
