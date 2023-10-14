@@ -11,6 +11,7 @@ const CategoriesFilter = () => {
     const handleSelection = (category) =>{
         
         setSelectCategory(category)
+        
         dispatch(setCategory({category:category}));
         dispatch(getFilter({category:category}))
     }

@@ -6,6 +6,7 @@ import { useAuth } from "../Account/Context/AuthContext";
 import { clearUser, getUser } from "../../redux/slices/userSlice";
 import NEOGN from "../../utils/images/Logo/NEOGN.png";
 import ToggleDarkMode from "./ToggleDarkMode";
+import { setLogin } from "../../redux/slices/LoginSlice";
 
 const DashBoardUser = ({ handleThemeSwitch }) => {
   const auth = useAuth();
@@ -15,6 +16,7 @@ const DashBoardUser = ({ handleThemeSwitch }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    dispatch(setLogin({login:true}))
     if (auth.authReady) {
       const fetchDetail = async () => {
         try {
@@ -39,6 +41,7 @@ const DashBoardUser = ({ handleThemeSwitch }) => {
 
   const handleLogout = () => {
     auth.logout();
+    dispatch(setLogin({login:false}));
     dispatch(clearUser());
   };
 
@@ -110,7 +113,7 @@ const DashBoardUser = ({ handleThemeSwitch }) => {
           />
         </Link>
         <Link
-          to="/Account/Wishlist"
+          to="/Wishlist"
           className="w-auto h-auto flex items-center justify-between"
         >
           <div className="w-auto h-auto flex items-center gap-6">
