@@ -1,4 +1,5 @@
 import getFilter from "../../redux/actions/getFilter";
+import { Link } from 'react-router-dom'
 import {useDispatch} from "react-redux"
 import {useState} from "react"
 
@@ -17,6 +18,7 @@ const TopCategories = () => {
       <div className="w-auto ">
 
         <div className="flex justify-center items-center ">
+        <Link to="/search">
           <button
             onClick={() => handleSelection("Monitors")}
             className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center m-2${
@@ -31,6 +33,8 @@ const TopCategories = () => {
               Monitors
             </div>
           </button>
+          </Link>
+          <Link to="/search">
           <button
             onClick={() => handleSelection("Headsets")}
             className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center m-2 ${
@@ -45,6 +49,8 @@ const TopCategories = () => {
               Headsets
             </div>
           </button>
+          </Link>
+          <Link to="/search">
           <button
             onClick={() => handleSelection("Keyboards")}
             className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center m-2${
@@ -59,6 +65,8 @@ const TopCategories = () => {
               Keyboards
             </div>
           </button>
+          </Link>
+          <Link to="/search">
           <button
             onClick={() => handleSelection("Mice")}
             className={`w-[76px] h-[60px] rounded-xl border border-violet-200 flex flex-col justify-center items-center m-2${
@@ -73,6 +81,7 @@ const TopCategories = () => {
               Mice
             </div>
           </button>
+          </Link>
           </div>
           <div className="mt-4" />
 

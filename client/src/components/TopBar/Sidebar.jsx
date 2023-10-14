@@ -112,7 +112,7 @@ function Sidebar() {
                 PRODUCTS
               </Link>
             </li>
-            {/* <li>
+            <li>
               <Link
                 to="/categories"
                 className="text-black text-xl font-normal block mb-6"
@@ -120,7 +120,7 @@ function Sidebar() {
               >
                 CATEGORIES
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link
                 to="/contact"

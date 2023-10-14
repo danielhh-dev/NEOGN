@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LuSettings2 } from "react-icons/lu";
@@ -38,10 +37,20 @@ const Search = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-    dispatch(getFilter({ category: categoryState.category}));
-  }, [dispatch]);
+const handleSelection = (category) => {
+  setSelectCategory(category);
+  
+  // Verificar si el estado de getFilter está vacío
+  if (isEmpty(getFilterState)) {
+    dispatch(getFilter({ category: category }));
+  }
+}
+
+// La función isEmpty puede ser una función personalizada que verifica si el estado está vacío
+// Por ejemplo, podrías definirla así:
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
 
   return (
     <div className="h-full pb-32">

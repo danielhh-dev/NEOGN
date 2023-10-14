@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Searchbar from "./SearchBar";
 import Sidebar from "./Sidebar";
 import ActiveHeartImage from "../../utils/images/AppbarIcons/Neogn.jpeg";
+import Banner from "./Banner";
 
 const TopBar = () => {
   // con este estado cuando se expanda el search se oculta todo
@@ -14,6 +15,8 @@ const TopBar = () => {
 
 
   return (
+    <div> 
+      <Banner /> 
     <div className="w-full h-auto flex items-center justify-between">
       {!isSearchFocused && <Sidebar />}
       {!isSearchFocused && (
@@ -25,6 +28,10 @@ const TopBar = () => {
       )}
       <div className="lg:flex items-center"></div>
       <Searchbar onFocusChange={handleSearchFocus} />
+      
+    </div>
+    
+    
     </div>
   );
 };
